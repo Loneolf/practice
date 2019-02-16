@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>弹性布局测试</title>
+    <style>
+        .box{width:45%;height:50px;background:#ccc;display:inline-flex;}
+        .son{width:100%;}
+        .grandSon{float:right;width:20px;height:20px;background:skyblue;flex-grow:1;}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="son">
+            <div class="grandSon"></div>
+            <div class="grandSon"></div>
+            <div class="grandSon"></div>
+        </div>
+    </div>
+</body>
+</html>
