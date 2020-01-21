@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖动录制</title>
+    <style>
+        div{width:100px;height:100px;background:skyblue;position:absolute;}
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    var div
+    var arr=[]
+    var state=0 // 状态，当状态为0时，不记录，当状态为1是，记录轨迹，当状态为2时，播放轨迹。
+    var list=[]
+    var index=0
+    init()
+    function init(){
+      div=document.getElementById("box")
+      div.addEventListener("mousedown",moveMouseHandler)
+      setInterval(animation,16)
+    }
+
+    function moveMouseHandler(e){
+      e.preventDefault()
+      e.stopPropagation()
+      if(e.type==="mousedown"){
+        state=1
+        document.addEventListener("mousemove",moveMouseHandler)
+        document.position={x:e.offsetX,y:e.offsetY}
+        document.elem=this
+        this.addEventListener("mouseup",moveMouseHandler)
+      }
+      if(e.type==="mousemove"){
+        this.elem.style.left=e.x-this.position.x+"px"
+        this.elem.style.top=e.y-this.position.y+"px"
+
+      }
+      if(e.type==="mouseup"){
+        moveShadow()
+        state=2
+        document.position=null
+        document.elem=null
+        document.removeEventListener("mousemove",moveMouseHandler)
+        this.removeEventListener("mouseup",moveMouseHandler)
+      }
+    }
+
+    function animation(){
+      if(state===0) return
+      if(state===1){
+        record()
+      }
+      if(state===2){
+        play()
+      }
+    }
+
+    // 阴影
+    function moveShadow(){
+      var bool=false
+      if(list.length===0) bool=true
+      for(var i=0;i<5;i++){
+        if(bool)list.push(div.cloneNode(false))
+        list[i].style.opacity=1-i*0.2
+        document.body.appendChild(list[i])
+        console.log(i)
+      }
+    }
+
+    // 记录轨迹，将位置信息存放到数组中
+    function record(){
+      var rect=div.getBoundingClientRect()
+      arr.push({x:rect.x,y:rect.y})
+    }
+
+    // 播放，将数组中的位置依次给DOM赋值
+    function play(){
+      var point=arr[index]
+      index++
+      if(point) {
+        div.style.left = point.x + "px"
+        div.style.top = point.y + "px"
+      }
+      var bool=false
+      for(var i=0;i<list.length;i++){
+        if(!arr[index-i]) continue
+        list[i].style.left=arr[index-i].x+"px"
+        list[i].style.top=arr[index-i].y+"px"
+        bool=true
+      }
+      if(!bool){
+        state=0
+        for(var j=0;j<list.length;j++){
+          list[j].remove();
+        }
+      }
+    }
+</script>
+</body>
+</html>
