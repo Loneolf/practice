@@ -6,89 +6,69 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <style>
-      .myhead{
-        position: fixed;
-        top: 0;
-        left:0;
-        height:100px;
-        width:100%;
-        background:green;
-        z-index: 10;
-      }
-      .mybody{
-        position: absolute;
-        top: 100px;
-        left:0;
-        height:500px;
-        width:100%;
-        background:yellow;
-        z-index: 1;
-      }
-      .son{
-        position:absolute;
-        height:2000px;
-        z-index: 1050;
-        width:200px;
-        background: red;
-      }
-    </style>
+    <style></style>
   </head>
 
   <body>
-    <div class="myhead">
-      我是头
-    </div>
-    <div class='mybody'>
-      <div class="son">
 
-      </div>
-    </div>
+    <script>
+      let obj = {}
+      console.log(obj.a);
+      
+    </script>
 
-    <!-- <svg width="960" height="500"></svg> -->
-    <script type='text'>
-     
-    var svg = d3.select("svg"),
+   <!--  <svg width="960" height="500"></svg>
+    <script>
+      var svg = d3.select("svg"),
         width = +svg.attr("width"), //设置宽度
         height = +svg.attr("height"),
-        transform = d3.zoomIdentity;//获取抓取对象时的起始点,还没弄清楚k,x,y的含义，感觉k像是缩放比例，x,y分别是x轴、y轴的起始点
-        console.log(transform);//控制台输出结果：{k: 1, x: 0, y: 0}
-    var points = d3.range(2000).map(phyllotaxis(10));
-     
-    var g = svg.append("g");
-     
-    g.selectAll("circle")
+        transform = d3.zoomIdentity; //获取抓取对象时的起始点,还没弄清楚k,x,y的含义，感觉k像是缩放比例，x,y分别是x轴、y轴的起始点
+      console.log(transform); //控制台输出结果：{k: 1, x: 0, y: 0}
+      var points = d3.range(2000).map(phyllotaxis(10));
+
+      var g = svg.append("g");
+
+      g.selectAll("circle")
         .data(points)
-      .enter().append("circle")
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
+        .enter()
+        .append("circle")
+        .attr("cx", function(d) {
+          return d.x;
+        })
+        .attr("cy", function(d) {
+          return d.y;
+        })
         .attr("r", 2.5)
-        .call(d3.drag()
-            .on("drag", dragged));
-     
-    svg.call(d3.zoom()
-        .scaleExtent([1 / 2, 8])
-        .on("zoom", zoomed));
-     
-    function zoomed() {
-      g.attr("transform", d3.event.transform);
-    }
-     
-    function dragged(d) {
-      d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
-    }
-     
-    function phyllotaxis(radius) {
-      var theta = Math.PI * (3 - Math.sqrt(5));
-      return function(i) {
-        var r = radius * Math.sqrt(i), a = theta * i;
-        return {
-          x: width / 2 + r * Math.cos(a),
-          y: height / 2 + r * Math.sin(a)
+        .call(d3.drag().on("drag", dragged));
+
+      svg.call(
+        d3
+          .zoom()
+          .scaleExtent([1 / 2, 8])
+          .on("zoom", zoomed)
+      );
+
+      function zoomed() {
+        g.attr("transform", d3.event.transform);
+      }
+
+      function dragged(d) {
+        d3.select(this)
+          .attr("cx", (d.x = d3.event.x))
+          .attr("cy", (d.y = d3.event.y));
+      }
+
+      function phyllotaxis(radius) {
+        var theta = Math.PI * (3 - Math.sqrt(5));
+        return function(i) {
+          var r = radius * Math.sqrt(i),
+            a = theta * i;
+          return {
+            x: width / 2 + r * Math.cos(a),
+            y: height / 2 + r * Math.sin(a)
+          };
         };
-      };
-    }
-     
-    </script>
+      }
+    </script> -->
   </body>
 </html>

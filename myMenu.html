@@ -90,8 +90,7 @@
       // 将当前方块的顺序排在最后面，这样当index恢复时不会被之前的盖住
       body.removeChild(this)
       body.appendChild(this)
-      this.style.zIndex = 10
-      console.log('bbb')
+      this.style.zIndex = 9
       this.addEventListener('mousedown',mouseHandler)
     }
 
