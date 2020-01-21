@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>掷骰子</title>
+    <style>
+        .box{width:400px;height:400px;border:1px solid #ccc;transform-style:preserve-3d;margin:100px auto;position:relative;display: flex;transform:rotateX(30deg) rotateY(30deg)}
+        .face{width:140px;height:140px;border:1px solid skyblue;background:#fff;position:absolute;top:50%;left:50%;margin-top:-100px;margin-left:-100px;background:#666;display:flex;border-radius: 15px;padding:30px;}
+        .face1{transform:rotateZ(0) translateZ(100px);justify-content:center;align-items: center;}
+        .face2{transform:rotateZ(180deg) translateZ(-100px);justify-content:space-between;}
+        .face2 div:nth-child(2){align-self:flex-end;}
+        .face3{transform:rotateY(90deg) translateZ(100px);justify-content:space-between;}
+        .face3 div:nth-child(2){align-self: center;}
+        .face3 div:nth-child(3){align-self: flex-end;}
+        .face4{transform:rotateY(-90deg) translateZ(100px);flex-direction: column; justify-content: space-between;}
+        .face5{transform:rotateX(90deg) translateZ(100px);flex-direction: column;justify-content: space-between;}
+        .face5 div:nth-child(2){align-self: center;}
+        .face6{transform:rotateX(-90deg) translateZ(100px);flex-direction: column;justify-content: space-between;}
+        .out{display:flex;justify-content:space-between;}
+        .circle{border-radius: 50%;width:30px;height:30px;background:#fff;}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="face1 face">
+            <div class="circle"></div>
+        </div>
+        <div class="face2 face">
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <div class="face3 face">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <div class="face4 face">
+            <div class="out">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="out">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>    
+        </div>
+        <div class="face5 face">
+            <div class="out">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="circle"></div>
+            <div class="out">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
+        <div class="face6 face">
+            <div class="out">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="out">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="out">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+    <button>试试运气</button>
+    <script>
+        btn = document.querySelector("button")
+        turnBox = document.querySelector(".box")
+        let time,time2//定时器
+        let counter=1//计数器，初始值为1
+        let arr=[{x:0,y:0}]//
+        btn.addEventListener("click",clickHandler)
+        btn.addEventListener("mousedown",mouseHandler)
+        btn.addEventListener("mouseup",mouseHandler)
+        function clickHandler(e){
+            
+        }
+        function mouseHandler(e){
+            if(e.type === 'mousedown'){
+                clearInterval(time)
+                time = setInterval(function(){
+                    counter++
+                }, 1000);
+            }
+            if(e.type === 'mouseup'){
+                clearInterval(time)
+                clearTimeout(time2)
+                arr.push(randomAngle())
+                let x = (arr[1].x+arr[0].x)
+                let y = (arr[1].y+arr[0].y)
+                let time3 = 2+counter
+                console.log(time3)
+                turnBox.style.transition=`all ${time3}s ease-out`
+                turnBox.style.transform = `rotateX(${x+360*counter}deg) rotateY(${y+360*counter}deg)`
+                arr[0] = arr[1]
+                arr.shift()
+                time2 = setTimeout(() => {
+                    turnBox.style.transition=`none`
+                    turnBox.style.transform = `rotateX(${x%360}deg) rotateY(${y%360}deg)`
+                }, time3*1000)
+                counter=0
+                }
+        }
+        function randomAngle(){
+            let num1 = parseInt(Math.random()*4+1)
+            let num2 = parseInt(Math.random()*4+1)
+            return {x:num1*90,y:num2*90}
+        }
+    </script>
+</body>
+</html>

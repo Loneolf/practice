@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let str = {"firstReach":true,"firstReachChannel":[{"type":"TEL","option":{"selectTime":1568044800000}}],"steps":[{"notFinishedList":{"intervalTime":"34","intervalTimeUnit":"hour","reachChannelList":[{"type":"TEL"}]},"finishedList":{"reachChannelList":[{"type":"SMS","option":{"selectNodeModule":"444"}}]},"event":{"createTime":1566755222000,"updateTime":1566757471000,"id":11,"name":"下单","filter":"[\n{\n    \"connector\": \"AND\",\n    \"filters\": [\n    {\n        \"level1\": \"\",\n        \"level2\": \"\",\n        \"tableId\": 2,\n        \"fieldName\": \"事件名称\",\n        \"field\": \"eventName\",\n        \"fieldType\": \"STRING\",\n        \"value\": \"order\",\n        \"operator\": \"EQ\",\n        \"connector\": \"AND\"\n    }]\n}]","eventFilter":[{"connector":"AND","filters":[{"connector":"AND","field":"eventName","fieldType":"STRING","operator":"EQ","value":"order","tableId":2}]}]},"eventProperties":[{"connector":"AND","filters":[{"level1":"","level2":"","tableId":2,"fieldName":"城市","field":"city","fieldType":"STRING","value":"北京","operator":"EQ","connector":"AND"},{"level1":"","level2":"","tableId":2,"fieldName":"城市","field":"city","fieldType":"STRING","value":"南京","operator":"EQ","connector":"AND"}]},{"connector":"AND","filters":[{"level1":"","level2":"","tableId":2,"fieldName":"城市","field":"city","fieldType":"STRING","value":"北京","operator":"EQ","connector":"AND"}]}]},{"notFinishedList":{"intervalTime":"3","intervalTimeUnit":"hour"},"finishedList":{"reachChannelList":[{"type":"SMS","option":{"selectNodeModule":"444"}}]},"event":{"createTime":1566755222000,"updateTime":1566757471000,"id":11,"name":"下单","filter":"[\n{\n    \"connector\": \"AND\",\n    \"filters\": [\n    {\n        \"level1\": \"\",\n        \"level2\": \"\",\n        \"tableId\": 2,\n        \"fieldName\": \"事件名称\",\n        \"field\": \"eventName\",\n        \"fieldType\": \"STRING\",\n        \"value\": \"order\",\n        \"operator\": \"EQ\",\n        \"connector\": \"AND\"\n    }]\n}]","eventFilter":[{"connector":"AND","filters":[{"connector":"AND","field":"eventName","fieldType":"STRING","operator":"EQ","value":"order","tableId":2}]}]},"eventProperties":[{"connector":"AND","filters":[{"level1":"","level2":"","tableId":2,"fieldName":"城市","field":"city","fieldType":"STRING","value":"无锡","operator":"EQ","connector":"AND"}]}]}],"campaignId":2,"segmentId":11}
+    let time1 = new Date().getTime()
+    console.log(JSON.parse(JSON.stringify(str)))
+    let time2 = new Date().getTime()
+    console.log(time2,time1,time2-time1)
+  </script>
+</body>
+</html>
