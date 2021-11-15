@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模块化</title>
+</head>
+
+<body>
+  <!-- <script src="https://cdn.bootcdn.net/ajax/libs/immutable/4.0.0-rc.9/immutable.min.js" defer></script> -->
+  <script type="module">
+    import * as util from './testTurn.js'
+    console.log(util)
+    let a
+    import('./testTurn.js').then((module)=>{
+      a = module.a2
+    })
+    setInterval(() => {
+      console.log(util.a2,a)
+    }, 1000);
+  </script>
+</body>
+
+</html>

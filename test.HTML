@@ -1,74 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <style></style>
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
 
-    <script>
-      let obj = {}
-      console.log(obj.a);
-      
-    </script>
+<body>
+  <script type='text/aaa'>
+  //   输入：
+  // ["语文	数学	英语	政治", "132	134	110	87", "130	111	109	97", ...]
+  // ["数学	英语	化学	物理", "   134   	  110	 87	  98  ", "130	111	109	97", ...]
+  // 输出：
+  // "语文 数学  英语  政治 化学 物理", "132	134	110	87	0	0", "0	134	110	0	87	98", ...]
+  let li = ["语文	数学	英语	政治", "132	134	110	87", "130	111	109	97"]
+  let wen = ["数学	英语	化学	物理", "134	110	87	98", "130	111	109	97"]
+  add(li, wen)
+  function add(arr1, arr2) {
+    if (!arr1 || !arr1.length || !arr2 || !arr2.length) return false
+    let result = []
+    let temArr1 = dealArr(arr1)
+    let temArr2 = dealArr(arr2)
+    let tem1 = []
+    let num
 
-   <!--  <svg width="960" height="500"></svg>
-    <script>
-      var svg = d3.select("svg"),
-        width = +svg.attr("width"), //设置宽度
-        height = +svg.attr("height"),
-        transform = d3.zoomIdentity; //获取抓取对象时的起始点,还没弄清楚k,x,y的含义，感觉k像是缩放比例，x,y分别是x轴、y轴的起始点
-      console.log(transform); //控制台输出结果：{k: 1, x: 0, y: 0}
-      var points = d3.range(2000).map(phyllotaxis(10));
+    temArr1.forEach
+    console.log(temArr1, temArr2)
+  }
+  function dealArr(arr) {
+    let result = []
+    let length = arr[0].split('\t').length
+    arr.forEach(item => {
+      let tem = item.split('\t')
+      tem.forEach((item2, index) => {
+        if (!result[index]) result[index] = []
+        result[index].push(item2)
+      })
+    });
+    return result
+  }
+  // console.log(dealArr(li))
+  </script>
+  <!-- 执行顺序 -->
+  <script>
+    // console.log('script start')
 
-      var g = svg.append("g");
+    // async function async1() {
+    //   await async2()
+    //   console.log('async1 end')
+    // }
+    // async function async2() {
+    //   console.log('async2 end')
+    // }
+    // async1()
 
-      g.selectAll("circle")
-        .data(points)
-        .enter()
-        .append("circle")
-        .attr("cx", function(d) {
-          return d.x;
-        })
-        .attr("cy", function(d) {
-          return d.y;
-        })
-        .attr("r", 2.5)
-        .call(d3.drag().on("drag", dragged));
+    // setTimeout(function () {
+    //   console.log('setTimeout')
+    // }, 0)
 
-      svg.call(
-        d3
-          .zoom()
-          .scaleExtent([1 / 2, 8])
-          .on("zoom", zoomed)
-      );
+    // new Promise(resolve => {
+    //   console.log('Promise')
+    //   resolve()
+    // })
+    //   .then(function () {
+    //     console.log('promise1')
+    //   })
+    //   .then(function () {
+    //     console.log('promise2')
+    //   })
+    // console.log('script end')
 
-      function zoomed() {
-        g.attr("transform", d3.event.transform);
+
+      // promise执行顺序，两次resolve会怎样：第二次resolve不执行
+    // let promise1 = new Promise((resolve, reject)=>{
+    //   console.log('aaa1')
+    //   let p1 = new Promise((resolve, reject)=>{
+    //     console.log('aaa2')
+    //     resolve('aaa4')
+    //     setTimeout(() => {
+    //       console.log('aaa5')
+    //       resolve('aaa6')
+    //     }, 0);
+    //   })
+    //   p1.then(arg => {
+    //     console.log(arg)
+    //   })
+    //   resolve('aaa3')
+    // })
+    // promise1.then(arg => {
+    //   console.log(arg)
+    // })
+    // console.log('aaa7')
+
+    // 闭包相关
+    // let x = 5
+    // function fn(x){
+    //   return function(y){
+    //     return y + (++x)
+    //   }
+    // }
+    // let f = fn(6)
+    // console.log(f(7))
+    // console.log(x) 
+
+    // console.log(1)
+    // async function async1(){
+    //   console.log(2)
+    //   await console.log(3)
+    //   console.log(4)
+    // }
+    // setTimeout(() => {
+    //   console.log(5)
+    // }, 0);
+    // async1()
+    // new Promise((res)=>{
+    //   console.log(6)
+    //   res()
+    // }).then(()=>{
+    //   console.log(7)
+    // })
+    // console.log(8)
+    // 1,2,3,6,8,4,7,5
+
+    // this指向与箭头函数
+    // let name = 'window'
+    // let obj = {
+    //   name:'obj',
+    //   normal(){
+    //     return ()=>{
+    //       console.log(this.name)
+    //     }
+    //   },
+    //   arrow: ()=>{
+    //     return function(){
+    //       console.log(this.name)
+    //     }
+    //   }
+    // }
+    // let obj1 = {name: 'obj1'}
+    // obj.normal.call(obj1)() // obj1
+    // obj.arrow.call(obj1)()
+    // let a = (value) => value
+    // console.log(a.call({})(5))
+
+    // 函数参数会在内部重新赋值，如果是原始值：字符串，数组，bool，在函数内部改变参数值，并不会影响外面的值
+    // 如果是对象，传递引用，重新赋值也是同一个对象，改变对象的属性会影响外面的值
+    // 但是如果传递的是对象，又将参数重新赋值一个对象，则不会影响外面的对象
+    // let object = {a: 0}
+    // function fun(obj){
+    //   obj.a = 1
+    //   obj = {a: 2}
+    //   obj.b = 2
+    // }
+    // fun(object)
+    // console.log(object) // {a: 1}
+
+    // let a = 4
+    // function fun2(obj){
+    //   obj = 6
+    // }
+    // fun2(a)
+    // console.log(a)
+
+    function bilibili(){/*
+        这是一个
+        多行注释
+        23333
+        44444
+        555555
+    */}
+    function multiline(fn) {
+      let arr = fn.toString().split('\n')
+      return arr.slice(1, arr.length -1).join('\n')
+    }
+    // console.log(`%c${multiline(bilibili)}`, 'color:green;') 
+    class mum{
+      constructor(weight){
+        this.weight = weight
       }
-
-      function dragged(d) {
-        d3.select(this)
-          .attr("cx", (d.x = d3.event.x))
-          .attr("cy", (d.y = d3.event.y));
+      run(){
+        console.log('i can run')
       }
+    }
 
-      function phyllotaxis(radius) {
-        var theta = Math.PI * (3 - Math.sqrt(5));
-        return function(i) {
-          var r = radius * Math.sqrt(i),
-            a = theta * i;
-          return {
-            x: width / 2 + r * Math.cos(a),
-            y: height / 2 + r * Math.sin(a)
-          };
-        };
+    class people extends mum{
+      constructor(name, color, weight){
+        super(weight)
+        this.name = name
+        this.color = color
       }
-    </script> -->
-  </body>
+    }
+    let zhangsan = new people('zhangsan', 'red', 34)
+    console.log(zhangsan, zhangsan.weight)
+    
+  </script>
+</body>
+
 </html>

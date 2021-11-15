@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原形与this</title>
+</head>
+
+<body>
+  <script>
+    // 原型，原型链，继承
+    // function test1 () {}
+    // console.log( test1.prototype ) // { constructor : f }
+
+    // function test2 () {}
+    // console.log( test2.prototype ) // { constructor : f }
+    // console.log(test1.prototype == test2.prototype)
+
+
+    // prototype本身是一个属性， 也是给即将实例的对象，继承下去的属性，
+    // 所以，一些通用的属性或者方法，放在prototype上,所有实例都可以继承
+    // function User(name, age) {
+    //   this.name = name; // 这里面的this，就代表了即将生成的那个对象 ，并且绑定传参
+    //   this.age = age;
+    // }
+    // User.prototype.greet = function () {
+    //   console.log('你好, 我是' + this.name + '，我' + this.age + '岁');
+    // }
+    // let zhangsan = new User('张三', 20);
+    // let lisi = new User('李四', 22);
+    // zhangsan.greet() // 你好, 我是张三，我20岁
+    // lisi.greet() // 你好, 我是李四，我22岁
+    // console.log(zhangsan.greet === lisi.greet) // true
+    // console.log(zhangsan)
+    // console.log(zhangsan.__proto__) // 指向原形
+    // console.log(zhangsan.__proto__ === lisi.__proto__) // true
+    // 每个对象，都有一个__proto__属性，指向该对象的原型，实例后通过访问proto访问原型的prototype
+    // 原型链就是由一个个原型对象构成，有着相同的proto，通过该属性，可将所有原型对象链接起来，实现继承和共享属性方法等
+
+    // constructor 构造函数
+    // let wangwu = new zhangsan.constructor('王五', 23)
+    // console.log(wangwu)
+    // console.log(zhangsan.constructor, zhangsan.constructor === User) // true
+    // 构造函数即为原型，可通过实例后的构造函数再继续进行原型对象的实例化
+
+
+
+    // 原生对象的原型机Object.create()
+    // let a = {}
+    // let b = new Object()
+    // console.log(a, b, a.constructor === b.constructor)
+    // 直接使用{}和使用new Object() 创建对象，本质上没有任何区别
+
+    // Object.create(obj), 以obj 为原型创建对象
+    // let a2 = Object.create(null)
+    // console.log(a2) // 创建出一个无原型的空对象
+    // let a3 = Object.create({aa: 123})
+    // console.log(a3) // 原型对象为{aa: 123}
+
+
+    // Animal --> Mammal --> Person --> me
+    // Animal 
+    // function Animal(color, weight) {
+    //   this.color = color;
+    //   this.weight = weight;
+    // }
+    // // console.log(Animal, Animal.prototype)
+    // Animal.prototype.eat = function () {
+    //   console.log('吃饭');
+    // }
+    // Animal.prototype.sleep = function () {
+    //   console.log('睡觉');
+    // }
+    // //  Mammal
+    // function Mammal(color, weight) {
+    //   Animal.call(this, color, weight); //绑定 this 这个下面讲
+    // }
+    // Mammal.prototype = Object.create(Animal.prototype);
+    // Mammal.prototype.constructor = Mammal;
+    // Mammal.prototype.suckle = function () {
+    //   console.log('喝牛奶');
+    // }
+    // //  Person
+    // function Person(color, weight) {
+    //   Mammal.call(this, color, weight);
+    // }
+    // Person.prototype = Object.create(Mammal.prototype);
+    // Person.prototype.constructor = Person;
+    // Person.prototype.lie = function () {
+    //   console.log('你是个骗子');
+    // }
+    // // 实例
+    // let zhiren = new Mammal('block', 70)
+    // console.log(zhiren)
+    // let zhangsan = new Person('brown', 100);
+    // let lisi = new Person('brown', 80);
+    // console.log('zhangsan:', zhangsan);
+    // zhangsan.eat()
+    // zhangsan.lie()
+    // console.log('lisi:', lisi);
+    // 通过prototype和object.create()，实现了三级继承
+    // 通过object.create()，将animal中的显性属性color，weight继承到最重的实例原型中
+
+
+
+    // this
+    // var Person = {
+	  //   fname:'三',
+    // 	lname:'张',
+    // 	fullname:function(){
+    //     console.log(this) // 谁引用，this就指向谁
+    // 		return this.lname + this.fname
+    // 	}
+    // }
+    // console.log(Person.fullname)
+    // Person.fullname()
+    // let a = Person.fullname
+    // console.log(a())
+    // this的指向不取决于位置，而是取决于是谁调用
+
+    // function User (name, height) {
+    //   this.name = name
+    //   this.height = height
+    //   console.log(this) // 指向即将实例化的对象，并且绑定传参
+    // }
+    // User () // 严格模式下为undefined，非严格模式下指向window 
+    // new User ('zhangsan', 183) // User {} 构造函数中，this指向即将实例化的对象
+    // 1. 如果this 是 在一个函数中，并且被用作方法来叫，那么这个时候的 this 就指向了父级对象;
+    // 2. 如果this 是在匿名函数，或者全局环境的函数中，那么这个时候的 this 就是；undefined;
+    // 3. 如果this 是在构造函数中，那么这个时候的 this 就指向了即将生成的那个对象
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>算法</title>
+</head>
+
+<body>
+  <script>
+    // 1. 奇偶排序：给定⼀个⽆序Number数组 ，将数组中奇数升序排序、偶数降序排序
+    // 输出。注意保持奇数和偶数的位置不变
+    function sortOddEven(arr) {
+      if (!arr || !arr.length) return
+      let oddArr = []
+      let evenArr = []
+      let typeArr = []
+      arr.forEach((item, index) => {
+        let isEvent = Boolean(item % 2)
+        typeArr.push(isEvent)
+        isEvent ? evenArr.push(item) : oddArr.push(item)
+      })
+      oddArr.sort((a, b) => a - b)
+      evenArr.sort((a, b) => b - a)
+      return typeArr.map(item => {
+        if (item) return evenArr.pop()
+        return oddArr.pop()
+      })
+    }
+    // let arr = [1,4,2,8,3,5,10,9,7,6,41,58]
+    // console.log(sortOddEven(arr))
+   
+    // 2. ⽐较两个版本号 version1 和 version2。如果 version1 > version2 返回 1，如
+    // 果 version1 < version2 返回 -1， 除此之外返回 0。
+    // 可以假设版本字符串⾮空，并且只包含数字和 . 字符，. 字符不代表⼩数点，⽽是⽤于分隔数字序列。
+    function versionCampare(version1, version2) {
+      let arr1 = version1.split('.')
+      let arr2 = version2.split('.')
+      if (arr1.length !== arr2.length) {
+        arr1.length > arr2.length ? arr2.length = arr1.length : arr1.length = arr2.length
+      }
+      let result = 0
+      for (let i = 0; i < arr1.length; i++) {
+        if (!arr1[i]) arr1[i] = 0
+        if (!arr2[i]) arr2[i] = 0
+        if (Number(arr1[i]) !== Number(arr2[i])){
+          result = arr1 [i] > arr2[i] ? 1 : -1
+          break
+        }       
+      }
+      return result
+    }
+    // console.log(versionCampare('2.1.2.1', '1.2.1.1'))
+    // console.log(versionCampare('1.0', '1.0.0'))
+    // console.log(versionCampare('1.0.1', '1'))
+    // console.log(versionCampare('0.1', '1.0'))
+    // console.log(versionCampare('1.01', '1.001'))
+
+
+    // 3.给定⼀个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+
+    // 最小花费爬楼梯
+    let temArr = {} // 在外部增加一个缓存
+    function stairs(num) {
+      if(num <= 2) return num
+      if (!temArr[num]){
+        temArr[num] = stairs(num - 1) + stairs(num - 2)
+      } 
+      return temArr[num]
+    }
+
+    function stairs2(num) {
+      let arr = new Array(num).fill(0)
+      arr[0] = 1
+      arr[1] = 1
+      for (let i = 2; i <= num; i++) {
+        arr[i] = arr[i - 1] + arr[i - 2]
+      }
+      return arr[num]
+    }
+    // console.log(stairs(40))
+    // console.log(stairs2(40))
+    
+    // 大数相加
+    function addBigNum(num1, num2) {
+      if (num2.length > num1.length) [num2, num1] = [num1, num2]
+      if (!num1 || !num2) return num1 || num2
+      let bigArr = num1.split('').reverse()
+      let smalArr = num2.split('').reverse()
+      let result = []
+      let isOver = false
+      bigArr.forEach((item, index) => {
+        let tem = Number(item) + Number(~~smalArr[index]) + Number(isOver)
+        result.push(tem % 10)
+        isOver = tem / 10 >= 1 ? true : false
+      })
+      if (isOver) result.push(1)
+      return result.reverse().join('')
+    }
+    // let num1 = '9999999999'
+    // let num2 = '2365265245646245624562'
+    // console.log(num1)
+    // console.log(num2)
+    // console.log(addBigNum(num1, num2))
+    
+    // 快速排序，递归
+    function quickSort(arr) {
+      if (arr.length <= 1) return arr
+      let midIndex = Math.floor(arr.length / 2)
+      let midNum = arr.splice(midIndex, 1)[0]
+
+      let left = [], right = []
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] <= midNum) left.push(arr[i])        
+        else right.push(arr[i])
+      }
+      return quickSort(left).concat(midNum, quickSort(right))
+    }
+    // let arr = [4,5,67,83,3,2,56,7,83,6,7,3,45]
+    // console.log(quickSort(arr))
+  </script>
+</body>
+
+</html>

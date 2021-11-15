@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>call&bind,apply</title>
+</head>
+<body>
+  <script>
+    // call,bind,apply 都是改变this指向的方法
+    // call和apply是立即执行函数，其中call第一个参数为要指定的this，后面可以跟多个参数
+    // apply第二个参数为数组，里面是要传递的参数
+    // bind不会立即执行函数，而是先绑定，后执行，返回一个指定this的函数，bind的参数和call类似
+
+    // 原生实现
+    // call
+    Function.prototype.myCall = function (ctx, ...arg) {
+      ctx = ctx || window
+      ctx.fn = this
+      let result = ctx.fn(...arg)
+      delete ctx.fn
+      return result
+    }
+
+    // apply
+    Function.prototype.myApply = function (ctx, ...arg) {
+      ctx = ctx || window
+      ctx.fn = this
+      let result
+      if (arg.length > 1) throw new Error('参数错误')
+      if (arg.length) result = ctx.fn(...arg[0])
+      else result = ctx.fn()
+      delete ctx.fn
+      return result
+    }
+
+    // bind
+    Function.prototype.myBind = function (ctx, ...arg) {
+      ctx = ctx || window
+      let _this = this
+      return function () {
+        _this.myApply(ctx, arg)
+      }
+    }
+
+    function mytest(...arg) {
+      console.log(this, ...arg)
+    }
+    // mytest.myCall(null, 2,3,4)
+    // mytest.myApply({a: 1, b: 2}, [2,3,4])
+    // let test2 = mytest.myBind({a: 1, b: 2}, 2,3,4)
+    // test2()
+  </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手写promise</title>
+</head>
+
+<body>
+  <div type='file'>选择文件</div>
+  <script>
+    // new Promise((resolve, reject) => {
+    //   console.log('aaa23333')
+    //   setTimeout(() => {
+    //     console.log('222')
+    //     resolve('商品数据-1');
+    //   }, 1000)
+    // }).then(value => {
+    //   console.log(value)
+    // })
+
+    // const p2 = new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     //  resolve('商品数据-2');
+    //     reject('失败的数据');
+    //   }, 1000)
+    // })
+    //调用allSettled方法
+    // const result = Promise.allSettled([p1, p2]);
+    // console.log(result)
+    // //调用all方法
+    // const result1 = Promise.all([p1, p2]);
+    // console.log(result1)//rejected
+
+  </script>
+  <script>
+    const PENDING = 'pending'
+    const RESOLVED = 'resolved'
+    const REJECTED = 'rejected'
+
+    function MyPromise(fn) {
+      const that = this
+      that.state = PENDING
+      that.value = null
+      that.resolvedCallbacks = []
+      that.rejectedCallbacks = []
+      function resolve(value) {
+        if (that.state !== PENDING) return
+        that.state = RESOLVED
+        that.value = value
+        that.resolvedCallbacks.map(cb => cb(that.value))
+      }
+      function reject(value) {
+        if (that.state !== PENDING) return
+        that.state = REJECTED
+        that.value = value
+        that.rejectedCallbacks.map(cb => cb(that.value))
+      }
+      try {
+        fn(resolve, reject)
+      } catch (e) {
+        reject(e)
+      }
+    }
+    MyPromise.prototype.then = function (onFulfilled, onRejected) {
+      const that = this
+      onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v
+      onRejected = typeof onRejected === 'function' ? onRejected : r => { throw r }
+      if (that.state === PENDING) {
+        that.resolvedCallbacks.push(onFulfilled)
+        that.rejectedCallbacks.push(onRejected)
+      }
+      if (that.state === RESOLVED) {
+        onFulfilled(that.value)
+      }
+      if (that.state === REJECTED) {
+        onRejected(that.value)
+      }
+    }
+    new MyPromise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(1)
+      }, 0);
+    }).then(value => {
+      console.log(value)
+      return 4
+    })
+    // all
+    function promiseAll(promises) {
+      return new Promise(function (resolve, reject) {
+        if (!isArray(promises)) {
+          return reject(new TypeError('arguments must be an array'));
+        }
+        let resolvedCounter = 0;
+        let promiseNum = promises.length;
+        let resolvedValues = new Array(promiseNum);
+        for (let i = 0; i < promiseNum; i++) {
+          Promise.resolve(promises[i]).then(function (value) {
+            resolvedCounter++
+            resolvedValues[i] = value
+            if (resolvedCounter == promiseNum) {
+              return resolve(resolvedValues)
+            }
+          }, function (reason) {
+            return reject(reason)
+          })
+        }
+      })
+    }
+    // race
+    // any
+    // allSettled
+    // finally
+  </script>
+</body>
+
+</html>

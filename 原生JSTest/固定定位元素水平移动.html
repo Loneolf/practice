@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test</title>
+  <style>
+    .scrollBox{
+      width: 1000px;
+      height: 20000px;
+      background-color: green;
+    }
+    .fixDom{
+      position: fixed;
+      left: 300px;
+      right: 12px;
+      min-width: 500px;
+      height: 50px;
+      background-color: red; 
+    }
+  </style>
+</head>
+<body>
+  <div class="scrollBox" id='scrollBox'>
+    <div class="fixDom" id='fixDom'></div>
+  </div>
+  <script>
+    let beforeLeft = 0, beforeTop = 0
+    window.addEventListener('scroll', ()=>{
+      const {scrollLeft: left, scrollTop: top} = document.documentElement
+      if (beforeTop !== top) return beforeTop = top
+      beforeTop = top
+      let dirL = left > beforeLeft ? '向右滑' : '向左滑'
+      beforeLeft = left
+      let width = fixDom.clientWidth
+      Object.assign(fixDom.style, {
+        left: 300 - left + 'px',
+        width,
+        right: 'auto'
+      })
+    })
+  </script>
+</body>
+</html>

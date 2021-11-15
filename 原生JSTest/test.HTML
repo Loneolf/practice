@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+
+
+<body>
+  <script>
+    var data = [
+      {id: 1,name: "招商"}, 
+      {id: 2,name: "建设"}, 
+      {id: 3,name: "招商"}, 
+      {id: 4,name: "建设"}
+    ]
+    data.sort((a, b) => {
+      return a.name.localeCompare(b.name,"zh")
+    })
+    data.push({id: 5, name: '建设'})
+    console.log(data)
+  </script>
+</body>
+
+</html>

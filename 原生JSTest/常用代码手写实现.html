@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手写常用代码</title>
+</head>
+
+<body>
+  <script>
+    // 防抖
+    function debounce(fun, deley = 500) {
+      let timer
+      return () => {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+          fun.apply(this, arguments)
+        }, deley)
+      }
+    }
+    // 节流
+    function throttle(fun, deley) {
+      let onOff = true
+      return () => {
+        if (!onOff) return
+        onOff = false
+        setTimeout(() => {
+          fun.apply(this, arguments)
+          onOff = true
+        }, deley);
+      }
+    }
+    // 深度克隆
+    function deepClone(target) {
+      if (target instanceof Function) {
+        return function () {
+          target.apply(this, arguments)
+        }
+      }
+      if (target instanceof Date) return new Date(target)
+      const res = new target.constructor()
+      Object.keys(target).forEach((item) => {
+        if (target[item] instanceof Object) {
+          res[item] = deepClone(target[item])
+        } else {
+          res[item] = target[item]
+        }
+      })
+      return res
+    }
+    // let cloneObj = {a:1, b:{c:[3,4,{5:6}]}, f: function(){console.log(this.a)}}
+    // let c = deepClone(cloneObj)
+    // console.log(cloneObj, c)
+    // call, apply, bind
+    // call
+    Function.prototype.myCall = function (ctx, ...arg) {
+      ctx = ctx || window
+      ctx.fn = this
+      let result = ctx.fn(...arg)
+      delete ctx.fn
+      return result
+    }
+    // apply
+    Function.prototype.myApply = function (ctx, ...arg) {
+      ctx = ctx || window
+      ctx.fn = this
+      let result
+      if (arg.length > 1) throw new Error('参数错误')
+      if (arg.length) result = ctx.fn(...arg[0])
+      else result = ctx.fn()
+      delete ctx.fn
+      return result
+    }
+    // bind
+    Function.prototype.myBind = function (ctx, ...arg) {
+      ctx = ctx || window
+      let _this = this
+      return function () {
+        _this.myApply(ctx, arg)
+      }
+    }
+    // promise.all
+    function promiseAll(arr) {
+      return new Promise((resolve, reject) => {
+        if (!Array.isArray(arr)) return reject(new Error('is not Array'))
+        let resultArr = []
+        for (let i = 0; i < arr.length; i++) {
+          Promise.resolve(arr[i]).then((value) => {
+            resultArr.push(value)
+            if (i === arr.length - 1) return resolve(resultArr)
+          }, (value) => {
+            return reject(value)
+          })
+        }
+      })
+    }
+
+    // 数组扁平化
+    function flatmap(arr, callback) {
+      if (!Array.isArray(arr)) return alert("请传入正确的数组对象")
+      let newArr = new arr.constructor()
+      for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+          newArr = newArr.concat(flatmap(arr[i], callback))
+        } else {
+          let value = callback(i, arr[i])
+          newArr.push(value)
+        }
+      }
+      return newArr
+    }
+
+    // map手写实现
+    Array.prototype.myMap = function (fn, toThis) {
+      let arr = this;
+      const result = [];
+      for (let i = 0; i < arr.length; i++) {
+        const item = fn.call(toThis, arr[i], i, arr);
+        result[i] = item;
+      }
+      return result;
+    };
+    // 大数相加
+    function addBigNum(num1, num2) {
+      if (num2.length > num1.length) [num2, num1] = [num1, num2]
+      if (!num1 || !num2) return num1 || num2
+      let bigArr = num1.split('').reverse()
+      let smalArr = num2.split('').reverse()
+      let result = []
+      let isOver = false
+      bigArr.forEach((item, index) => {
+        let tem = Number(item) + Number(~~smalArr[index]) + Number(isOver)
+        result.push(tem % 10)
+        isOver = tem / 10 >= 1 ? true : false
+      })
+      if (isOver) result.push(1)
+      return result.reverse().join('')
+    }
+    // console.log(num1)
+    // console.log(num2)
+    // console.log(addBigNum(num1, num2))
+
+    // 数组对象去重
+    function removeSome(arr, key) {
+      let len = arr.length
+      let obj = {}
+      for (let i = 0; i < len; i++) {
+        if (obj[arr[i][key]]) arr[i] = ''
+        else obj[arr[i][key]] = 1
+      }
+      return arr.filter((item) => item !== '')
+    }
+    // 使用reduce 实现数组对象去重， 待完成
+    function removeSome2(arr, key) {
+      let has = {}
+      let res = arr.reduce((tem, item) => {
+        if (!has[item[key]]) {
+          has[item[key]] = true
+          tem.push(item)
+        }
+        return tem
+      }, [])
+      return res
+    }
+    // let arr = [{a: 1, b: 2}, {a: 2, b: 4}, {a: 3, b: 4}, {a: 2, b: 1}, {a: 1, b: 2}]
+    // console.log(removeSome2(arr, 'a'))
+
+    // 极简响应式原理
+    function myAbserve(obj) {
+      if (!obj || typeof obj !== 'object') return
+      Object.keys(obj).forEach((key) => {
+        defineReactive(obj, key, obj[key])
+      })
+    }
+    function defineReactive(obj, key, value) {
+      // console.log('aaa', obj, key, value)
+      myAbserve(value)
+      Object.defineProperty(obj, key, {
+        configurable: true,
+        enumerable: true,
+        // writable: true,
+        get: function () {
+          console.log('aaaget', value)
+          return value
+        },
+        set: function (newValue) {
+          console.log('aaaset', newValue)
+          value = newValue
+        }
+      })
+    }
+    // let obj = {a: 1, b: 2}
+    // myAbserve(obj)
+    // obj.b = 4 
+    // console.log(obj.a, obj.b)
+
+    // instanceof 原理及实现
+    // 通过对比左侧.__proto__ ... 与右侧的prototype是否强相等
+    function myInstanceof(L, R) {
+      let tem = R.prototype
+      L = L.__proto__
+      while (true) {
+        if (L === null || L === undefined) return false
+        if (L === tem) return true
+        L = L.__proto__
+      }
+    }
+    // console.log(myInstanceof([], Array))
+
+    // new 的原理及实现
+    // 1.新生成对象
+    // 2.链接到原型
+    // 3.绑定this
+    // 4.返回新对象
+    function myNew(...rest) {
+      let obj = {}
+      let constrocterF = rest.shift()
+      obj.__proto__ = constrocterF.prototype
+      let res = constrocterF.apply(obj, rest)
+      return (res instanceof Object) ? res : obj
+    }
+    // function People(name, height){
+    //   this.name = name
+    //   this.height = height
+    // }
+    // let a = myNew(People, 'zhangsan', '183')
+    // console.log('aaa', a, new People('lisi', '180'))
+
+    // 继承
+    function myExtends(Child, Parent) {
+      let F = function () { };
+      F.prototype = Parent.prototype;
+      Child.prototype = new F();
+      Child.prototype.constructor = Child;
+      Child.uber = Parent.prototype;
+      if (Parent.prototype.constructor === Object.prototype.constructor) {
+        Parent.prototype.constructor === Parent
+      }
+    }
+
+    // URL参数提取
+    function urlToObject(url) {
+      if (!~url.indexOf("?")) return;
+      //  如果没有找到&，就会将当前的这个字符串整体放在数组的第0位
+      let arr = url.split("?").pop().split("&");
+      let obj = {};
+      arr.forEach(function (t) {
+        let arr1 = t.split("=");
+        if (arr1[1].indexOf("|") > -1) {
+          obj[arr1[0]] = arr1[1].split("|");
+          obj[arr1[0]] = obj[arr1[0]].map(function (t2) {
+            return getNum(t2);
+          })
+        } else {
+          obj[arr1[0]] = getNum(arr1[1]);
+        }
+      });
+      return obj;
+
+      function getNum(str) {
+        if (isNaN(Number(str))) return str;
+        return Number(str);
+      }
+    }
+    let url = 'http://www.163.com/index.html?user=xie&pass=123456&age=30&sex=man&interest=看书|游戏&list=101|102'
+    console.log(urlToObject(url))
+
+    //在对象的原型上直接添加迭代器
+    Object.prototype[Symbol.iterator] = function () {
+      const _this = this
+      const keys = Object.keys(this)
+      let index = 0
+      return {
+        next() {
+          return { value: _this[keys[index++]], done: index > keys.length }
+        }
+      }
+    }
+
+    // 使用远程的加法 ： https://www.yuque.com/docs/share/c531a3e6-7e55-47c4-9efa-0b3c8f1cc06a?# 《【0】加法》
+    async function add(...inputs) {
+      if (inputs < 2) return
+      return new Promise(async (resolve, reject) => {
+        let sum = 0
+        let len = inputs.length
+        for (let i = 0; i < len; i++) {
+          sum = await addRemote(inputs[i], sum)
+          if (i === len - 1) resolve(sum)
+        }
+      })
+    }
+
+    // https://www.yuque.com/docs/share/c8efb8c9-0126-48fe-b7c8-bc1decf55c18?# 《【3】实现一个可以取消的延时》
+    function delay(ms, value) {
+      let time
+      let res = new Promise((resolve, reject) => {
+        time = setTimeout(() => {
+          return resolve(value)
+        }, ms);
+      })
+      res.cancel = function (params) {
+        clearTimeout(time)
+      }
+      return res
+    }
+
+
+    // 并发控制
+    function asyncPool(poolLimit, array, iteratorFn) {
+      let i = 0;
+      const ret = [];
+      const executing = [];
+      const enqueue = function () {
+        if (i === array.length) return Promise.resolve();
+        const item = array[i++];
+        const p = Promise.resolve().then(() => iteratorFn(item, array));
+        ret.push(p);
+        const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+        executing.push(e);
+        let r = Promise.resolve();
+        if (executing.length >= poolLimit) r = Promise.race(executing);
+        return r.then(() => enqueue());
+      };
+      return enqueue().then(() => Promise.all(ret));
+    }
+    // const timeout = (i) => new Promise(resolve => setTimeout(() => resolve(i), 300));
+    // let arr = [1, 2, 3, 4, 5, 5, 6, 7, 87, 89, 9, 6, 5, 4, 3, 2, 21, 34, 4, 5, 56]
+    // asyncPool(6, arr, timeout)
+    //   .then(results => {
+    //     console.log(results)
+    //   });
+
+
+    function concurrentPoll(num) {
+      this.tasks = [];
+      this.max = num || 10;
+    }
+    concurrentPoll.prototype.addTask = function (task) {
+      this.tasks.push(task)
+      this.run()
+    }
+    concurrentPoll.prototype.run = function () {
+      if (this.tasks.length == 0) return
+      let min = Math.min(this.tasks.length, this.max);
+      for (let i = 0; i < min; i++) {
+        this.max--; // 执行最大并发递减  
+        let task = this.tasks.shift(); // 从数组头部取任务  
+        task().then((res) => {
+          console.log(res)
+        }).catch((err) => {
+          console.log(err)
+        }).finally(() => { // 重：当所有请求完成并返回结果后，执行finally回调，此回调将按照for循环依次执行，此时max为0.  
+          this.max++; // 超过最大并发10以后的任务将按照任务顺序依次执行。此处可理解为递归操作。  
+          this.run();
+        })
+      }
+    }
+    let poll = new concurrentPoll(); // 实例  
+    for (let i = 0; i < 20; i++) { // 数据模拟  
+      setTimeout((j) => {
+        poll.addTask(function () {
+          return new Promise(
+            function (resolve, reject) {
+              resolve(j) // 数据处理完成  
+              // reject('失败') // 数据处理出错  
+            }
+          )
+        })
+      }, 2000, i);
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello world</title>
+</head>
+<body>
+  <button class='btn'>加载文件内容</button>
+  <div class='content'></div>
+  <button class='remoteBTN'>remoteBTN</button>
+  <script src="./remoteWin.js"></script>
+  <script>
+    let fs = require('fs')
+    window.onload = function(){
+      let btn = document.querySelector('.btn')
+      let content = document.querySelector('.content')
+      
+      btn.addEventListener('click',()=>{
+        fs.readFile('./test.txt',(err,data)=>{
+          content.textContent = data
+        })
+      })
+     
+    }
+  </script>
+</body>
+</html>
