@@ -1,4 +1,4 @@
-export default function crash(rectA, rectB) {
+export function crash(rectA, rectB) {
 	rectA.left = rectA.x;
 	rectA.right = rectA.x + rectA.image.width;
 	rectA.top = rectA.y;
@@ -16,4 +16,17 @@ export default function crash(rectA, rectB) {
 	if ( rectB.left >= rectA.left &&rectB.left <= rectA.right &&rectB.bottom >= rectA.top &&rectB.bottom <= rectA.bottom ) return true;
 	if ( rectB.right >= rectA.left &&rectB.right <= rectA.right &&rectB.bottom >= rectA.top &&rectB.bottom <= rectA.bottom ) return true;
 	return false;
+}
+
+export function imgFromPath(path) {
+	let img = new Image();
+	img.src = path;
+	return img;
+}
+
+export const levels = {
+	'1': [[100, 100]],
+	'2': [[100, 100,], [200, 100,2]],
+	'3': [[100, 100,], [200, 100,2], [300, 100, 3]],
+	'4': [[100, 100,], [200, 100,2], [300, 100, 3], [100, 200, 4]],
 }
