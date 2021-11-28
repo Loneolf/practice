@@ -22,6 +22,7 @@ function __main() {
   myGame.registerAction("f", () => bullet.fire());
   myGame.registerAction("s", () => bullet.stop());
   myGame.updata = function () {
+    log('aaa', 30)
     bullet.move();
     if (crash(bullet, board)) bullet.changeDirectionY();
     for (let i = 0; i < bricks.length; i++) {

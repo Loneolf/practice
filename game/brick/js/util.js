@@ -30,3 +30,10 @@ export const levels = {
 	'3': [[100, 100,], [200, 100,2], [300, 100, 3]],
 	'4': [[100, 100,], [200, 100,2], [300, 100, 3], [100, 200, 4]],
 }
+
+// let log = console.log.bind(console)
+
+let log = (...params) => {
+	textarea.value += '\n' + params
+}
+window.log = log
