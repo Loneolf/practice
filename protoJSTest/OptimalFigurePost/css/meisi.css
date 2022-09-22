@@ -1,0 +1,232 @@
+@charset "utf-8";
+*{
+	margin: 0;padding: 0;list-style: none;border: none;color: #222;text-decoration: none;
+	font-family: "微软雅黑";font-size: 14px;
+}
+img{vertical-align: top;}
+
+/*固定导航*/
+.header{width: 100%;height: 53px;position: fixed;top: 0;left: 0;z-index: 8;margin: 12.5px 0;}
+.header-in{
+	width: 1180px;height: 100%;margin: 0 auto;/*background-or:red ;*/
+}
+.header-in .header-in-left{
+	float: left;width: 800px;height: 53px;
+}
+
+
+
+.header-in .header-in-left li{
+	float: left;text-align: center;line-height: 53px;margin-right: 35px;position: relative;overflow: hidden;
+}
+.header-in .header-in-left li:nth-child(1){
+	width: 185px;height: 53px;
+}
+.header-in .header-in-left li:nth-child(1) a{
+	width: 185px;height: 53px;display:inline-block;background-color: red;
+	background:url(../img/serve/lunbo/logo.png) no-repeat center;background-size: 100% 150%;
+}
+.header-in .header-in-left li:nth-child(2){
+	width: 32px;height: 53px;border-bottom-color: #c0a75e;
+}
+.header-in .header-in-left li:nth-child(2) a{
+	width: 32px;height: 53px;display:inline-block; border-bottom:1px solid  #c0a75e;color: white;
+}
+
+.header-in .header-in-left li:nth-child(3){
+	width: 90px;height: 53px;position: relative;
+}
+.header-in .header-in-left li:nth-child(3) a{
+	width: 70px;height: 53px;display:inline-block;color: white;
+}
+.header-in .header-in-left li:nth-child(3) .tri{
+	border-top:5px solid white ;border-left: 5px solid transparent;border-right: 5px solid transparent;
+	position: absolute;right: -3px;top: 23px;
+}
+.header-in .header-in-left li:nth-child(4){
+	width: 48px;height: 53px;
+}
+.header-in .header-in-left li:nth-child(4) a{
+	width: 48px;height: 53px;display:inline-block;color: white;
+}
+
+
+
+.header-in .header-in-left li span:nth-child(2){position: absolute;top: 53px;left: 0;width: 100%;height: 100%;display: inline-block;background-color: skyblue;}
+.header-in .header-in-right{
+	width: 165px;height: 53px;float: right;line-height: 53px;
+}
+.header-in .header-in-right a{
+	width: 75px;height: 34px;display: inline-block;text-align: center;line-height: 34px;
+	color: white;border-radius:2px ;
+}
+.header-in .header-in-right a:nth-child(1){
+	border: 1px solid white;margin-right: 3px;
+}
+.header-in .header-in-right a:nth-child(2){
+	background-color: #c0a75e;color: white;border: 1px solid #c0a75e;
+}
+.header2{margin:0;background-color: white;width: 100%;height: 53px;position: fixed;top:0px;left: 0;z-index: 8;}
+.header2 #header-in a{color: black;}
+.header2 #header-in ul li:nth-child(1) a{background:url(../img/serve/lunbo/logo2.png) no-repeat center;background-size: 100% 150%;}
+.header2 #header-in .header-in-right a:nth-child(1){background-color: #eee;}
+.header2 #header-in .header-in-right a:nth-child(2){color: white;}
+
+/*固定导航*/
+/*内容区*/
+/*轮播图*/
+.content{width: 100%;height: 4000px;}
+.content h4{height: 24px;text-align: center;color: #666;font-size: 24px;font-family: "新宋体"}
+.content .banner{position: relative;width: 100%;height: 620px;}
+.content .banner ul{position: absolute;width: 100%;height: 620px;}
+.content .banner ul li{position: absolute;top: 0;left: 0;width: 100%;height: 620px;display: none;}
+.content .banner ul .first{display: block;}
+.content .banner ul li img{width: 100%;height: 100%;}
+.content .banner .text{position: absolute;top: 0;left: 0;width: 100%;height: 620px;}
+.content .banner .text .text-in{width: 1180px;height: 620px;margin: 0 auto;color: white;}
+.content .banner .text .text-in .title{width: 180px;height:70px; margin-top: 150px;font-size: 40px;border-bottom: 2px solid #999999;color: white;padding: 10px;letter-spacing: 4px;font-weight: 100;}
+.content .banner .text .text-in .title span{color: white;font-size: 40px;font-weight: 400;letter-spacing: 4px;}
+.content .banner .text .text-in .title:nth-child(2){width: 360px;margin: 10px 0;border-bottom: none;}
+.content .banner .text .text-in .as{width: 250px;height: 80px;}
+.content .banner .text .text-in .as a{width: 80px;height: 30px;display:inline-block; border: ;font-size: 20px;color: white;padding: 10px;border-radius: 3px;}
+.content .banner .text .text-in .as a:nth-child(1){background-color: #c0a75e;margin-right: 10px;}
+.content .banner .text .text-in .as a:nth-child(2){border: 1px solid white;}
+/*轮播图*/
+/*设计服务平台*/
+.content .advantage{
+	width: 100%;height: 493px;padding-top: 60px;padding-bottom: 120px;box-sizing: border-box;/*background-color: red;*/
+	}
+.content .advantage-in{width: 1180px;height: 313px;/*background-color: blue;*/margin: 0 auto;}
+.content .advantage-in h4{margin-bottom: 30px;}
+.content .advantage-in .four-div{width:100%; height: 259px;/*background-color: red;*/}
+.content .advantage-in .four-div .box{width:290px; height: 259px;display: inline-block;text-align: center;transition: all 0.4s;}
+.content .advantage-in .four-div:hover .box{transform: rotateZ(5deg);}
+
+.content .advantage-in .four-div:hover .two{transition-delay: 0.1s;}
+.content .advantage-in .four-div:hover .three{transition-delay: 0.2s;}
+.content .advantage-in .four-div:hover .four{transition-delay: 0.3s;}
+.content .advantage-in .four-div .box .p1{color: #444;font-size: 20px;margin-top: 15px;}
+.content .advantage-in .four-div .box .p2{color: #999;font-size: 14px;margin-top: 20px;}
+/*设计服务平台*/
+/*马上找到您需要的设计师*/
+.content .choose-designer{background-color: rgba(200,200,200,0.2);width: 100%; height: 592px;}
+.content .choose-designer-in{width: 1180px;height: 522px;margin: 0 auto;padding-top: 70px;/*background-color: red;*/text-align: center;}
+.content .choose-designer-in .ht{margin-bottom: 14px;}
+.content .choose-designer .ht-slider{width: 100px; height: 2px;background-color: #c0a75e;margin: 30px auto;}
+.content .choose-designer-in .showCase{width:1180px; height: 318px;margin: 0 auto;/*background-color: red;*/}
+.content .choose-designer-in .showCase .box{width: 194.67px;height: 157px;display: inline-block; float: left;text-align: center;padding: 20px;box-sizing: border-box;margin: 0 1px 2px 1px;background-color: white;
+}
+.content .choose-designer-in .showCase .box:hover{transform: translateY(-6px);box-shadow: 0 3px 5px #ccc;color: #c0a75e;}
+.content .choose-designer-in .showCase .box span{width: 100%;height: 19px;display: inline-block; margin-top: 28px;color: #555;font-size: 14px;}
+.content .choose-designer-in .title{width: 100%;height: 22px;margin: 40px auto 16px; text-align: center;    font-size: 16px;letter-spacing: 4px;color: #999;}
+.content .choose-designer-in>a{width: 124px;height: 40px;display:inline-block;border: 1px solid #000;text-align: center;line-height: 40px;}
+/*马上找到您需要的设计师*/
+/*联合设计中心*/
+.content .union{width: 100%; height: 605px;background-color: rgba(200,200,200,0.2);}
+.content .union-in{width: 1180px;height: 605px;padding: 70px 0 40px 0;margin: 0 auto;position: relative;}
+.content .union-in:before{content: "";display: inline-block;width: 100px;height: 1px;    background-color: #000;position: absolute;top: 80px;left: 0;}
+.content .union-in:after{content: "";display: inline-block;width: 100px;height: 1px;background-color: #000;position: absolute;top: 80px;right: 0;}
+.content .union-in h4{margin-bottom: 80px;}
+.content .union-in .unites{width: 100%;height: 332px;background-color: rgba(200,200,200,0.1);}
+.content .union-in .unites a{width: 370px;height: 332px;box-sizing: border-box; display:inline-block; padding-top: 20px;padding-bottom: 40px;margin-right: 20px;text-align: center;background-color: white;}
+.content .union-in .unites a:hover{transform: translateY(-3px);box-shadow: 0 3px 5px #ccc;color: #c0a75e;}
+.content .union-in .unites a img{margin-bottom: 22px;}
+.content .union-in .unites a .name{margin-bottom: 14px;display: inline-block; color: #c0a75e;
+    font-size: 18px;}
+.content .union-in .unites a .extra{margin-bottom: 14px;color: #999;font-size: 14px;}
+.content .union-in .unites a .divider{width: 40px;height: 1px;background-color:#c0a75e;margin: 0 auto;margin-bottom: 14px;}
+.content .union-in .unites a .cate{color: #999;}
+.content .union-in .text{height: 19px;margin-top: 40px;font-size: 16px;letter-spacing: 4px;color: #999;text-align: center;}
+.content .union-in .text span{color: #222;cursor: pointer;font-size: 16px;letter-spacing: 4px;}
+/*联合设计中心*/
+/*设计师*/
+.desiger{width: 1349px;height: 1100px;padding-top: 70px;padding-bottom: 60px;box-sizing: border-box;}
+.desiger-in{width: 1180px;height: 886px;margin: 0 auto;/*background-color: lightblue;*/}
+.desiger-in h4{margin-bottom: 14px;}
+.desiger-in .ht-slider{width: 100px; height: 2px;background-color: #c0a75e;margin: 30px auto;}
+
+.desiger-in .photoes{width: 1180px;height: 800px;}
+
+.desiger-in .photoes .user a{width: 280px;height: 320px;display: inline-block;}
+.desiger-in .photoes .user a img{width: 280px;height: 320px;transition: all 1s;}
+.desiger-in .photoes .user a img:hover{transform: rotate(15deg);}
+.desiger-in .photoes .user .detail{width: 290px;height: 320px;/*background-color: red;*/}
+.desiger-in .photoes .user .detail .detail-header{width: 290px;height: 123px;}
+.desiger-in .photoes .user .detail .detail-header .title{font-size: 14px;color: #c0a75e;display: block;margin-top: -44px;margin-bottom: 14px;}
+.desiger-in .photoes .user .detail .detail-header .bg{font-size: 64px;line-height: 64px;color: #f2f2f2;margin-right: 16px;display: block;}
+.desiger-in .photoes .user .detail .detail-header a{width: 112px;height: 40px;display:inline-block; padding: 0 0 20px 28px;font-size: 28px;color: #222;border-bottom: 1px solid #222;box-sizing: border-box;}
+.desiger-in .photoes .user .detail .descript{width: 290px;height: 100px;line-height: 1.8em;color: #9d9d9d;}
+
+.desiger-in .photoes .left{width: 570px;height: 520px;margin-right: 20px;}
+.desiger-in .photoes .left .detail{float: right;text-align: right;background: linear-gradient(to right,#f3f3f3,#f3f3f3 200px,transparent 200px,transparent);}
+.desiger-in .photoes .left .detail .descript{padding-left: 12px; }
+
+.desiger-in .photoes .right{float: right;margin-top: -310px;}
+.desiger-in .photoes .right .detail{float: left;text-align: left;background: linear-gradient(to left,#f3f3f3,#f3f3f3 200px,transparent 200px,transparent);}
+.desiger-in .photoes .right .detail .descript{padding-right: 12px;}
+
+/*设计师*/
+/*成功项目实例*/
+.succeed{width: 100%;height: 779px;background-color: rgba(200,200,200,0.2);}
+.succeed-in{width: 1180px;height: 779px;padding-top: 70px; margin: 0 auto;/*background-color: lightblue;*/}
+.succeed-in  h4{margin-bottom: 14px;}
+.succeed-in .ht-slider{width: 100px; height: 2px;background-color: #c0a75e;margin: 30px auto;}
+.succeed-in .slider{width: 1180px;height: 623px;margin: 0 auto;padding-bottom: 30px;box-sizing: border-box;position: relative;}
+.succeed-in .slider .box{width: 1180px;height: 547px;overflow: hidden;position: relative;}
+.succeed-in .slider .box .box-in{position: absolute;left:0px;top: 0;}
+.succeed-in .slider .box .box-in .group{width: 1180px;height: 547px;position: absolute;left: 1180px;top: 0;}
+.succeed-in .slider .box .box-in .first{left: 0;top: 0;}
+.succeed-in .slider .box .box-in a{width: 380px;height: 547px;display: inline-block; 
+margin-left: 20px;float: left;transition: all 0.5s;}
+.succeed-in .slider .box .box-in a:hover{transform: translateY(-5px);box-shadow: 0 3px 5px #ccc;}
+.succeed-in .slider .box .box-in a:nth-child(1),
+.succeed-in .slider .box .box-in a:nth-child(4),
+.succeed-in .slider .box .box-in a:nth-child(7){margin-left: 0;}
+.succeed-in .slider .box .box-in a img{width: 380px;height: 380px;}
+.succeed-in .slider .box .box-in a .content{width:380px;height: 166.7px; text-align: center;padding: 24px 0 40px 0;box-sizing: border-box;}
+.succeed-in .slider .box .box-in a .content .title{width: 100%;color: #222;font-size: 16px;font-weight: 700;letter-spacing: 3px;}
+.succeed-in .slider .box .box-in a .content .time{width: 100%;margin-top: 14px;letter-spacing: 3px;color: #999;}    
+.succeed-in .slider .box .box-in a .content .user{margin-top: 10px;color: #c0a75e;}
+.succeed-in .slider .btn{width: 1180px;height: 26px;margin-top: 20px;text-align: center;}
+.succeed-in .slider .btn button{width: 20px;height: 20px;border-radius: 50%;border: 1px solid #ccc;cursor: pointer;}
+.succeed-in .slider .btn .current{background-color: #fff;}
+.succeed-in .slider .hand{position: absolute;bottom:300px;width: 32px;height: 62px;text-align:center;line-height: 62px; font-size: 62px;color: #555;cursor: pointer;}
+.succeed-in .slider .left{left: -50px;}
+.succeed-in .slider .right{right: -50px;}
+.succeed-in .slider .hand:hover{color: #c0a75e;}
+/*成功项目实例*/
+/*马上找到您需要的设计师*/
+.find-designer{width: 100%;height: 404px;padding: 70px 0 110px 0;box-sizing: border-box;}
+.find-designer-in{width: 1180px;height: 224px;margin: 0 auto;}
+.find-designer-in  h4{margin-bottom: 14px;}
+.find-designer-in .ht-slider{width: 100px; height: 2px;background-color: #c0a75e;margin: 30px auto;}
+.find-designer-in .blocks{width: 1180px;height: 138px;}
+.find-designer-in .blocks a{width: 184px;height: 69px;display: inline-block;float: left;text-align: center;    color: #555;line-height: 69px;margin: 0 1px 2px 1px;    background-color: #f8f8f8;}
+.find-designer-in .blocks a:hover{transform: translateY(-5px);box-shadow: 0 3px 5px #ccc;color: #c0a75e;}
+/*马上找到您需要的设计师*/
+/*他们选择美思*/
+.mate{width: 100%;height: 350px;padding-bottom: 10px;background-color: rgba(200,200,200,0.2);}
+.mate-in{width: 1180px;height: 300px;margin: 0 auto;}
+.mate-in  h4{margin-bottom: 14px;}
+.mate-in .ht-slider{width: 100px; height: 2px;background-color: #c0a75e;margin: 30px auto;}
+.mate-in .brands{width: 1180px;height: 240px;margin-top: 20px;}
+.mate-in .brands a{display: inline-block;width: 190px; height: 80px;}
+.mate-in .brands a img{width: 100px;height: 30px;}
+/*他们选择美思*/
+/*页脚区*/
+.footer{width: 100%;height: 360px;margin-top: 20px;background-color: #333;}
+
+.top{width: 1180px;height: 300px;margin: 0 auto;padding: 26px 0;}
+.top h2{height: 23px;color: #999;margin-bottom: 26px;font-size: 18px;}
+.top .col{width: 270px;height: 200px;margin: 10px;float: left;}
+.top .col label{display: block;width: 100%;height: 19px;margin-bottom: 26px;color: #999;}
+.top .col a{margin-bottom: 10px;color: #ddd;display: block;}
+.bottom{width: 100%;height: 59px;padding: 20px 0;background-color: #222222;}
+.bottom-in{width: 1180px;height:59%;margin: 0 auto;line-height: 59px;color:  #999;}
+/*页脚区*/
+/*内容区*/
+/*canvas*/
+#canvas{position: absolute;left: 0;bottom:80px;}
+#closeCanvas{position: absolute;left: -9px;bottom:75px;width: 30px;height: 30px;background-color: transparent;
+font-size: 20px;color: #000000;}
+/*canvas*/

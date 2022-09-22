@@ -5,8 +5,8 @@ export default class Stars {
     this.ctx = ctx;
     this.width = width;
     this.height = height;
-    this.type = type;
     this.stars = this.getStars(amount);
+    this.type = type;
     this.count = 0;
   }
 
@@ -38,7 +38,7 @@ export default class Stars {
   dotDraw() {
     if (this.count % 10 !== 0) return;
     let ctx = this.ctx;
-    ctx.clearRect(0, 0, this.width, this.height);
+    // ctx.clearRect(0, 0, this.width, this.height);
     ctx.save();
     ctx.fillStyle = "white";
     this.stars.forEach((star, i) => {
@@ -47,6 +47,19 @@ export default class Stars {
       ctx.fill();
     });
     ctx.restore();
+  }
+
+  dotBlink() {
+    this.stars = this.stars.map((star, i) => {
+      let sign = Math.random() > 0.5 ? 1 : -1;
+      star.r += sign * 0.2;
+      if (star.r < 0) {
+        star.r = -star.r;
+      } else if (star.r > 1) {
+        star.r -= 0.2;
+      }
+      return star;
+    });
   }
 
   normalDraw() {
@@ -72,8 +85,8 @@ export default class Stars {
       ctx.closePath();
       ctx.fillStyle = "yellow";
       ctx.fill();
+      ctx.restore();
     });
-    ctx.restore();
   }
 
   normalBlink() {
@@ -83,16 +96,4 @@ export default class Stars {
     });
   }
 
-  dotBlink() {
-    this.stars = this.stars.map((star, i) => {
-      let sign = Math.random() > 0.5 ? 1 : -1;
-      star.r += sign * 0.2;
-      if (star.r < 0) {
-        star.r = -star.r;
-      } else if (star.r > 1) {
-        star.r -= 0.2;
-      }
-      return star;
-    });
-  }
 }

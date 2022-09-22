@@ -11,14 +11,14 @@ canvas.width = width;
 canvas.height = height;
 
 // 初始化星星
-let stars = new Stars(ctx, width, height, 200, 'normal')
+let stars = new Stars(ctx, width, height, 200, '')
 let moon = new Moon(ctx, width, height)
 function animation () {
-  // stars.blink()
-  // stars.draw()
+  moon.move();
+  moon.draw();
+  stars.blink()
+  stars.draw()
 
-  // moon.move();
-  // moon.draw();
   requestAnimationFrame(animation)
 }
 animation()
