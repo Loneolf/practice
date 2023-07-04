@@ -10,66 +10,370 @@
 
 
 <body>
+  <input class="input" id="input" type="text" />
   <script>
-    let taskTypes = [
-      {
-        "taskType": "setPwd",
-        "extInfo": "{\"parentToken\":null,\"scene\":4,\"riskVerifyNo\":\"risk20201116170026239250\",\"increaseTppCode\":null,\"realSource\":\"PAY\"}"
-      },
-      {
-        "taskType": "pbcCredit",
-        "extInfo": "{\"tppCode\":\"CQQXLOAN\",\"orgChannel\":\"CTRIP\",\"okBtn\":\"同意授权并继续\",\"cancelBtn\":\"暂不授权\",\"protocol\":null,\"protocols\":[{\"protocoltype\":\"pbc\",\"text\":\"重庆趣携小额贷款有限公司人行征信查询授权书\",\"type\":null,\"link\":\"https://jr.ctrip.com/m/iousapi/queryProtocolDetail.do?protocolDetailkey=CQQX_PBC_AUTH\"}],\"msg\":\"您仅需同意{protocols}即可获得拿去花额度及专享权益\",\"showType\":\"dialog\",\"iousImg\":\"https://s.qunarzz.com/finance/finance_nano/activate/pbc_credit_ious.png\",\"riskVerifyNo\":null,\"increaseTppCode\":\"CQQXLOAN\",\"realSource\":\"PAY\"}"
-      },
-      {
-        "taskType": "education",
-        "extInfo": "{\"token\":\"BC202009242044150232166309\",\"signLink\":\"\",\"riskVerifyNo\":\"12B871B8141DC6FF38C0F6108F74192E\",\"increaseTppCode\":\"HR\",\"realSource\":\"PAY\"}"
-      },
-      {
-        "taskType": "checkMobile",
-        "extInfo": "{\"mobile\":\"18354216432\", \"mobileToken\":\"18354216432\"}"
-      },
-      {
-        "taskType": "card",
-        "extInfo": "{\"token\":null,\"signLink\":\"\",\"riskVerifyNo\":\"risk20211130194137011435\",\"increaseTppCode\":null,\"realSource\":\"PAY\",\"verifyScene\":\"ADVERT\",\"canSkip\":false}"
-      },
-      {
-        "taskType": "uploadIdCard",
-        "extInfo": "{\"userId\":\"1444649682\",\"tppCode\":\"MSTGLOAN\",\"tradeNo\":\"21113019FW00000001\",\"identityCode\":\"5227Ca5Ej4l0ESN740\",\"source\":\"FINANCE_WEB\",\"sign\":\"bae888e680bb106e139e3a3ec350ec3c\",\"type\":\"1,2\",\"ext\":\"\",\"riskVerifyNo\":null,\"increaseTppCode\":\"MSTGLOAN\",\"realSource\":\"PAY\",\"verifyScene\":\"ADVERT\",\"canSkip\":false}"
-      },
-      {
-        "taskType": "face",
-        "extInfo": "{\"token\":null,\"step\":\"[1,2]\",\"orgChannel\":\"QUNAR\",\"retryLimit\":{\"duration\":36000000,\"fail\":3,\"identify\":2,\"unknown\":4},\"riskVerifyNo\":null,\"increaseTppCode\":\"MSTGLOAN\",\"realSource\":\"PAY\",\"verifyScene\":\"ADVERT\",\"canSkip\":false}"
-      },
-      {
-        "taskType": "information",
-        "extInfo": "{\"name\":\"c127af0862ca62d8f010581b4ec2874c\",\"userMobile\":\"c17f8b9aabda2633e3b9134ebddc2a39\",\"riskVerifyNo\":null,\"increaseTppCode\":\"MSTGLOAN\",\"realSource\":\"PAY\",\"verifyScene\":\"ADVERT\",\"canSkip\":false,\"content\":\"{\\\"title\\\":\\\"请完善您的个人信息\\\",\\\"subTitle\\\":\\\"完善联系人信息，助力您获得更高额度\\\",\\\"formList\\\":[{\\\"title\\\":\\\"联系人信息\\\",\\\"itemList\\\":[{\\\"label\\\":\\\"关系\\\",\\\"name\\\":\\\"contact_relate\\\",\\\"type\\\":\\\"Select\\\",\\\"props\\\":{\\\"selectList\\\":[{\\\"text\\\":\\\"父母\\\",\\\"value\\\":\\\"父母\\\"},{\\\"text\\\":\\\"配偶\\\",\\\"value\\\":\\\"配偶\\\"},{\\\"text\\\":\\\"兄弟\\\",\\\"value\\\":\\\"兄弟\\\"},{\\\"text\\\":\\\"姐妹\\\",\\\"value\\\":\\\"姐妹\\\"},{\\\"text\\\":\\\"子女\\\",\\\"value\\\":\\\"子女\\\"},{\\\"text\\\":\\\"同学\\\",\\\"value\\\":\\\"同学\\\"},{\\\"text\\\":\\\"同事\\\",\\\"value\\\":\\\"同事\\\"},{\\\"text\\\":\\\"朋友\\\",\\\"value\\\":\\\"朋友\\\"}],\\\"value\\\":{\\\"text\\\":\\\"父母\\\",\\\"value\\\":\\\"父母\\\"}}},{\\\"label\\\":\\\"姓名\\\",\\\"name\\\":\\\"contact_name\\\",\\\"type\\\":\\\"Input\\\",\\\"props\\\":{\\\"type\\\":\\\"text\\\",\\\"placeholder\\\":\\\"联系人姓名\\\",\\\"ruleType\\\":\\\"name\\\",\\\"secretType\\\":\\\"md5\\\",\\\"ruleFunc\\\":\\\"(function() {var inputValue = INPUT_VALUE;if ('c127af0862ca62d8f010581b4ec2874c' === INPUT_SECRET_VALUE) {return {ret: false,message: '联系人姓名不能与客户姓名一致'};}if (inputValue.match(/爸|妈|妹妹|姐姐|姨|叔叔|舅舅|奶奶|爷爷|老婆|配偶|老公|儿子|女儿|外甥|侄子|外甥女|侄女|姑姑|哥哥|弟弟|妻子|丈夫|先生|小姐|女士|男士|哈哈|呵呵/)) {return {ret: false,message: '姓名错误，请重新填写'};}if (inputValue.length <= 1) {return {ret: false,message: '姓名错误，请重新填写'};}return {ret: true};})();\\\",\\\"rules\\\":[{\\\"required\\\":true}]}},{\\\"label\\\":\\\"手机号\\\",\\\"name\\\":\\\"contacts_mobile\\\",\\\"needBase64\\\":true,\\\"type\\\":\\\"Input\\\",\\\"props\\\":{\\\"placeholder\\\":\\\"联系人手机号\\\",\\\"secretType\\\":\\\"md5\\\",\\\"ruleFunc\\\":\\\"(function() {var inputValue = INPUT_VALUE;if ('c17f8b9aabda2633e3b9134ebddc2a39' === INPUT_SECRET_VALUE) {return {ret: false,message: '联系人手机号码不能与客户手机号码一致'};}if (!inputValue.match(/^1[3-9]/)) {return {ret: false,message: '手机号错误，请重新填写'};}if (inputValue.match(/(\\\\\\\\d)\\\\\\\\1{9}/)) {return {ret: false,message: '手机号错误，请重新填写'};}return {ret: true};})();\\\",\\\"rules\\\":[{\\\"required\\\":true},{\\\"pattern\\\":\\\"^1[0-9]{10}$\\\"}]}}]}]}\"}"
-      },
-      {
-        "taskType": "protocol",
-        "extInfo": "{\"protocolSerialNo\":\"21113019UAN00000011\",\"clientSource\":\"QUNAR\",\"protocolKeyList\":[\"MSTGLOAN_PBC_AUTH\",\"MSTGLOAN_LOAN\",\"MSTGLOAN_NOTSTUDENT\"],\"riskVerifyNo\":null,\"increaseTppCode\":\"MSTGLOAN\",\"realSource\":\"PAY\",\"verifyScene\":\"ADVERT\",\"canSkip\":false,\"content\":\"{\\\"btnText\\\":\\\"同意协议并开通\\\",\\\"protocolList\\\":[{\\\"protocolTitle\\\":\\\"马上消费金融个人贷款申请及征信、信息授权协议\\\",\\\"protocolUrl\\\":\\\"http://jr.fat3501.qa.nt.ctripcorp.com/m/nano/api/queryProtocolDetail.do?protocolDetailkey=MSTGLOAN_PBC_AUTH&clientSource=QUNAR&serialNo=21113019UAN00000011&tppCode=MSTGLOAN\\\"},{\\\"protocolTitle\\\":\\\"马上消费金融循环额度贷款合同\\\",\\\"protocolUrl\\\":\\\"http://jr.fat3501.qa.nt.ctripcorp.com/m/nano/api/queryProtocolDetail.do?protocolDetailkey=MSTGLOAN_LOAN&clientSource=QUNAR&serialNo=21113019UAN00000011&tppCode=MSTGLOAN\\\"},{\\\"protocolTitle\\\":\\\"马上消费金融非学生承诺函\\\",\\\"protocolUrl\\\":\\\"http://jr.fat3501.qa.nt.ctripcorp.com/m/nano/api/queryProtocolDetail.do?protocolDetailkey=MSTGLOAN_NOTSTUDENT&clientSource=QUNAR&serialNo=21113019UAN00000011&tppCode=MSTGLOAN\\\"}],\\\"contentTitle\\\":\\\"\\\",\\\"title\\\":\\\"您需同意以下协议\\\",\\\"desc\\\":\\\"同意协议即可申请拿去花额度及专享权益\\\"}\"}"
-      },
-    ]
-    taskTypes.forEach(item => {
-      console.log(item.taskType, JSON.parse(item.extInfo))
-    });
-    let str = "{\"token\":\"BC202009242044150232166309\",\"signLink\":\"\",\"riskVerifyNo\":\"12B871B8141DC6FF38C0F6108F74192E\",\"increaseTppCode\":\"HR\",\"realSource\":\"PAY\"}"
-    console.log(JSON.parse(str))
-    let obj = {
-      token: 'BC202009242044150232166309', 
-      signLink: '', 
-      riskVerifyNo: '12B871B8141DC6FF38C0F6108F74192E', 
-      increaseTppCode: 'SCLOAN', 
-      realSource: 'PAY',
-      selectList: [
-        {"value":1,"text":"党政机关/事业单位"},
-        {"value":2,"text":"公司职员"},
-        {"value":3,"text":"工人/服务人员"},
-        {"value":4,"text":"生意人/个体户"},
-        {"value":5,"text":"自由职业"},
-        {"value":6,"text":"其它"}
-      ]
-    }
-    console.log(JSON.stringify(obj))
+    let data1 = {
+            "type": "color",
+            "header": {
+                "headerTitle": "拿去花激活",
+                "headerRight": "了解拿去花",
+                "descList": [
+                    {
+                        "title": "携程金融·拿去花是携程金融为更好地服务旅行用户，联合银行、消费金融公司等拥有合法金融业务资质的机构推出的一项面对个人的信用消费服务，您可在拿去花覆盖场景使用，目前支持携程、去哪儿等平台。"
+                    }
+                ]
+            },
+            "bgImg": "https://s.qunarzz.com/finance/finance_nano/activate/color/back.png",
+            "headerImg": "https://s.qunarzz.com/finance/finance_nano/activate/color/title01.png",
+            "swipe": [
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "188****5056激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "136****9100激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "150****8749激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "139****7803激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "136****0721激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "178****9978激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "137****8890激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "138****0015激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "151****7312激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "186****6357激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "150****1916激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "173****3398激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "177****5849激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "177****5010激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "135****0263激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "186****7833激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "185****0114激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "138****8914激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "133****6198激活成功 获得696券包"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "139****6290激活成功 获得696券包"
+                }
+            ],
+            "coupon": {
+                "couponImg": "https://s.qunarzz.com/finance/finance_nano/activate/color/coupon.png",
+                "btnImg": "https://pages.c-ctrip.com/CtripFinance/nano/activate/colorBtn2X.png",
+                "descImg": "https://s.qunarzz.com/finance/finance_nano/activate/color/ques.png",
+                "desc": {
+                    "headerTitle": "活动规则",
+                    "descList": [
+                        {
+                            "title": "1.本活动所赠优惠券仅限在活动期间通过本页面成功开通的拿去花新用户领取和使用；"
+                        },
+                        {
+                            "title": "2.本活动所赠优惠券不可折现，仅限在携程客户端预订产品时使用；"
+                        },
+                        {
+                            "title": "3.总价值696元拿去花新人券包由总价值30元拿去花立减券包和总价值666元出行券包组成；"
+                        },
+                        {
+                            "title": "4.总价值30元拿去花立减券包包含：",
+                            "subTitle": [
+                                "• 1张10元立减券，",
+                                "• 2张10元分期立减券（分别自发券之日起31天后和61天后可用）；"
+                            ]
+                        },
+                        {
+                            "title": "5.总价值666元出行券包包含（以最终实际发放为准）：",
+                            "subTitle": [
+                                "• 机酒最高400元满减券，",
+                                "• 接送机/站最高30元满减券，",
+                                "• 包车最高150元满减券，",
+                                "• 在线购满100元减5元券，",
+                                "• 在线购最高30元满减券，",
+                                "• 按摩仪20元立减券，",
+                                "• 电动牙刷20元立减券，",
+                                "• AirPods Pro 三代蓝牙耳机400元立减券，",
+                                "• 拿去花收银台分期息费88折券，",
+                                "• 借去花最高35元新人借款息费减免券；"
+                            ]
+                        },
+                        {
+                            "title": "6.查看总价值696元拿去花新人券包的详细使用规则请至：携程APP-我的-优惠券；"
+                        },
+                        {
+                            "title": "7.成功开通拿去花的用户通过携程APP-我的-拿去花-分期酒店页面预订酒店产品即可享受全场3期免息优惠。"
+                        },
+                        {
+                            "title": "8.如有任何利用程序漏洞的不当行为，携程金融有权取消您的活动资格，并作废优惠券。"
+                        }
+                    ]
+                }
+            },
+            "use": {
+                "sceneTitle": "拿去花怎么用",
+                "searchImg": "https://s.qunarzz.com/finance/finance_nano/activate/color/search.png",
+                "sloganImg": "https://s.qunarzz.com/finance/finance_nano/activate/color/solagn.png",
+                "sceneList": [
+                    {
+                        "type": "hotel",
+                        "bg": "https://s.qunarzz.com/finance/finance_nano/activate/color/hotel.png",
+                        "title": "住酒店",
+                        "desc": "笔笔3期免息"
+                    },
+                    {
+                        "type": "airplane",
+                        "bg": "https://s.qunarzz.com/finance/finance_nano/activate/color/airplane.png",
+                        "title": "订机票",
+                        "desc": "先飞后还"
+                    },
+                    {
+                        "type": "traffic",
+                        "bg": "https://s.qunarzz.com/finance/finance_nano/activate/color/bus.png",
+                        "title": "乘高铁",
+                        "desc": "先乘后还"
+                    },
+                    {
+                        "type": "vacation",
+                        "bg": "https://pages.c-ctrip.com/CtripFinance/nano/activity/withCash/vacation.png",
+                        "title": "去旅行",
+                        "desc": "海量免息线路"
+                    },
+                    {
+                        "type": "installment",
+                        "bg": "https://s.qunarzz.com/finance/finance_nano/activate/color/installment.png",
+                        "title": "享分期",
+                        "desc": "年化利率10%起"
+                    },
+                    {
+                        "type": "shopping",
+                        "bg": "https://s.qunarzz.com/finance/finance_nano/activate/color/buy.png",
+                        "title": "买好物",
+                        "desc": "美妆3C免息购"
+                    }
+                ]
+            }
+        }
+        let date2 = {
+            "headerImg": "https://pages.c-ctrip.com/CtripFinance/nano/activity/color/q_luck_bag_head.png",
+            "swipe": [
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "188****5056激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "136****9100激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "150****8749激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "139****7803激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "136****0721激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "178****9978激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "137****8890激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "138****0015激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "151****7312激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "186****6357激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "150****1916激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "173****3398激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "177****5849激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "177****5010激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "135****0263激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "186****7833激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "185****0114激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "138****8914激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "133****6198激活成功 获得旅行福袋"
+                },
+                {
+                    "profile": "https://s.qunarzz.com/finance/finance_nano/activate/color/human.png",
+                    "text": "139****6290激活成功 获得旅行福袋"
+                }
+            ],
+            "coupon": {
+                "couponImg": "https://pages.c-ctrip.com/CtripFinance/nano/activity/color/luck_bag_coupon.png",
+                "protpcolActivity": {
+                    "special": "领新人福利",
+                    "common": "领专属权益"
+                },
+                "desc": {
+                    "headerTitle": "活动规则",
+                    "descList": [
+                        {
+                            "title": "1.本活动所赠优惠券仅限在活动期间通过本页面开通拿去花的新用户领取和使用；"
+                        },
+                        {
+                            "title": "2.本活动所赠优惠券不可折现，仅限在去哪儿网客户端预订产品时使用；"
+                        },
+                        {
+                            "title": "3.旅行福袋包含（以最终实际发放为准）：1000元财富体验金和信用贷（原借去花）首期免息券（最高20元）；"
+                        },
+                        {
+                            "title": "4.查看1000元财富体验金详细使用规则请至：去哪儿网客户端-我的-我的钱包-财富赚钱-右上角体验金模块，查看信用贷（原借去花）首期免息券（最高20元）详细使用规则请至：去哪儿网客户端-我的-代金券；",
+                            "subTitle": null
+                        },
+                        {
+                            "title": "5.如有任何利用程序漏洞的不当行为，携程金融有权取消您的活动资格，并作废优惠券；",
+                            "subTitle": null
+                        },
+                        null,
+                        null,
+                        null
+                    ]
+                }
+            },
+            "use": {
+                "searchImg": "https://pages.c-ctrip.com/CtripFinance/nano/activity/color/search_Q.png",
+                "sloganImg": "",
+                "sceneList": [
+                    {
+                        "desc": "先订后还"
+                    },
+                    {
+                        "desc": "先飞后付"
+                    },
+                    {
+                        "title": "去旅行",
+                        "desc": "先游后还"
+                    },
+                    {
+                        "type": "traffic",
+                        "bg": "https://pages.c-ctrip.com/CtripFinance/nano/activity/color/installment.png",
+                        "title": "灵活分期",
+                        "desc": "多种还款方式"
+                    },
+                    {
+                        "type": "installment",
+                        "bg": "https://pages.c-ctrip.com/CtripFinance/nano/activity/color/rate1.png",
+                        "title": "付款优惠",
+                        "desc": "随机立减"
+                    },
+                    {
+                        "type": "shopping",
+                        "bg": "https://pages.c-ctrip.com/CtripFinance/nano/activity/color/safe.png",
+                        "title": "安全无忧",
+                        "desc": "平台账户保障"
+                    }
+                ]
+            },
+            "partner": {
+                "img": "https://pages.c-ctrip.com/CtripFinance/nano/activity/color/q_color_fundList.png",
+                "style": {
+                    "margin": "0 0 -40px 0"
+                },
+                "hotspot": {
+                    "top": "200",
+                    "left": "312",
+                    "width": "130",
+                    "height": "40"
+                }
+            }
+        }
+        console.log(JSON.stringify({...data1, ...date2}))
+        for (const key in object) {
+            if (Object.hasOwnProperty.call(object, key)) {
+                const element = object[key];
+                
+            }
+        }
+        for (const iterator of object) {
+            
+        }
   </script>
 </body>
 
