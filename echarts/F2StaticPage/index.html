@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./css//base.css" />
+		<link rel="stylesheet" href="./css/index.css" />
+		<title>F2 练习</title>
+	</head>
+	<body>
+		<div class="hot-recommend-title">
+			<h1>收益走势</h1>
+		</div>
+		<div class="chartCont">
+			<div class="profit-text">
+				<span>近三月累计收益率</span>
+				<span>+1.13%</span>
+			</div>
+			<div class="chartRelative">
+				<div class="tipsInfo" ref="yieldTipsDataFlag">
+					<div>
+						<div class="chartTitleIco"></div>
+						<span>累计收益:</span>
+						<span id="yieldTipsData"></span>
+					</div>
+					<div id="yieldTipsDate"></div>
+				</div>
+
+				<div class="canvasCont">
+					<canvas class="chart" id="profitChart"></canvas>
+				</div>
+			</div>
+			<ul class="chartDate">
+				<li>近三月</li>
+				<li>近一年</li>
+				<li>今年以来</li>
+			</ul>
+		</div>
+        <div class="demoBox">
+            <canvas class="ring" id="ring"></canvas>
+        </div>
+		<script src="./lib/f2.min.js"></script>
+		<script src="./lib/remFlex.js"></script>
+		<script type="module" src="./js/index.js"></script>
+		<script type="module" src="./js/demo.js"></script>
+	</body>
+</html>

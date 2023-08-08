@@ -1,0 +1,369 @@
+@charset "utf-8";
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+ form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+ th, td /* table elements 表格元素 */ {
+	margin:0;
+	padding:0;
+}
+/** 
+* @ 设置默认字体 *
+* @ 这里的\5b8b\4f53就是代表宋体
+* @注释乱码：强烈建议不要用中文注释。font-family:'宋体'
+* @常用中文字体解码
+新细明体 \65B0\7EC6\660E\4F53
+细明体 \7EC6\660E\4F53
+标楷体 \6807\6977\4F53
+黑体 \9ED1\4F53
+宋体 \5B8B\4F53
+新宋体 \65B0\5B8B\4F53
+仿宋 \4EFF\5B8B
+楷体 \6977\4F53
+仿宋_GB2312 \4EFF\5B8B_GB2312
+楷体_GB2312 \6977\4F53_GB2312
+微软正黑体 \5FAE\x8F6F\6B63\9ED1\4F53
+微软雅黑 \5FAE\8F6F\96C5\9ED1
+*/
+/**,*:active,*:active,*:link{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	tap-highlight-color:rgba(0,0,0,0);
+	tap-highlight-color:transparent;
+	border-style:none; outline:none;
+}*/
+body{-webkit-text-size-adjust:none; /*如果文字＜12px无效*/
+	-webkit-touch-callout:none;/*禁止用户在新窗口弹出页面*/
+	-webkit-user-select:none;
+}
+body, button, input, select, textarea /* for ie */ {
+	font:12px/1.5 Tahoma, Arial,\5FAE\8F6F\96C5\9ED1,\5b8b\4f53, sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-size:100%;
+}
+address, cite, dfn, em, b,caption,code,strong,th,var,em,i{
+	font-style:normal;
+	font-weight:normal;
+} /* 将斜体扶正 */
+code, kbd, pre, samp {
+	font-family:courier new, courier, monospace;
+} /* 统一等宽字体 */
+small {
+	font-size:12px;
+} /* 小于 12px 的中文很难阅读，让 small 正常化 */
+/** 重置列表元素 **/
+ul, ol ,li,dl,dh{
+	list-style:none;
+}
+/** 重置文本格式元素 **/
+a {
+	color:#bf2c2a;
+	text-decoration:none;
+}
+a:hover {
+
+	text-decoration:none;
+}
+sup {
+	vertical-align:text-top;
+} /* 重置，减少对行高的影响 */
+sub {
+	vertical-align:text-bottom;
+}
+a:hover,a:active, input, :focus { outline:none;}
+/** 重置表单元素 **/
+legend {
+	color:#000;
+} /* for ie6 */
+fieldset, img {
+	border:0;-ms-interpolation-mode:bicubic;
+} /* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea {
+	font-size:100%;
+    -webkit-appearance:none;
+    border-radius: 0;
+} /* 使得表单元素在 ie 下能继承字体大小 */
+/* 注：optgroup 无法扶正 */
+/** 重置表格元素 **/
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+	word-break:break-all;
+}
+/* 重置 HTML5 元素 */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+	display:block;
+	margin:0;
+	padding:0;
+}
+/*兼容android样式*/
+select{
+    appearance: none;
+    -webkit-appearance: none;
+}
+mark {background:#ff0;}
+/* 遮罩层。 */
+.mask {background-color:#000;opacity:0.3;filter:alpha(opacity=30);}
+/*改变文字选中默认背景颜色*/
+::selection { background:#8DB040; color:#fff; }
+::-moz-selection { background:#8DB040; color:#fff; }
+::-webkit-selection { background:#8DB040; color:#fff; }
+
+/* 隐藏 */
+.hidden {display:none;}
+.invisible {visibility:hidden;}
+/* 清除浮动 */
+.clear:after {
+	content:'\20';
+	display:block;
+	height:0;
+	clear:both;
+}
+.clear {	*zoom:1;}
+/*行块*/
+.inlineBlock{
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+}
+/*重置盒子模型模式*/
+*{ -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; font-family:'Arial','\5FAE\8F6F\96C5\9ED1';}
+/*设置按钮得到光标属性显示为手型*/
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {cursor:pointer;-webkit-appearance:button; *overflow:visible}
+/*重置系统选择按钮*/
+input[type="checkbox"], input[type="radio"] { box-sizing:border-box; padding:0;}
+/*同一搜索按钮UI*/
+input[type="search"] { -webkit-appearance:textfield;}
+input[type="search"]::-webkit-search-decoration {-webkit-appearance:none}
+/*重置火狐浏览器中按钮的文字垂直对齐问题*/
+button::-moz-focus-inner, input::-moz-focus-inner { border:0; padding:0;}
+.bkw { word-break:break-all; word-wrap:break-word;overflow:hidden;}
+.ellip { text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+
+
+::-webkit-scrollbar {
+  width:3px;
+  height:3px;
+  border-radius:5px;
+  -webkit-border-radius:5px;
+  background:#2b2b2b;
+    display: none;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+  border-radius:999px;
+  border:3px solid transparent;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow:1px 1px 5px rgba(0,0,0,0.5) inset; display:none;
+}
+
+::-webkit-scrollbar-thumb {
+  min-height:20px;
+  background-clip:content-box;
+  box-shadow:0 0 0 5px rgba(0,0,0,.2) inset;
+}
+
+::-webkit-scrollbar-corner {
+  background:transparent;
+}
+
+div, ul, li, dl, dt, dd, p, span, em, i, a,
+header, section, footer{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);/* 清除手机中点击出现的高亮边框 */
+	/*-webkit-text-size-adjust:none;*//* 清除默认字体大小 */
+}
+html,body{height:100%;}
+
+
+/* 0.5 像素边框 */
+
+/* 0.5像素边框 */
+
+.border-top-ee,
+.border-right-ee,
+.border-right-ee-70,
+.border-bottom-ee,
+.border-left-ee,
+.border-top-e7,
+.border-right-e7,
+.border-bottom-e7,
+.border-left-e7 {
+  position: relative;
+}
+
+.border-top-ee:after,
+.border-right-ee:after,
+.border-right-ee-70:after,
+.border-bottom-ee:after,
+.border-left-ee:after,
+.border-top-e7:after,
+.border-right-e7:after,
+.border-bottom-e7:after,
+.border-left-e7:after {
+  content: '';
+  position: absolute;
+  z-index: 15;
+  display: block;
+}
+
+.border-top-ee:after,
+.border-top-e7:after {
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  background-color: #e7e7e7;
+}
+
+.border-top-ee:after {
+  background-color: #eee;
+}
+
+.border-right-ee:after,
+.border-right-ee-70:after,
+.border-right-e7:after {
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: auto;
+  width: 1px;
+  height: 100%;
+  -webkit-transform: scaleX(.5);
+  transform: scaleX(.5);
+  -webkit-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+  background-color: #e7e7e7;
+}
+
+.border-right-ee:after,
+.border-right-ee-70:after {
+  background-color: eee;
+}
+
+.border-right-ee-70:after {
+  height: 70%;
+  top: 50%;
+  -webkit-transform: scaleX(.5) translateY(-50%);
+  transform: scaleX(.5) translateY(-50%);
+}
+
+.border-bottom-ee:after,
+.border-bottom-e7:after {
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  background-color: #e7e7e7;
+}
+
+.border-bottom-ee:after {
+  background-color: #eee;
+}
+
+.border-left-ee:after,
+.border-left-e7:after {
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  -webkit-transform: scaleX(.5);
+  transform: scaleX(.5);
+  -webkit-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+  background-color: #e7e7e7;
+}
+
+.border-left-ee:after {
+  background-color: #e7e7e7;
+}
+
+/* webfont */
+@font-face {
+  font-family: 'iconfont';
+  src: url('/z_modules/webfont/iconfont.eot');
+  src: url('/z_modules/webfont/iconfont.eot?#iefix') format('embedded-opentype'),
+      url('/z_modules/webfont/iconfont.woff2') format('woff2'),
+      url('/z_modules/webfont/iconfont.woff') format('woff'),
+      url('/z_modules/webfont/iconfont.ttf') format('truetype'),
+      url('/z_modules/webfont/iconfont.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: .28rem;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+.iconfont-icon{
+  vertical-align: middle;
+}
+
+.txt-red{
+  color:#F43438;
+}
+
+.txt-green{
+  color:#01A05F;
+}
+
+.txt-gray{
+  color:#919191;
+}
+.list-noData-block{
+  height:100%;
+  width:100%;
+  background:url(../img/no-data.png) no-repeat center 0;
+  background-size:4.84rem 1.88rem;
+  margin-top:1.77rem;
+  padding-top:2.17rem;
+}
+.lnb-txt-block{
+}
+.lnb-txt1{
+  line-height:.42rem;
+  font-size: .30rem;
+  color: #919191;
+  letter-spacing: 0;
+  text-align: center;
+  margin-bottom:.18rem;
+}
+.lnb-txt2{
+  font-size: .26rem;
+  color: #BBBBBB;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: .37rem;
+}
+
+.__share-mask {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 9999;
+}
