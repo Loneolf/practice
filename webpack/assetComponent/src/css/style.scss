@@ -1,0 +1,9 @@
+$size:20px;
+
+.body{
+    font-size: $size;
+    .textContent{
+        background: url(../../img/3.jpg) no-repeat!important;
+        background-size: contain!important;
+    }
+}
