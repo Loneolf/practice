@@ -2,4 +2,4 @@
 
 ###### 常用指令：
 
-sass --watch style.scss:output.css 去掉.map文件， 加后缀 --no-source-map
+sass --watch index.scss:index.css --no-source-map 去掉.map文件， 加后缀 --no-source-map

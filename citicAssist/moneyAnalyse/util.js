@@ -85,7 +85,7 @@ export function getRungeNum(totalAmount, num, minMoney = 0, maxMoney, isInt) {
 	}
 
 	let arr = [];
-	while (num > 1) {
+	while (num >= 1) {
 		let money;
 		let max = totalAmount - num * minMoney;
 		let avg = (max / (num - 1)) * 2;
