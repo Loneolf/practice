@@ -15,7 +15,32 @@
 //     speedDiff: number;
 //     randomPadding: number;
 // }
-import { mathRand, addZero, dutil } from "../util/util.js";
+// import { mathRand, addZero, dutil } from "../util/util.js";
+
+function createElem(type, parent, className, style){
+    var elem=document.createElement(type)
+    if(parent) parent.appendChild(elem)
+	if(className) elem.className = className
+    for(var key in style){
+        elem.style[key]=style[key]
+    }
+    return elem
+}
+
+// 获取某个范围内的随机值
+export function mathRand(min, max) {
+	return parseInt(Math.random() * (max - min)) + min;
+}
+// 补零
+export function addZero(num) {
+	if (num < 10) num = `0${num}`;
+	return num;
+}
+
+
+
+// 主体
+
 let barrageMaterial = [
 	"66666666",
 	"Nice兄dei",
@@ -63,7 +88,7 @@ let barrageMaterial = [
 const barrageInfo = getBarrageInfo();
 const barrageNumList = initBarrage(barrageInfo);
 const domList = [];
-const moveType = 'calculate' // calculate
+const moveType = 'calculate' // calculate / animation
 
 console.log(barrageNumList);
 
@@ -168,37 +193,40 @@ function animationMove(domList, barrageInfo) {
 	});
 }
 
+// 生成dom，渲染dom
 function rendDom(barrageNumList) {
 	barrageNumList.forEach((lineList) => {
-		let lineBox = dutil.createElem("div", box, `lineBox ${moveType === 'animation' ? 'animationLine' : ''}`);
+		let lineBox = createElem("div", box, `lineBox ${moveType === 'animation' ? 'animationLine' : ''}`);
 		domList.push(lineBox);
 		lineList.forEach((item) => {
 			let itemClass = `barrage-item ${moveType === 'animation' ? 'animationItem' : 'calculateItem'}`
-			let spanItem = dutil.createElem("span", lineBox, itemClass);
-			let barrageText = dutil.createElem("span", spanItem, "barrage-text");
+			let spanItem = createElem("span", lineBox, itemClass);
+			let barrageText = createElem("span", spanItem, "barrage-text");
 			barrageText.textContent = item.text;
-			let emoImg = dutil.createElem("img", spanItem, "emoImg");
+			let emoImg = createElem("img", spanItem, "emoImg");
 			emoImg.src = item.emoImg;
 		});
 	});
 }
 
+// 保留两位数字
 function numt(num) {
 	return Number(num.toFixed(2))
 }
 
+// 获取弹幕相关信息
 function getBarrageInfo() {
 	const baseInfo = {
-		barrageCount: 4,
+		barrageCount:  5, // 弹道
 		barrageSpeed: {
-			baseSpeed: 20,
-			rangeSpeed: 10,
+			baseSpeed: 20,  // 基础速度
+			rangeSpeed: 10,  // 随机速度(0-10)  真是速度为基础速度+随机速度
 			speedDiff: 0,
-			randomPadding: 50,
-			isAllRandom: true,
-			itemMargin: 40
+			randomPadding: 50, // 弹幕间的随机差值
+			isAllRandom: true, 
+			itemMargin: 40 // 弹幕之间的固定差值  弹幕与弹幕之间的距离为固定差值+随机差值
 		},
-		barrageList: [],
+		barrageList: [], // 弹幕文本与icon
 	};
 	for (let i = 0; i < 30; i++) {
 		baseInfo.barrageList.push({
