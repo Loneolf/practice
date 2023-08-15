@@ -39,25 +39,24 @@ export function getRungeNum(totalAmount, num, minMoney = 0, maxMoney, isInt) {
 	if (!maxMoney) maxMoney = totalAmount / 2;
 	if (num === 1) return [totalAmount];
 	if (totalAmount < num * minMoney || totalAmount > num * maxMoney) {
-		throw new Error("参数异常，分配不完或者不够分");
+	  throw new Error("参数异常，分配不完或者不够分");
 	}
+	// 初始为最低值
+	let arr = [...new Array(num)].fill(minMoney);
+	totalAmount -= minMoney * num
 
-	let arr = [];
+	let max = maxMoney - minMoney
 	while (num > 1) {
-		let money;
-		let max = totalAmount - num * minMoney;
-		let avg = (max / (num - 1)) * 2;
-		money = (Math.random() * avg + minMoney).toFixed(isInt ? 0 : 2);
-		arr.push(money);
-		totalAmount -= money;
-		num -= 1;
+	  if (totalAmount < max) {
+		max = totalAmount
+	  }
+	  let money = Math.random() * max;
+	  arr[num - 1] += Number(money);
+	  totalAmount -= money;
+	  num -= 1;
 	}
-	arr.push(totalAmount.toFixed(isInt ? 0 : 2));
-	// console.log(
-	// 	"aaaasum",
-	// 	arr.reduce((sum, item) => {
-	// 		return Number(sum) + Number(item);
-	// 	})
-	// );
+	arr[0] += totalAmount;
+	arr.forEach((item, index) => arr[index] = Number(item.toFixed(isInt ? 0 : 2)))
+	// console.log("aaaasum", arr.reduce((sum, item) => Number(sum) + Number(item)));
 	return arr;
-}
+  }

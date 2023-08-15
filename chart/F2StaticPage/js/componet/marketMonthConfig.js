@@ -1,5 +1,4 @@
-// import { decimalFormat, formatDate, formatStr } from "../util.js";
-import { mockGetData } from "../mockData.js";
+import { mockGetData } from "../mockData/index.js";
 
 // 设置超出三行显示 展示/收起
 const line = 3;

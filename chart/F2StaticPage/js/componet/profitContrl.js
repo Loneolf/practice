@@ -1,8 +1,7 @@
 // 收益贡献 三个图表
 
-import { decimalFormat, formatDate, formatStr, getColor } from "../util.js";
-import { mockGetData } from "../mockData.js";
-import { typeMap } from "./config.js";
+import { decimalFormat, formatStr, getColor } from "../util.js";
+import { mockGetData } from "../mockData/index.js";
 
 export default async function getContriData(vm) {
 	const data = (await mockGetData("contriData")).data;

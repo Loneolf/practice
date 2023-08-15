@@ -1,4 +1,4 @@
-import {getRungeNum, mathRand} from './util.js'
+import {getRungeNum, mathRand} from '../util.js'
 
 const base3 = {
 	update_dt: "2023-07-01",
@@ -61,9 +61,7 @@ const base3 = {
 	],
 };
 
-// let mockD = getMockData(base3, 1786786, 4, 11);
-
-// console.log('aaaamockD', mockD)
+export const assetsDisData  = getMockData(base3, 1786786, 4, 11);
 
 // money: 金钱总额， 
 // comNum 资产分类， 

@@ -1,5 +1,5 @@
 import { decimalFormat, formatDate, formatStr } from "../util.js";
-import { mockGetData } from "../mockData.js";
+import { mockGetData } from "../mockData/index.js";
 
 export default async function getAccumProfitData(vm) {
 	const data = (await mockGetData("accumProfitData"))[vm.chartDateValue];

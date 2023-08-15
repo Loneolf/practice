@@ -1,10 +1,10 @@
 // 风险收益指标
 
-import { mockGetData } from "../mockData.js";
+import { mockGetData } from "../mockData/index.js";
 
 export default async function getRiskProfit(vm) {
 	const data = (await mockGetData("riskProfit")).data;
-	console.log("aaagetRiskProfit", data);
+	// console.log("aaagetRiskProfit", data);
 	if (!data) return;
     var arr = []
     vm.reskTypeArr.forEach(function (tItem) {
@@ -15,6 +15,6 @@ export default async function getRiskProfit(vm) {
         })
         arr.push(temObj)
     })
-    console.log(JSON.stringify(arr))
+    // console.log(JSON.stringify(arr))
     vm.riskData = arr
 }

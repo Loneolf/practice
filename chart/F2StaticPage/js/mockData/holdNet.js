@@ -1,4 +1,4 @@
-import { getMonthDays, stocksMock, getRungeNum, mathRand } from './util.js'
+import { getMonthDays, stocksMock, getRungeNum } from '../util.js'
 
 const baseData = {
 	update_dt: "2023-07-01",
@@ -22,9 +22,9 @@ const baseData = {
 		},
 	],
 };
-const monthArr = [1, 3, 6, 7, 12, 24]
-const AmontArr = [300000, 150000, 260000, 340000, 200000, 330000, 50000, 80000, 14000, 70000, 60000, 550000]
-// getMockData(baseData, monthArr, AmontArr, 4, false)
+const monthArr = [1, 3, 6, 7, 12, 36, 48]
+const AmontArr = getRungeNum(1000000, 12, 50000, 300000, true)
+export const holdNetData = getMockData(baseData, monthArr, AmontArr, 4, false)
 // monthArr 数组中是获取几个月的数据，例如[3,6,9,12] 等, 
 // baseAmontArr 几个产品的基准金额，有三个就是是三个产品
 // isCost: 是纯收益走势还是包含本金的走势
@@ -39,7 +39,7 @@ function getMockData(baseData, monthArr, baseAmontArr, comNum, isCost) {
     let alen = baseAmontArr.length
     // 随机分组
     const groupArr = getRungeNum(alen, comNum, alen / (comNum * 2), (alen * 2) / comNum, true)
-    console.log(JSON.stringify(groupArr))
+    // console.log(JSON.stringify(groupArr))
     let assetItem = groupArr.pop()
     let asset_list = [], temComList = []
     let asset_typeArr = [7,3,5,1]
@@ -61,7 +61,7 @@ function getMockData(baseData, monthArr, baseAmontArr, comNum, isCost) {
             temComList = []
         }
     }
-    console.log('aaaaprofit', allProfitArr)
+    // console.log('aaaaprofit', allProfitArr)
     for (let j = 0; j < monthArr.length; j++) {
         const { dayStr, allDay } = allMonthData[monthArr[j]];
         let num = 0
@@ -76,6 +76,6 @@ function getMockData(baseData, monthArr, baseAmontArr, comNum, isCost) {
         baseData.asset_list = asset_list
         mockResult[monthArr[j]] = JSON.parse(JSON.stringify(baseData));
     }
-    console.log(mockResult);
+    // console.log(mockResult);
     return mockResult;
 }

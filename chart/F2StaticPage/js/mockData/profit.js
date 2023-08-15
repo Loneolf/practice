@@ -1,8 +1,8 @@
 // 收益走势
-import {stocksMock, getMonthDays} from './util.js'
+import {stocksMock, getMonthDays} from '../util.js'
 
 //  总收益
-let base1 = {
+let accontProfitbase = {
     total_amount: "1001000.11",
     hold_pl: "1000.11",
     total_pl: "20000.11",
@@ -11,10 +11,10 @@ let base1 = {
         pl_arr_str: "",
     },
 };
-// getMockData(base1, [3, 6, 9, 12], 500000)
+export const accontProfitData = getMockData(accontProfitbase, [3, 6, 7, 12], 500000)
 
 // 单支产品收益
-let base2 = {
+let productProfitBase = {
     "update_dt": "2023-07-01",
     "prod_name": "信享臻选",
     "prod_code": "00001",
@@ -26,7 +26,7 @@ let base2 = {
         "pl_arr_str": "200.01,-100.23,..."
     }
 };
-// getMockData(base2, [3, 7, 12, 24], 100000)
+export const productProfitData = getMockData(productProfitBase, [3, 7, 12, 24], 100000)
 
 // 获取mock数据，数组中是获取几个月的数据，例如[3,6,9,12] 等, isCost: 是纯收益走势还是包含本金的走势
 function getMockData(baseData, monthArr, baseAmont, isCost) {
@@ -44,6 +44,6 @@ function getMockData(baseData, monthArr, baseAmont, isCost) {
 
         mockResult[monthArr[i]] = JSON.parse(JSON.stringify(baseData));
     }
-    console.log(mockResult);
+    // console.log(mockResult);
     return mockResult;
 }

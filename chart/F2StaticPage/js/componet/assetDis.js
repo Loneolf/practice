@@ -1,7 +1,7 @@
 // 资产配置
 
-import { decimalFormat, formatDate, formatStr } from "../util.js";
-import { mockGetData } from "../mockData.js";
+import { formatDate } from "../util.js";
+import { mockGetData } from "../mockData/index.js";
 import {typeMap} from './config.js'
 
 export default async function getAssetsDis(vm) {

@@ -1,6 +1,6 @@
 // 持仓产品净值走势
 import { decimalFormat, formatDate, formatStr, getColor } from "../util.js";
-import { mockGetData } from "../mockData.js";
+import { mockGetData } from "../mockData/index.js";
 import { typeMap } from "./config.js";
 
 export default async function getHoldNetData(vm) {

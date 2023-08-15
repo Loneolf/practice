@@ -1189,25 +1189,19 @@ audio::-webkit-media-controls-panel {
   background-color: #F9F9F9;
 }
 
-.audio audio::-webkit-media-controls-play-button {
-  background-image: url('../img/play.png');
+.audio audio{
   height: 0.4rem;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-/* .audio audio::-webkit-media-controls-pause-button {
-  background-image: url('../img/phase.png');
-  height: 0.4rem;
-  background-repeat: no-repeat;
-  background-size: contain;
-} */
+.audio .pauseAudio::-webkit-media-controls-play-button {
+  background-image: url('../img/play.png');
+}
 
-/* .audio-img {
-  position: absolute;
-  height: 0.4rem;
-  padding: 0 0.2rem;
-} */
+.audio .playAudio::-webkit-media-controls-play-button {
+  background-image: url('../img/pause.png');
+}
 
 .ydpz-content {
   padding: 0 0.28rem 0.2rem 0.28rem;

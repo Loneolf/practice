@@ -1,12 +1,12 @@
 import { decimalFormat, formatDate, formatStr } from "../util.js";
-import { mockGetData } from "../mockData.js";
+import { mockGetData } from "../mockData/index.js";
 
 // 净值走势
 export default async function getNetValueData(vm) {
 	const data = (await mockGetData("netValueData"))[vm.netValueChartDateValue];
 	// console.log("aaaagetNetValueData", data);
-	let unitNetValueList = formatStr(data.unitNetValue, "|", true);
-	let netValueList = formatStr(data.netValueDate, "|");
+	let unitNetValueList = formatStr(data.unitNetValue, ",", true);
+	let netValueList = formatStr(data.netValueDate, ",");
 	let arr = [];
 	for (let i = 0; i < unitNetValueList.length; i++) {
 		if (!unitNetValueList[i]) {

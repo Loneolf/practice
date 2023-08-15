@@ -101,6 +101,7 @@ new Vue({
 
 		// 月度配置观点数据
 		audio_url: "", // 音频地址
+		isAudioPlay: false,
 		MonthUpdate: "", // 更新时间
 		analyze_market: [], // 债券、股票、量化具体详情
 
@@ -128,7 +129,9 @@ new Vue({
 		ProfitContrl(this);
 		// 市场月度观点
 		MarketMonthConfig(this);
+		// 风险收益指标
 		getRiskProfit(this);
+		this.initAudio()
 	},
 	watch: {},
 	methods: {
@@ -178,12 +181,6 @@ new Vue({
 		setHoldNetPop(popDate) {
 			this.holdNetMorePop = popDate;
 		},
-		morePopSwitch(v) {
-			this.holdNetChartDateValue = v.val;
-			this.holdNetMoreDateName = v.name;
-			HoldNet(this);
-			this.setHoldNetPop(false);
-		},
 		holdNetMorePopSwitch(v) {
 			this.holdNetChartDateValue = v.val;
 			this.holdNetMoreDateName = v.name;
@@ -204,26 +201,12 @@ new Vue({
 		},
 
 		initAudio() {
-			var dom = $("#ydpzAudio")[0];
-			var _this = this;
-			if (dom) {
-				dom.removeEventListener("play", _this.changePlayIcon);
-				dom.removeEventListener("pause", _this.changePauseIcon);
-				dom.addEventListener("play", _this.changePlayIcon);
-				dom.addEventListener("pause", _this.changePauseIcon);
-			}
+			if(!ydpzAudio) return
+			ydpzAudio.addEventListener("play", this.changePlay);
+			ydpzAudio.addEventListener("pause", this.changePlay);
 		},
-		changePlayIcon() {
-			var dom = $("#ydpzAudio")[0];
-			$("#ydpzAudio").append(
-				"<style>#ydpzAudio::-webkit-media-controls-play-button{ background-image: url('../img/pause.png');}</style>"
-			);
-		},
-		changePauseIcon() {
-			var dom = $("#ydpzAudio")[0];
-			$("#ydpzAudio").append(
-				"<style>#ydpzAudio::-webkit-media-controls-play-button{ background-image: url('../img/play.png');}</style>"
-			);
+		changePlay(e){
+			this.isAudioPlay = e.type === 'play'
 		},
 		// 文资展开收起
 		foldTextHandle(item, index) {

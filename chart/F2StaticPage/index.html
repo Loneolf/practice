@@ -34,28 +34,6 @@
 
 			</div>
 		</div>
-
-		<div class="riskData">
-			<div class="hot-recommend-title">
-				<h1>风险收益指标</h1>
-			</div>
-			<div class="riskDataTitle border-bottom-e7">
-				<div></div>
-				<div v-for="item of riskYearArr">{{item[1]}}</div>
-			</div>
-			<div class="riskDataContent">
-				<div class="riskDataItem" v-for="(item, index) in riskData">
-					<div  class="itemCell cellTitle">{{item.name}}</div>
-					<div 
-						class="itemCell" 
-						v-for="(si, sindex) of riskYearArr" 
-						:class="{'normal-red': sindex == riskYearArr.length - 1}" 
-					>
-						{{item[si[0]]}}
-					</div>
-				</div>
-			</div>
-		</div>
 		
 		<div class="syzs tableChartCont">
 			<div class="hot-recommend-title">
@@ -138,6 +116,28 @@
 						</div>
 					</li>
 				</ul>
+			</div>
+		</div>
+
+		<div class="riskData">
+			<div class="hot-recommend-title">
+				<h1>风险收益指标</h1>
+			</div>
+			<div class="riskDataTitle border-bottom-e7">
+				<div></div>
+				<div v-for="item of riskYearArr">{{item[1]}}</div>
+			</div>
+			<div class="riskDataContent">
+				<div class="riskDataItem" v-for="(item, index) in riskData">
+					<div  class="itemCell cellTitle">{{item.name}}</div>
+					<div 
+						class="itemCell" 
+						v-for="(si, sindex) of riskYearArr" 
+						:class="{'normal-red': sindex == riskYearArr.length - 1}" 
+					>
+						{{item[si[0]]}}
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -249,7 +249,13 @@
 				</h1>
 			</div>
 			<div class="audio border-bottom-e7">
-				<audio :src="audio_url" id="ydpzAudio" controls controlslist="nodownload">
+				<audio 
+					:class="isAudioPlay ? 'playAudio' : 'pauseAudio'" 
+					:src="audio_url" 
+					id="ydpzAudio" 
+					controls 
+					controlslist="nodownload"
+				>
 					浏览器不支持该文件
 				</audio>
 			</div>
