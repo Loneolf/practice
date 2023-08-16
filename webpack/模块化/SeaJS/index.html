@@ -8,6 +8,12 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        seajs.use(['./index.js'], function(math) {
+            console.log(math)
+            console.log(math.add(4,5))
+            console.log(math.minus(3,6))
+        });
+    </script>
 </body>
 </html>

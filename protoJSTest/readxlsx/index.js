@@ -1,7 +1,5 @@
 const XLSX = require("xlsx");
 const fs = require("fs");
-// console.log(XLSX)
-// const workbook = XLSX.readFile('./enter.xlsx');
 const workbook = XLSX.readFile("./point.xlsx");
 const sheetName = workbook.SheetNames[0];
 const sheet = workbook.Sheets[sheetName];

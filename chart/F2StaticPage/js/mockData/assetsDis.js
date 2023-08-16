@@ -28,36 +28,7 @@ const base3 = {
 					comp_mkt: "2000.00",
 				},
 			],
-		},
-		{
-			asset_type: "2",
-			asset_percent: "3000.00/sum(所有成分资产市值)",
-			asset_mkt: "3000.00",
-			comp_list: [
-				{
-					comp_name: "产品3",
-					comp_code: "000003",
-					comp_mkt: "3000.00",
-				},
-			],
-		},
-		{
-			asset_type: "3",
-			asset_percent: "4000.00+5000.00/sum(所有成分资产市值)",
-			asset_mkt: "4000.00+5000.00",
-			comp_list: [
-				{
-					comp_name: "产品4",
-					comp_code: "000001",
-					comp_mkt: "4000.00",
-				},
-				{
-					comp_name: "产品5",
-					comp_code: "000002",
-					comp_mkt: "5000.00",
-				},
-			],
-		},
+		}
 	],
 };
 
