@@ -1,0 +1,17 @@
+/*!**************************************************************************************************************!*\
+  !*** css ../node_modules/css-loader/dist/cjs.js!../node_modules/sass-loader/dist/cjs.js!./src/css/style.css ***!
+  \**************************************************************************************************************/
+.body {
+  color: red; }
+
+/*!***************************************************************************************************************!*\
+  !*** css ../node_modules/css-loader/dist/cjs.js!../node_modules/sass-loader/dist/cjs.js!./src/css/style.scss ***!
+  \***************************************************************************************************************/
+.body {
+  font-size: 20px; }
+  .body .textContent {
+    background: url(../images/3_3007cd95e7c253c4c716.jpg) no-repeat !important;
+    background-size: contain !important; }
+
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGUvMjg2NGIxNGQ3OWUxMTBiZGU2ZDAuY3NzIiwibWFwcGluZ3MiOiI7OztBQUFBO0VBQ0ksVUFBVTs7Ozs7QUNDZDtFQUNJLGVBSE07RUFFVjtJQUdRLHdFQUFvRDtJQUNwRCxtQ0FBa0MiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvY3NzL3N0eWxlLmNzcyIsIndlYnBhY2s6Ly8vLi9zcmMvY3NzL3N0eWxlLnNjc3MiXSwic291cmNlc0NvbnRlbnQiOlsiLmJvZHl7XHJcbiAgICBjb2xvcjogcmVkO1xyXG59IiwiJHNpemU6MjBweDtcclxuXHJcbi5ib2R5e1xyXG4gICAgZm9udC1zaXplOiAkc2l6ZTtcclxuICAgIC50ZXh0Q29udGVudHtcclxuICAgICAgICBiYWNrZ3JvdW5kOiB1cmwoLi4vLi4vaW1nLzMuanBnKSBuby1yZXBlYXQhaW1wb3J0YW50O1xyXG4gICAgICAgIGJhY2tncm91bmQtc2l6ZTogY29udGFpbiFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbn0iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/

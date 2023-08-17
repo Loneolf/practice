@@ -64,14 +64,14 @@ module.exports = {
                 // asset 自动根据文件大小生成资源或者base64的url，默认值为8K 4*1024
                 parser:{
                     dataUrlCondition:{
-                        maxSize: 4 * 1024 * 1024
+                        maxSize: 4 * 1024
                     }
                 }
             }, 
             {
                 test: /\.(css|scss)$/,
-                // use: ['style-loader', 'css-loader', 'less-loader'],
-                // use: ['style-loader', 'css-loader', 'sass-loader']
+                // use: ['style-loader', 'css-loader', 'less-loader'], // 编译less文件的loader
+                // use: ['style-loader', 'css-loader', 'sass-loader'], // 编译sass文件的loader
                 // use 支持链式调用，如果是数组，从后往前执行，依次将产物给前一个loader去执行
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             }
