@@ -29,3 +29,24 @@ imgdom3.src = img3
 app.appendChild(imgdom3)
 
 console.log('aaa2333', img3)
+
+const iconMap = {
+    '我':"&#x6211;",
+    '爱':"&#x7231;",
+    '你':"&#x4f60;",
+    '从':"&#x4ece;",
+    '前':"&#x524d;",
+    '到':"&#x5230;",
+    '现':"&#x73b0;",
+    '在': "&#x5728;"
+}
+const arr =  ['我', '爱', '你', '从', '前', '到', '现', '在']
+const spanWrap = document.createElement('span')
+for (let i = 0; i < arr.length; i++) {
+    const spanDom = document.createElement('span')
+    spanDom.classList.add('icon')
+    spanDom.innerHTML=[iconMap[arr[i]]]
+    spanWrap.appendChild(spanDom)
+}
+app.appendChild(spanWrap)
+

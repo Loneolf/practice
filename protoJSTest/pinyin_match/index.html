@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼音匹配</title>
+    <!-- 引入包的方式使用s -->
+    <script src="./main.js"></script>
+</head>
+<body>
+    <input id="input" />
+    <script>
+        let test = '我是测试代码，测试代码呀，测试测试'
+        input.addEventListener('input', (value)=> {
+            let res = PinyinMatch.match(test, input.value)
+            console.log(res)
+        })
+        console.log("aaa2333", PinyinMatch)
+    </script>
+</body>
+</html>

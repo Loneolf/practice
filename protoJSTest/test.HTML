@@ -9,34 +9,19 @@
 
 <body>
   <script>
-    let res = getRungeNum(100, 5, 10, 40)
-    console.log(res)
-    function getRungeNum(totalAmount, num, minMoney = 0, maxMoney, isInt) {
-      if (!minMoney) minMoney = 0.01;
-      if (!maxMoney) maxMoney = totalAmount / 2;
-      if (num === 1) return [totalAmount];
-      if (totalAmount < num * minMoney || totalAmount > num * maxMoney) {
-        throw new Error("参数异常，分配不完或者不够分");
+    var params = {}
+    var text = '今日委托'
+    switch (text) {
+      case '历史委托':
+      case '历史成交':
+        params.begin_date = 'start'
+        params.end_date = 'end'
+        break
+      case '撤单':
+        params.Direction = 1;
+        break
       }
-      // 初始为最低值
-      let arr = [...new Array(num)].fill(minMoney);
-      totalAmount -= minMoney * num
-
-      let max = maxMoney - minMoney
-      while (num > 1) {
-        if (totalAmount < max) {
-          max = totalAmount
-        }
-        let money = Math.random() * max;
-        arr[num - 1] += Number(money);
-        totalAmount -= money;
-        num -= 1;
-      }
-      arr[0] += totalAmount;
-      arr.forEach((item, index) => arr[index] = Number(item.toFixed(isInt ? 0 : 2)))
-      // console.log("aaaasum", arr.reduce((sum, item) => Number(sum) + Number(item)));
-      return arr;
-    }
+        console.log(params)
   </script>
 </body>
 
