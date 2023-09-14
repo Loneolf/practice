@@ -1,0 +1,20 @@
+body{
+    display: flex;
+    background-color: gray;
+}
+
+.item{
+    display: flex;
+    transform: rotate(45deg);
+    transform-origin: center;
+    width: 200px;
+    height: 200px;
+    background-color: aquamarine;
+}
+
+:global(.item3){
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    display: flex;
+}

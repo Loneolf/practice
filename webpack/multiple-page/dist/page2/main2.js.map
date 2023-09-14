@@ -1,0 +1,1 @@
+{"version":3,"file":"page2/main2.js","mappings":";;;;;;;;AAAA;AACA;;;;;;;;;;ACDA","sources":["webpack://source-map/./src/app2.js","webpack://source-map/./src/common.js"],"sourcesContent":["\r\nconsole.log('app2')","console.log('aaacommon')"],"names":[],"sourceRoot":""}

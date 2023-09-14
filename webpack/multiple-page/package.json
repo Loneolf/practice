@@ -1,0 +1,27 @@
+{
+  "name": "source-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx webpack",
+    "serve": "webpack serve",
+    "serveOpen": "npx webpack serve --open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "broeserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

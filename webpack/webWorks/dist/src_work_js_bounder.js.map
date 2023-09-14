@@ -1,0 +1,1 @@
+{"version":3,"file":"src_work_js_bounder.js","mappings":";;;;;AAAA;AACA;AACA;AACA;AACA;AACA;AACA","sources":["webpack://source-map/./src/work.js"],"sourcesContent":["// 接受主线程发送的信息\r\nself.onmessage = (message) => {\r\n    console.log('aaa233', message)\r\n    self.postMessage({\r\n      answer: 1111,\r\n    });\r\n  };"],"names":[],"sourceRoot":""}

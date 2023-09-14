@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "file": "index_bounder.js",
+    "mappings": ";;;;;AAAA",
+    "sources": [
+        "webpack://source-map/./index.js"
+    ],
+    "sourcesContent": [
+        "console.log('aaa2333,hello呀,树哥')"
+    ],
+    "names": [],
+    "sourceRoot": ""
+}
