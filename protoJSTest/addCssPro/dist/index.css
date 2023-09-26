@@ -1,0 +1,31 @@
+/*!*******************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./index.css ***!
+  \*******************************************************************************************************/
+body{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: gray;
+}
+
+.item{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    width: 200px;
+    height: 200px;
+    background-color: aquamarine;
+}
+
+:global(.item3){
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}

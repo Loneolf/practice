@@ -1,6 +1,7 @@
+// 一层对象模式
 const XLSX = require("xlsx");
 const fs = require("fs");
-const workbook = XLSX.readFile("./point.xlsx");
+const workbook = XLSX.readFile("./jiaoyi.xlsx");
 const sheetName = workbook.SheetNames[0];
 const sheet = workbook.Sheets[sheetName];
 const data = XLSX.utils.sheet_to_json(sheet);
@@ -27,7 +28,7 @@ data.forEach((item) => {
 		}
 	}
 	str = str.substring(0, str.length - 1) + " }";
-  res[item['描述']] = `maidian.reportEvent('${item.act_name}', ${str})`;
+  res[item['埋点中文名称']] = `maidian.reportEvent('${item.act_name}', ${str})`;
 	// res.push(strRes);
 });
 
