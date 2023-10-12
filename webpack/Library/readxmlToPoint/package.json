@@ -1,6 +1,6 @@
 {
   "name": "qing-library-util",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "读取excel生产json埋点文件",
   "main": "dist/qing_util.js",
   "scripts": {
@@ -15,7 +15,6 @@
     "webpack-cli": "5.1.4"
   },
   "peerDependencies": {
-    "fs": "^0.0.1-security",
     "xlsx": "0.18.5"
   }
 }

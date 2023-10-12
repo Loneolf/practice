@@ -1,0 +1,1 @@
+self.webpackHotUpdatesource_map(143,{672:(e,d,n)=>{Promise.all([n.e(881).then(n.t.bind(n,881,23)),n.e(565).then(n.t.bind(n,565,23))]).then((([{default:e},{default:d}])=>{console.log(e,d);const n=document.createElement("div");n.appendChild(e()),n.appendChild(d(7)),document.body.appendChild(n)}))}},(function(e){e.h=()=>"5da879eed71f05117b89"}));

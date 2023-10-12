@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "qing-library-util": "^0.0.7"
+    "qing-library-util": "^0.1.1"
   }
 }

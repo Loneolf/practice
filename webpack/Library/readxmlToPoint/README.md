@@ -5,7 +5,7 @@
 该包是使用commonjs方式引入，并只能用于node端
 
 ```
-const { qing_util } = require('../dist/qing_util')
+const {qing_util} = require('qing-library-util')
 const path = require('path')
 let filePath = path.resolve(__dirname, './jiaoyi.xlsx')
 qing_util.readData({path: filePath, isWriteOrigin: true})
