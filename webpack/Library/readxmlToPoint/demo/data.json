@@ -12,7 +12,7 @@
   "jy_tab": {
     "desc": "交易顶部的四个tab点击",
     "name": "交易-tab",
-    "resStr": "maidian.reportEvent('jy_tab', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'tab_click', 'title': '交易首页', 'btn_name': '【普通、信用、期权、期货四者之一】', 'function_module': '交易', 'function': '普通沪深京全屏交易' })"
+    "resStr": "maidian.reportEvent('jy_tab', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'tab_click', 'title': '【普通交易页面、信用交易页面、期权交易页面、期货交易页面  之一】', 'btn_name': '【普通、信用、期权、期货四者之一】', 'btn_module': '交易顶部tab', 'function_module': '交易', 'function': '普通沪深京全屏交易' })"
   },
   "jy_pt_khlqfl": {
     "desc": "交易-普通里的开户领取福利按钮",
@@ -352,10 +352,11 @@
     "resStr": "maidian.reportEvent('jy_pt_dzjy_zx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'pageview', 'title': '大宗交易', 'function_module': '交易', 'function': '大宗交易' })"
   },
   "jy_pt_dzjy_yywdj": {
-    "change___resource_name": "【对应运营位名称，如：沪深证券、意向买入 等】--->[name]",
+    "change___resource_name": "【对应运营位名称，如：沪深大宗意向单/定价单查询、意向买入等】--->[name]",
+    "change___resource_module": "【对应一级模块名称，如：沪深证券、北交所和新三板证券 等】--->[nameF]",
     "desc": "点击对应运营位时触发",
     "name": "交易-普通-大宗交易-运营位点击",
-    "resStr": "maidian.reportEvent('jy_pt_dzjy_yywdj', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'resource_click', 'title': '大宗交易', 'resource_name': '[name]', 'function_module': '交易', 'function': '大宗交易' })"
+    "resStr": "maidian.reportEvent('jy_pt_dzjy_yywdj', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'resource_click', 'title': '大宗交易', 'resource_name': '[name]', 'resource_module': '[nameF]', 'resource_module_sub': '【对应二级模块名称，如：大宗买入、大宗卖出 等】', 'function_module': '交易', 'function': '大宗交易' })"
   },
   "jy_pt_dzjy_bz": {
     "desc": "点击“帮助”时触发",
@@ -409,17 +410,17 @@
   "jy_pt_ysyy_hs_yysg_sb": {
     "desc": "点击“申报”时触发",
     "name": "交易-普通-预受要约-沪深-要约收购-申报",
-    "resStr": "maidian.reportEvent('jy_pt_ysyy_hs_yysg_sb', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'submit', 'title': '沪深要约收购', 'product_name': '【对应产品名称】', 'product_code': '【对应产品code】', 'entrust_num': '【对应委托数量】', 'product_price': '【对应收购价格，如32】', 'p_type': '申报', 'note': '【沪深、北交所、新三板 选一】', 'function_module': '交易', 'function': '预受要约' })"
+    "resStr": "maidian.reportEvent('jy_pt_ysyy_hs_yysg_sb', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'submit', 'title': '沪深要约收购', 'product_name': '【对应产品名称】', 'product_code': '【对应产品code】', 'entrust_num': '【对应委托数量，注意传数值格式】', 'product_price': '【对应收购价格，如32，注意传数值格式】', 'p_type': '申报', 'note': '【沪深、北交所、新三板 选一】', 'function_module': '交易', 'function': '预受要约' })"
   },
   "jy_pt_ysyy_hs_yysg_jc": {
     "desc": "点击“解除”时触发",
     "name": "交易-普通-预受要约-沪深-要约收购-解除",
-    "resStr": "maidian.reportEvent('jy_pt_ysyy_hs_yysg_jc', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'submit', 'title': '沪深要约收购', 'product_name': '【对应产品名称】', 'product_code': '【对应产品code】', 'entrust_num': '【对应解除数量】', 'product_price': '【对应收购价格，如32】', 'p_type': '解除申报', 'note': '【沪深、北交所、新三板 选一】', 'function_module': '交易', 'function': '预受要约' })"
+    "resStr": "maidian.reportEvent('jy_pt_ysyy_hs_yysg_jc', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'submit', 'title': '沪深要约收购', 'product_name': '【对应产品名称】', 'product_code': '【对应产品code】', 'entrust_num': '【对应解除数量，注意传数值格式】', 'product_price': '【对应收购价格，如32，注意传数值格式】', 'p_type': '解除申报', 'note': '【沪深、北交所、新三板 选一】', 'function_module': '交易', 'function': '预受要约' })"
   },
   "jy_pt_ysyy_hs_yysg_cd": {
     "desc": "点击“撤单”时触发",
     "name": "交易-普通-预受要约-沪深-要约收购-撤单",
-    "resStr": "maidian.reportEvent('jy_pt_ysyy_hs_yysg_cd', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'cancel', 'title': '沪深要约收购', 'product_name': '【对应产品名称】', 'product_code': '【对应产品code】', 'entrust_num': '【对应撤销数量】', 'product_price': '【对应收购价格，如20.55】', 'p_type': '【申报、解除】', 'note': '【沪深、北交所、新三板 选一】', 'function_module': '交易', 'function': '预受要约' })"
+    "resStr": "maidian.reportEvent('jy_pt_ysyy_hs_yysg_cd', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'cancel', 'title': '沪深要约收购', 'product_name': '【对应产品名称】', 'product_code': '【对应产品code】', 'entrust_num': '【对应撤销数量，注意传数值格式】', 'product_price': '【对应收购价格，如20.55，注意传数值格式】', 'p_type': '【申报、解除】', 'note': '【沪深、北交所、新三板 选一】', 'function_module': '交易', 'function': '预受要约' })"
   },
   "jy_pt_ysyy_hs_yysg_yylbdj": {
     "change___resource_name": "【对应运营位名称，即产品名称，如：汉商股份 等】--->[name]",

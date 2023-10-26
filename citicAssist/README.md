@@ -1,7 +1,11 @@
-### 原生JS练习，数据mock，题解等
+### 中信 可用代码片段dome，方便日后查找
 
-#### 便捷操作
 
+目录及说明
+##### blockTrade： 大宗交易
+
+
+工具指令
 ##### sass实时更改
 ```
 npx sass --watch css/index.scss:css/index.css --no-source-map

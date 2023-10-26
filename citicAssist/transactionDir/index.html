@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="Cache-Control" content="no-siteapp">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+    <link rel="stylesheet" href="../lib/base-min.css">
+    <link rel="stylesheet" href="../lib/vant/index@2.12.css">
+	<link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+	<div class="container" id="container" v-cloak>
+		<div class="listBox" v-for="item in catalogueList" >
+			<!-- 顶部买卖撤持等横向列表 -->
+			<template v-if="item.type==='cross'">
+				<div class="crossList">
+					<div v-for="si in item.list" @click="linkListItem(si)">
+						<img :src="si.imgSrc"/>
+						<p>{{si.valueSign}}</p>
+					</div>
+				</div>
+			</template>
+			<!-- 正常列表 -->
+			<template v-if="item.type==='normal'">
+				<div v-if="item.title" class="titleTop">{{item.title}}</div>
+				<van-cell-group 
+					v-for="si in item.list" 
+					@click="linkListItem(si, item.title)" 
+					class="shouye_cell"
+					:class="si.exClass"
+				>
+					<van-cell 
+						:title="si.name" 
+						is-link  
+						:value="si.valueSign" 
+					/>
+				</van-cell-group>
+			</template>
+			<!-- 可折叠列表 -->
+			<template v-if="item.type==='collapse'">
+				<div v-if="item.title" class="titleTop">{{item.title}}</div>
+				<van-collapse v-model="item.activeNames" class="shou_collapse">
+					<van-collapse-item 
+						v-for="(si, six) in item.list" 
+						:name="six" 
+						:value="si.valueSign"
+						:class="si.exClass"
+					>
+						<div slot="title">{{si.name}}
+							<van-icon :name="si.rightIcon" @click="iconClick" />
+						</div>
+						<van-cell-group 
+							v-for="sv in si.itemChildren" 
+							@click="linkListItem(sv)"
+							class="shouye_cell"
+						>
+							<span class="point"></span><van-cell :title="sv.name" is-link :value="sv.valueSign" />
+						</van-cell-group>
+					</van-collapse-item>
+				</van-collapse>
+			</template>
+			<!-- tips -->
+			<template v-if="item.type==='tips'">
+				<div class="new-tips">{{item.text}}</div>
+			</template>
+
+			<!-- 提示弹窗 -->
+			<div class="ensureTC" v-if="tipPop">
+				<div class="nmtcBox">
+					<div class="nmtcText">
+						<h3>协商成交介绍</h3>
+						<div class="mb15">
+							<p>普通协商交易如何成交？</p>
+							<p class="paragraph"> 1、沪市：双方约定的协商交易，需一方做【协商买入】委托，另一方做【协商卖出】委托，所填交易要素一致(价格、数量、约定号等)，互填对方交易员，最终经交易系统确认成交。</p>
+							<p class="paragraph"> 2、深市：对比沪市，深市仅需一方发起协商委托(买或者卖)，另一方可通过【协商委托确认】查询该笔委托并做出接受或拒绝操作即可。</p>
+						</div>
+						<div>
+							<p>协商合并申报交易怎么做？</p>
+							<p class="paragraph">此终端不支持合并申报的发起委托，仅支持合并申报的响应委托。</p>
+							<p class="paragraph">沪深：可通过【协商委托确认】，查询本方可响应委托，点击接受即可响应成功，未达成最终成交前可撤单。</p>
+						</div>
+					</div>
+					<div class="nmtcBtn" @click="iconClick" >我知道了</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../lib/remFlex.js"></script>
+	<script src="../lib/lodash.min.js"></script>
+	<script src="../lib/vue.min.js"></script>
+	<script src="../lib/vant/vant@2.12.min.js"></script>
+	<script type="module" src="./index.js"></script>
+</body>
+
+</html>

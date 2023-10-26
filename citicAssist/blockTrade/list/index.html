@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>历史委托</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi = medium-dpi">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-touch-fullscreen" content="YES">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../lib/base-min.css">
+    <link rel="stylesheet" href="../../lib/vant/index@2.12.css">
+	<link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="lscj" id="app" v-cloak>
+        <div v-if="isHistoryList" class="fixed fixedHead">
+            <div class="dataChoose border-bottom-ee">
+                <div class="select_item" v-for="(v, i) in daySelectArr"
+                    :class="v.num == daySelectActive ? 'nevbar' : ''" @click="dataSelect(v)">
+                    <p>{{v.text}}</p>
+                    <span></span>
+                </div>
+            </div>
+            <div class="dateChoice">
+                <span class="begindate">
+                    <input type="text" id="date1" v-model="beginDate" readonly="readonly"
+                        @click="setPopDate(true, 'begin')" />
+                </span>
+                至
+                <span class="enddate">
+                    <input type="text" id="date2" v-model="endDate" readonly="readonly"
+                        @click="setPopDate(true, 'end')" />
+                </span>
+                <em class="btn_search datecha" @click="loadData(true)">确定</em>
+            </div>
+        </div>
+
+        <div class="maincontent">
+            <div class="dzjy_list" v-if="dataList.length">
+                <van-pull-refresh
+                    v-model="isPullLoading"
+                    success-text="刷新成功"
+                    @refresh="onRefresh"
+                >
+                    <van-list
+                        v-model="isLoadmore"
+                        :finished="finished"
+                        finished-text="没有更多了"
+                        @load="loadData"
+                    >
+                        <div class="cont_list cont_list_dzjy" v-for="(item, i) in dataList" @click="goDetail(i)">
+                            <div class="cont_title">
+                                <span class="cont_left_text">
+                                    <span class="title_buyDirection" :class="item.buyDirection === '卖出' ? 'sellTitle': ''">{{item.buyDirection}}</span>
+                                    <span class="title_name">{{item.name}}</span>
+                                    <span class="title_code">{{item.code}}</span>
+                                </span>
+                                <span class="cont_right_operat" v-if="item.operate">
+                                    <span class="status">{{item.operate.status}} </span>
+                                    <span 
+                                        class="chedan"
+                                        :class="item.operate.chedan ? 'chedanstyle' : ''"
+                                        @click.stop="dealWithDraw(item, i)"
+                                    >
+                                        {{item.operate.chedan}}
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="mainContent">
+                                <p class="subItem" v-for="si in item.mainArr">
+                                    <span class="siLable">{{si.lable}}:</span>
+                                    <span class="siValue">{{si.value}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </van-list>
+                </van-pull-refresh>
+            </div>
+            <div class="none" v-if="!dataList.length && !isLoadmore && !isLoading">
+                <!-- <img src="../images/noData.png" alt=""> -->
+                <p>~ 暂无数据 ~</p>
+            </div>
+        </div>
+        <van-popup v-model="idshowPopDate" position="bottom" :close-on-click-overlay="true">
+            <van-datetime-picker 
+                v-model="popDateValue" 
+                type="date" 
+                @confirm="confirmPopDate"
+                @cancel='setPopDate(false)' 
+                :max-date="maxDate"
+            ></van-datetime-picker>
+        </van-popup>
+    </div>
+    </div>
+    </div>
+
+    <script src="../../lib/remFlex.js"></script>
+	<script src="../../lib/vue.min.js"></script>
+	<script src="../../lib/vant/vant@2.12.min.js"></script>
+	<script src="../../lib/jquery-1.11.3.min.js"></script>
+	<script src="../../lib/TZT.js"></script>
+	<script type="module" src="./index.js"></script>    
+</body>
+
+</html>

@@ -17,6 +17,7 @@ module.exports = {
     new HTMLWebpackPlugin({
       filename: 'index.html',
       inject: 'body', 
+      title: 'searchApp'
     }),
     new ModuleFederationPlugin({
       name: 'search',

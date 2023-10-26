@@ -16,7 +16,8 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       filename: 'index.html',
-      inject: 'body', 
+      inject: 'body',
+      title: 'homeApp' 
     }),
     new ModuleFederationPlugin({
       name: 'home',

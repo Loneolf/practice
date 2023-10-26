@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi = medium-dpi">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-touch-fullscreen" content="YES">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../lib/base-min.css">
+    <link rel="stylesheet" href="../../lib/vant/index@2.12.css">
+	<link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="dzjy_detail" id="dzjy_detail" v-cloak>
+        <ul class="itemWrap">
+            <li v-for="item in showData" class="item">
+                <span class="lable">{{item.lable}}</span>
+                <span class="value" :class="item.isNumFont ? 'num' : ''">{{item.value}}</span>
+            </li>
+        </ul>
+        <div class="footer">
+            <span class="preBtn btn" @click="changeIndex(-1)">上一条</span>
+            <span class="line"></span>
+            <span class="nextBtn btn" @click="changeIndex(1)">下一条</span>
+        </div>
+    </div>
+	<script src="../../lib/jquery-1.11.3.min.js"></script>
+    <script src="../../lib/remFlex.js"></script>
+	<script src="../../lib/vue.min.js"></script>
+	<script src="../../lib/vant/vant@2.12.min.js"></script>
+	<script src="../../lib/TZT.js"></script>
+	<script type="module" src="./index.js"></script> 
+</body>
+
+</html>
