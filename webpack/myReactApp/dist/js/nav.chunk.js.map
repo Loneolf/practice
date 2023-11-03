@@ -1,0 +1,1 @@
+{"version":3,"file":"js/nav.chunk.js","mappings":"mJAEe,SAASA,IACtB,OAAOC,EAAAA,cAAA,UAAI,SACb,C","sources":["webpack://source-map/./src/page/nav/index.jsx"],"sourcesContent":["import React from \"react\";\r\n\r\nexport default function About() {\r\n  return <h1>nav~~~</h1>;\r\n}\r\n"],"names":["About","React"],"sourceRoot":""}
