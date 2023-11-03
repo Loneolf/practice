@@ -32,3 +32,7 @@ Shimming: 预置依赖
 library: npm包
 
 moduleFederation: 模块联邦
+
+dll: 动态链接，将不变动的依赖或者代码单独配置打包出来
+
+workerPool: 多线程
