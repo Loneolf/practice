@@ -16,7 +16,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.198",
     "add-asset-html-webpack-plugin": "^6.0.0",
-    "autoprefixer": "^7.2.6",
+    "autoprefixer": "^10.4.16",
     "css-loader": "^6.8.1",
     "node-sass": "^9.0.0",
     "postcss-loader": "^7.3.3",
