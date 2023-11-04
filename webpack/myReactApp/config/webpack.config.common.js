@@ -33,26 +33,6 @@ module.exports = {
 				type: "asset/resource",
 			},
 			{
-				test: /\.(css|scss)$/,
-				use: [
-					"style-loader",
-					{
-						loader: "css-loader",
-						options: {
-							modules: {
-								localIdentName:
-									"[name]_[local]_[hash:base64:6]",
-							},
-							importLoaders: 2,
-						},
-					},
-					{
-						loader: "postcss-loader",
-					},
-					"sass-loader",
-				],
-			},
-			{
 				test: /\.jsx?$/,
 				// exclude: /node_modules/, // 排除node_modules中的库
 				include: path.resolve(__dirname, "../src"),
@@ -75,7 +55,7 @@ module.exports = {
 		splitChunks: {
 			chunks: "all",
 			cacheGroups: {
-				 // react react-dom react-router-dom 一起打包成一个js文件
+				 // react相关的一起打包成一个js文件
 				 react: {
 					test: /[\\/]node_modules[\\/]react(.*)?[\\/]/,
 					name: "chunk-react",

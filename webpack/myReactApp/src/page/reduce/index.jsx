@@ -6,7 +6,7 @@ import { pushList, delList } from "@s/features/listSlice"; // 引入actions
 function App() {
 	const { count } = useSelector((state) => state.counter);
 	const { list } = useSelector((state) => state.list);
-	console.log("aaalist", list);
+	// console.log("aaalist", list);
 	const dispatch = useDispatch();
 	return (
 		<div className="box">

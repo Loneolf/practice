@@ -1,2 +1,2 @@
-"use strict";(self.webpackChunksource_map=self.webpackChunksource_map||[]).push([[411],{2711:(e,u,a)=>{a.r(u),a.d(u,{default:()=>r});var n=a(7294);function r(){return n.createElement("h1",null,"nav~~~")}}}]);
+"use strict";(self.webpackChunksource_map=self.webpackChunksource_map||[]).push([[411],{4865:(e,u,a)=>{a.r(u),a.d(u,{default:()=>r});var n=a(7294);function r(){return n.createElement("h1",null,"nav~~~")}}}]);
 //# sourceMappingURL=nav.chunk.js.map

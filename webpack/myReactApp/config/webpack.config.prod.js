@@ -35,6 +35,26 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.(css|scss)$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: "css-loader",
+						options: {
+							modules: {
+								localIdentName:
+									"[name]_[local]_[hash:base64:6]",
+							},
+							importLoaders: 2,
+						},
+					},
+					{
+						loader: "postcss-loader",
+					},
+					"sass-loader",
+				],
+			},
+			{
 				test: /\.jsx?$/,
 				include: path.resolve(__dirname, "../src"),
 				loader: "babel-loader",
