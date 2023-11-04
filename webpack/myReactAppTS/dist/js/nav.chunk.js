@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksource_map=self.webpackChunksource_map||[]).push([[411],{1010:(e,n,t)=>{t.r(n),t.d(n,{default:()=>a});var c=t(5893),u=t(7294);function a(){return(0,u.useEffect)((function(){fetch("/api/hello").then((function(e){return e.text()})).then((function(e){console.log("aaafetchRes12",e)}))}),[]),(0,c.jsx)("h1",{children:"nav~~~"})}}}]);
+//# sourceMappingURL=nav.chunk.js.map
