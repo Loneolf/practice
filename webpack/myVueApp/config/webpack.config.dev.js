@@ -14,6 +14,18 @@ module.exports = {
 	plugins: [
 		
 	],
+	module: {
+		rules: [
+			{
+				test: /\.css$/,
+				use: [
+					"vue-style-loader",
+					"css-loader",
+					"postcss-loader"
+				],
+			},
+		]
+	},
 	devServer: {
 		client: {
 			overlay: false,

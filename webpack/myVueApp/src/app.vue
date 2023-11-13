@@ -1,8 +1,8 @@
 <template>
   <div class="appbox">
-    <div>app123~~~34523</div>
-    <!-- <Home /> -->
-    <!-- <ul>
+    <div>app123~233fa</div>
+    <Home />
+    <ul>
       <li>
         <router-link to="/home">home</router-link>
       </li>
@@ -10,17 +10,17 @@
         <router-link to="/about">About</router-link>
       </li>
     </ul>
-    <router-view></router-view> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// import Home from './page/Home'
+import Home from '@/page/Home'
 export default {
   name: 'App',
-  // components: {
-  //   Home
-  // }
+  components: {
+    Home
+  }
 }
 </script>
 

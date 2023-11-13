@@ -1,10 +1,15 @@
 <template>
-  <div class="home">home1123</div>
+  <div class="home">home11sd23</div>
+  <el-button>我是 ElButton</el-button>
 </template>
 
 <script>
+
+import { ElButton } from 'element-plus'
+
 export default {
   name: "Home",
+  components: { ElButton },
 };
 </script>
 

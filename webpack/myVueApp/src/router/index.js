@@ -5,7 +5,6 @@ const About = () => import('../page/About')
 
 export default createRouter({
     history: createWebHashHistory(),
-    mode: 'history', // 配置mode为history
     routes: [
         {
             path: '/',

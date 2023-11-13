@@ -1,8 +1,11 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const { VueLoaderPlugin } =require("vue-loader")
+const { VueLoaderPlugin } = require("vue-loader");
 const { DefinePlugin } = require("webpack");
+const AutoImport = require("unplugin-auto-import/webpack");
+const Components = require("unplugin-vue-components/webpack");
+const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 
 module.exports = {
 	entry: "./src/main.js",
@@ -14,7 +17,10 @@ module.exports = {
 			context: path.resolve(__dirname, "../src"),
 			exclude: "node_modules",
 			cache: true,
-			cacheLocation: path.resolve(__dirname,"../node_modules/.cache/.eslintcache"),
+			cacheLocation: path.resolve(
+				__dirname,
+				"../node_modules/.cache/.eslintcache"
+			),
 		}),
 		new VueLoaderPlugin(),
 		// cross-env定义的环境变量给打包工具使用
@@ -22,6 +28,12 @@ module.exports = {
 		new DefinePlugin({
 			__VUE_OPTIONS_API__: true,
 			__VUE_PROD_DEVTOOLS__: false,
+		}),
+		AutoImport({
+			resolvers: [ElementPlusResolver()],
+		}),
+		Components({
+			resolvers: [ElementPlusResolver()],
 		}),
 	],
 	module: {
@@ -35,14 +47,6 @@ module.exports = {
 						maxSize: 10 * 1024, //
 					},
 				},
-			},
-			{
-				test: /\.css$/,
-				use: [
-					"vue-style-loader",
-					"css-loader",
-					"postcss-loader",
-				],
 			},
 			{
 				test: /\.(woff|woff2|ttf|otf|eot|txt)$/,
@@ -60,15 +64,43 @@ module.exports = {
 			{
 				test: /\.vue$/,
 				loader: "vue-loader",
-			}
+				options: {
+					// 开启缓存
+					cacheDirectory: path.resolve(
+						__dirname,
+						"../node_modules/.cache/vue-loader"
+					),
+				},
+			},
 		],
 	},
 	resolve: {
 		extensions: [".vue", ".js", ".json"], // 自动补全文件扩展名，让jsx可以使用
+		// 路径别名
+		alias: {
+			"@": path.resolve(__dirname, "../src"),
+		},
 	},
 	optimization: {
 		splitChunks: {
 			chunks: "all",
+			cacheGroups: {
+				vue: {
+					test: /[\\/]node_modules[\\/]vue(.*)?[\\/]/,
+					name: "vue-chunk",
+					priority: 40,
+				},
+				elementPlus: {
+					test: /[\\/]node_modules[\\/]element-plus[\\/]/,
+					name: "elementPlus-chunk",
+					priority: 30,
+				},
+				libs: {
+					test: /[\\/]node_modules[\\/]/,
+					name: "libs-chunk",
+					priority: 20,
+				},
+			},
 		},
 		runtimeChunk: {
 			name: (entrypoint) => `runtime~${entrypoint.name}.js`,

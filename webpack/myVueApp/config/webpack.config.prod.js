@@ -13,7 +13,8 @@ module.exports = {
 		assetModuleFilename: "asset/[name]_[contenthash:10][ext]", // images/test.png
 	},
 	mode: "production", // development | production
-	devtool: "source-map",
+	// devtool: "source-map",
+	devtool: false,
 	plugins: [
 		new MiniCssExtractPlugin({
 			// 默认生成main.css
@@ -32,6 +33,18 @@ module.exports = {
 			],
 		}),
 	],
+	module: {
+		rules: [
+			{
+				test: /\.css$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					"css-loader",
+					"postcss-loader"
+				],
+			},
+		]
+	},
 	optimization: {
 		minimizer: [new CssMinimizerWebpakPlugin(), new TerserPlugin()],
 	},

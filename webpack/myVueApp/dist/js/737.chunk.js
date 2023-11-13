@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_vue=self.webpackChunkmy_vue||[]).push([[737],{1737:(e,u,t)=>{t.r(u),t.d(u,{default:()=>c});var n=t(6252),s={class:"about"};const a={name:"About"};const c=(0,t(3744).Z)(a,[["render",function(e,u,t,a,c,r){return(0,n.wg)(),(0,n.iD)("div",s,"about")}]])}}]);
