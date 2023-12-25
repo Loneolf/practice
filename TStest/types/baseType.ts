@@ -146,17 +146,3 @@ let sy2:symbol = Symbol();
 sy1 === sy2 // false, symbol值都不相等
 
 
-// Enum 枚举，TS新增的数据类型，可看作是一类值的集合，既是类型，也是值
-enum Color {
-    Red,     // 0
-    Green,   // 1
-    Blue     // 2
-}
-// 如果不指定值，默认从0开始赋值，编译后生成属性和值正反赋值的对象，所以枚举值可以通过成员值获得成员名
-// var Color;
-// (function (Color) {
-//     Color[Color["Red"] = 0] = "Red";
-//     Color[Color["Green"] = 1] = "Green";
-//     Color[Color["Blue"] = 2] = "Blue"; // 2
-// })(Color || (Color = {}));
-
