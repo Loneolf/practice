@@ -1,5 +1,6 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = (env) => {
 	return {
@@ -21,7 +22,15 @@ module.exports = (env) => {
 		plugins: [
 			new HTMLWebpackPlugin({
 				inject: "body",
-				template: "./index.html",
+				template: "./src/index.html",
+			}),
+			new CopyPlugin({
+				patterns: [
+					{
+						from: path.resolve(__dirname, "./src/mp3"),
+						to: path.resolve(__dirname, "./dist/mp3"),
+					}
+				],
 			}),
 		],
 		devServer: {

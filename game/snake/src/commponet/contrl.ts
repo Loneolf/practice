@@ -2,16 +2,19 @@
 import Food from './food'
 import Score from './score'
 import Snake from './snake'
+import Music from './music'
 
 class Contrl {
     snake: Snake
     score: Score
     food: Food
-    isLive: boolean = true
+    music: Music
+    isLive: boolean = false
     // 是否加速
     isFast: boolean = false
     dirEL: HTMLDivElement
     speedAginEL: HTMLDivElement
+    liveOptEL: HTMLDivElement
     // 初始默认向右走
     direction: string = 'right'
     // 所有控制方向的索引
@@ -28,8 +31,11 @@ class Contrl {
         this.snake = new Snake()
         this.score = new Score()
         this.food = new Food()
+        this.music = new Music()
         this.dirEL = document.querySelector('#dirBox')!
         this.dirEL.addEventListener('touchstart', this.clickHandle.bind(this))
+
+        this.liveOptEL = document.querySelector('#agin')!
 
         // 复活与加速
         this.speedAginEL = document.querySelector('#speedAgin')!
@@ -39,7 +45,6 @@ class Contrl {
         // 监听键盘事件，改变方向和复活
         document.addEventListener('keydown', this.keyDownHanle.bind(this))
         document.addEventListener('keyup', this.keyDownHanle.bind(this))
-        this.run()
     }
 
     run() {
@@ -68,16 +73,20 @@ class Contrl {
             this.snake.Y = Math.round(y * 10) / 10
         } catch (error) {
             this.isLive = false
-            // console.log(error)
-            alert(error)
+            this.liveOptEL.innerText = '复活'
+            this.music.over()
         }
 
+        let time = (300 - this.score.lever * 30)/(this.isFast ? 2 : 1)
+        if (time < 60) {
+            time = 60
+        }
         setTimeout(() => {
             this.run()
             if (this.isLockDir) {
                 this.isLockDir = false
             }
-        }, (300 - this.score.lever * 30)/(this.isFast ? 2 : 1));
+        }, time);
     }
 
     // 判断蛇是否吃到了食物
@@ -86,16 +95,34 @@ class Contrl {
             this.food.change(this.snake.snakeAPositin)
             this.snake.addBody()
             this.score.addScore()
+            this.music.eatMusic()
         }
     }
 
     touchHandle(e: TouchEvent) {
         e.preventDefault()
-        const inner = (e.target as HTMLDivElement).innerText
+        const target = e.target as HTMLDivElement
+        const inner = target.innerText
         if (inner === '加速') {
             this.isFast = e.type === 'touchstart'
-        } else if (inner === '复活' && e.type === 'touchstart') {
-            this.again()
+            this.music.setBgMusicSpeed(e.type === 'touchstart' ? 1.5 : 1)
+        }
+        if (e.type === 'touchend') return
+        switch (inner) {
+            case '开始':
+                this.start(false)
+                target.innerText = '复活'
+                break;
+            // case '暂停':
+            //     target.innerText = '继续'
+            //     break;
+            // case '继续':
+            //     target.innerText = '暂停'
+            //     break;
+            case '复活':
+                this.start()
+                // target.innerText= '开始'
+                break;
         }
     }
 
@@ -114,10 +141,11 @@ class Contrl {
         if (e.type === 'keyup' && e.key !== 'k') return
         if (e.key === 'k') {
             this.isFast = e.type === 'keydown'
+            this.music.setBgMusicSpeed(e.type === 'keydown' ? 1.5 : 1)
         }
         if (e.code === 'Space') {
             // 空格键复活重新开始
-            this.again()
+            this.start()
         }
         if (this.dirMap[e.key]) {
             this.setDir(this.dirMap[e.key])
@@ -139,13 +167,15 @@ class Contrl {
         this.direction = dir
     }
 
-    again() {
+    start(changeFood = true) {
         if (this.isLive) return
         this.snake.init()
         this.score.init()
+        this.music.init()
         this.isLive = true
         this.direction = 'right'
-        this.food.change()
+        this.isFast = false
+        changeFood && this.food.change()
         this.run()
     }
 
