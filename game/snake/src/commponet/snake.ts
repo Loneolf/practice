@@ -1,4 +1,6 @@
 import * as util from '@u/util'
+import { SNAKEPOSITIONLS } from './config'
+
 export interface IPositionA {
     x: number;
     y: number
@@ -43,8 +45,37 @@ class Snake {
         this.headEl.style.top = y + 'rem'
     }
 
-    addBody() {
+    // 用户点击暂停进行游行存档，当用户重新打开，先读取存档，没有存档再游戏初始化
+    // 使用localStorage进行本地的数据存储
+    archive() {
+        const position = [
+            {x:this.X, y: this.Y},
+            ...this.snakeAPositin
+        ]
+        localStorage.setItem(SNAKEPOSITIONLS, JSON.stringify(position))
+    }
+    // 当用户点击继续或者读取存档后，清空存档
+    clearArchive() {
+        localStorage.removeItem(SNAKEPOSITIONLS)
+    }
+
+    // 存档还原
+    archiveRestore() {
+        const positionData:IPositionA[] = JSON.parse(localStorage.getItem(SNAKEPOSITIONLS)!).reverse()
+        const head = positionData.pop()!
+        this.X = head.x
+        this.Y = head.y
+        positionData.forEach(item => {
+            this.addBody(item)
+        })
+    }
+
+    addBody(position?: IPositionA) {
         const div = document.createElement('div')
+        if (position) {
+            div.style.left = `${position.x}rem`
+            div.style.top = `${position.y}rem`
+        }
         this.snakeA.push(div)
         document.querySelector("#snake")!.appendChild(div)
     }

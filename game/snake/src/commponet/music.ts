@@ -1,4 +1,3 @@
-import * as util from '@u/util'
 
 class Music {
     bgMusic: HTMLAudioElement;

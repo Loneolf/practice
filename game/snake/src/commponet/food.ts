@@ -1,5 +1,6 @@
 import * as util from '@u/util'
 import { IPositionA } from './snake'
+import { FOODPOSITIONLS } from './config'
 
 class Food {
 
@@ -18,6 +19,14 @@ class Food {
         return util.getRealrem(this.foodEl.offsetTop)
     }
 
+    set X(x: number) {
+        this.foodEl.style.left = x + 'rem'
+    }
+
+    set Y(y: number){
+        this.foodEl.style.top = y + 'rem'
+    }
+
     // 食物不能更改在蛇身上，需要传递过来蛇的坐标，不传的话默认不在蛇的初始位置
     change(postion?: IPositionA[]) {
         let x = Math.floor(Math.random() * 30) / 10 
@@ -33,8 +42,24 @@ class Food {
             this.change()
             return
         }
-        this.foodEl.style.left = x + 'rem'
-        this.foodEl.style.top = y + 'rem'
+        this.X = x
+        this.Y = y
+    }
+
+    // 存档
+    archive() {
+        localStorage.setItem(FOODPOSITIONLS, JSON.stringify({x:this.X, y: this.Y}))
+    }
+    // 清档
+    clearArchive() {
+        localStorage.removeItem(FOODPOSITIONLS)
+    }
+    // 还原
+    archiveRestore() {
+        const positionData:IPositionA = JSON.parse(localStorage.getItem(FOODPOSITIONLS)!)
+        this.X = positionData.x
+        this.Y = positionData.y
+        
     }
 
 }

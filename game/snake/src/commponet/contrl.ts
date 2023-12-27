@@ -3,6 +3,7 @@ import Food from './food'
 import Score from './score'
 import Snake from './snake'
 import Music from './music'
+import { CONTRLSTATE } from './config'
 
 class Contrl {
     snake: Snake
@@ -10,6 +11,8 @@ class Contrl {
     food: Food
     music: Music
     isLive: boolean = false
+    // 是否暂停游戏
+    isStop: boolean = false
     // 是否加速
     isFast: boolean = false
     dirEL: HTMLDivElement
@@ -34,6 +37,7 @@ class Contrl {
         this.music = new Music()
         this.dirEL = document.querySelector('#dirBox')!
         this.dirEL.addEventListener('touchstart', this.clickHandle.bind(this))
+        this.dirEL.addEventListener('mousedown', this.clickHandle.bind(this))
 
         this.liveOptEL = document.querySelector('#agin')!
 
@@ -41,14 +45,17 @@ class Contrl {
         this.speedAginEL = document.querySelector('#speedAgin')!
         this.speedAginEL.addEventListener('touchstart', this.touchHandle.bind(this))
         this.speedAginEL.addEventListener('touchend', this.touchHandle.bind(this))
+        this.speedAginEL.addEventListener('mousedown', this.touchHandle.bind(this))
+        this.speedAginEL.addEventListener('mouseup', this.touchHandle.bind(this))
 
         // 监听键盘事件，改变方向和复活
         document.addEventListener('keydown', this.keyDownHanle.bind(this))
         document.addEventListener('keyup', this.keyDownHanle.bind(this))
+        this.archiveRestore()
     }
 
     run() {
-        if (!this.isLive) return
+        if (!this.isLive || this.isStop) return
         let x = this.snake.X
         let y = this.snake.Y
         switch (this.direction) {
@@ -72,12 +79,13 @@ class Contrl {
             this.snake.X = Math.round(x * 10) / 10 // 小数精度问题
             this.snake.Y = Math.round(y * 10) / 10
         } catch (error) {
+            // console.log('aaaaaa2333', error)
             this.isLive = false
             this.liveOptEL.innerText = '复活'
             this.music.over()
         }
 
-        let time = (300 - this.score.lever * 30)/(this.isFast ? 2 : 1)
+        let time = (300 - this.score.lever * 30) / (this.isFast ? 2 : 1)
         if (time < 60) {
             time = 60
         }
@@ -99,34 +107,82 @@ class Contrl {
         }
     }
 
-    touchHandle(e: TouchEvent) {
+    touchHandle(e: TouchEvent | MouseEvent) {
         e.preventDefault()
         const target = e.target as HTMLDivElement
         const inner = target.innerText
+        const isPress = e.type === 'touchstart' || e.type === 'mousedown'
         if (inner === '加速') {
-            this.isFast = e.type === 'touchstart'
-            this.music.setBgMusicSpeed(e.type === 'touchstart' ? 1.5 : 1)
+            this.isFast = isPress
+            this.music.setBgMusicSpeed(isPress ? 1.5 : 1)
         }
-        if (e.type === 'touchend') return
+        if (!isPress) return
         switch (inner) {
             case '开始':
                 this.start(false)
-                target.innerText = '复活'
+                target.innerText = '暂停'
                 break;
-            // case '暂停':
-            //     target.innerText = '继续'
-            //     break;
-            // case '继续':
-            //     target.innerText = '暂停'
-            //     break;
+            case '暂停':
+                this.music.bgMusic.pause()
+                target.innerText = '继续'
+                this.isStop = true
+                this.archive()
+                break;
+            case '继续':
+                // 从存档点击继续，需要两百毫秒后播放音乐， 暂停又开始可以直接播放音乐
+                if (!this.isStop) {
+                    setTimeout(() => {
+                        this.music.init()
+                    }, 200);
+                } else {
+                    this.music.bgMusic.play()
+                }
+                target.innerText = '暂停'
+                this.isStop = false
+                this.clearArchive()
+                this.run()
+                break;
             case '复活':
                 this.start()
-                // target.innerText= '开始'
+                target.innerText = '暂停'
                 break;
         }
     }
 
-    clickHandle(e: TouchEvent) {
+    // 暂停存档
+    archive() {
+        this.snake.archive()
+        this.food.archive()
+        localStorage.setItem(CONTRLSTATE, JSON.stringify({ isArchive: true, dir: this.direction }))
+    }
+
+    // 点击继续清除存档
+    clearArchive() {
+        localStorage.removeItem(CONTRLSTATE)
+        this.snake.clearArchive()
+        this.food.clearArchive()
+    }
+
+    // 初始化读取本地是否有存档，如果有存档，则进行存档还原和清档
+    archiveRestore() {
+        try {
+            const archiveData: { isArchive: boolean, dir: string } = JSON.parse(localStorage.getItem(CONTRLSTATE)!)
+            if (archiveData?.isArchive) {
+                this.liveOptEL.innerText = '继续'
+                this.direction = archiveData.dir
+                this.isLive = true
+                this.snake.archiveRestore()
+                this.food.archiveRestore()
+            }
+        } catch (error) {
+            console.log('存档异常')
+            // this.start()
+        }
+
+    }
+
+
+    clickHandle(e: TouchEvent | MouseEvent) {
         e.preventDefault()
         e.stopPropagation()
         const target = e.target as HTMLDivElement
@@ -137,15 +193,15 @@ class Contrl {
 
     // 处理键盘事件，方向赋值，空格复活，K键加速
     keyDownHanle(e: KeyboardEvent) {
-        e.preventDefault()
         if (e.type === 'keyup' && e.key !== 'k') return
         if (e.key === 'k') {
             this.isFast = e.type === 'keydown'
             this.music.setBgMusicSpeed(e.type === 'keydown' ? 1.5 : 1)
         }
+        // 空格键复活重新开始
         if (e.code === 'Space') {
-            // 空格键复活重新开始
-            this.start()
+            this.start(false)
+            this.liveOptEL.innerText = '暂停'
         }
         if (this.dirMap[e.key]) {
             this.setDir(this.dirMap[e.key])
