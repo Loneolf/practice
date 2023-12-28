@@ -1,4 +1,5 @@
 import * as util from '@u/util'
+import ArchiveClass from '@u/archiveClass'
 import { SNAKEPOSITIONLS } from './config'
 
 export interface IPositionA {
@@ -6,7 +7,7 @@ export interface IPositionA {
     y: number
 }
 
-class Snake {
+class Snake implements ArchiveClass {
     snakeA: HTMLDivElement[]
     headEl: HTMLDivElement
     snakeAPositin: IPositionA[]

@@ -1,11 +1,12 @@
 
+import ArchiveClass from '@u/archiveClass'
 import Food from './food'
 import Score from './score'
 import Snake from './snake'
 import Music from './music'
 import { CONTRLSTATE } from './config'
 
-class Contrl {
+class Contrl implements ArchiveClass{
     snake: Snake
     score: Score
     food: Food
@@ -153,6 +154,7 @@ class Contrl {
     archive() {
         this.snake.archive()
         this.food.archive()
+        this.score.archive()
         localStorage.setItem(CONTRLSTATE, JSON.stringify({ isArchive: true, dir: this.direction }))
     }
 
@@ -161,6 +163,7 @@ class Contrl {
         localStorage.removeItem(CONTRLSTATE)
         this.snake.clearArchive()
         this.food.clearArchive()
+        this.score.clearArchive()
     }
 
     // 初始化读取本地是否有存档，如果有存档，则进行存档还原和清档
@@ -173,6 +176,7 @@ class Contrl {
                 this.isLive = true
                 this.snake.archiveRestore()
                 this.food.archiveRestore()
+                this.score.archiveRestore()
             }
         } catch (error) {
             console.log('存档异常')

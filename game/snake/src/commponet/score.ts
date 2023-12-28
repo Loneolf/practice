@@ -1,4 +1,7 @@
-class Score {
+import ArchiveClass from '@u/archiveClass'
+import { SCORESTATE } from './config'
+
+class Score implements ArchiveClass {
     lever: number = 1 // 等级默认为1
     score: number = 0 // 分数默认为0
     maxLever: number// 默认最大等级为10
@@ -34,6 +37,22 @@ class Score {
         this.levelEl.innerText = '1'
     }
 
+     // 存档
+     archive() {
+        localStorage.setItem(SCORESTATE, JSON.stringify({score:this.score, lever: this.lever}))
+    }
+    // 清档
+    clearArchive() {
+        localStorage.removeItem(SCORESTATE)
+    }
+    // 还原
+    archiveRestore() {
+        const scoreData:{score: number, lever: number} = JSON.parse(localStorage.getItem(SCORESTATE)!)
+        this.score = scoreData.score
+        this.lever = scoreData.lever
+        this.scoreEl.innerText = this.score + ''
+        this.levelEl.innerText = this.lever + ''
+    }
 
 }
 

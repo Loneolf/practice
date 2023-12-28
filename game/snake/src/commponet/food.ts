@@ -1,8 +1,9 @@
 import * as util from '@u/util'
+import ArchiveClass from '@u/archiveClass'
 import { IPositionA } from './snake'
 import { FOODPOSITIONLS } from './config'
 
-class Food {
+class Food implements ArchiveClass {
 
     foodEl: HTMLDivElement;
 
