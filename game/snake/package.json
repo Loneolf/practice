@@ -6,9 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run serve",
-    "serve": "webpack serve",
-    "serveOpen": "webpack serve --open",
-    "build": "webpack --env production && npm run upLoad",
+    "start": "npm run serve",
+    "serve": "cross-env NODE_ENV=development webpack serve",
+    "serveOpen": "cross-env NODE_ENV=development webpack serve --open",
+    "test-build": "cross-env NODE_ENV=development webpack && npm run testUpload",
+    "build": "cross-env NODE_ENV=production webpack && npm run upLoad",
+    "testUpload": "cross-env NODE_ENV=test node ./src/util/upCDN.js", 
     "upLoad": "node ./src/util/upCDN.js"
   },
   "keywords": [],
@@ -22,6 +25,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "core-js": "^3.34.0",
     "cos-nodejs-sdk-v5": "^2.12.6",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.8.1",
     "node-sass": "^9.0.0",
     "postcss-loader": "^7.3.3",

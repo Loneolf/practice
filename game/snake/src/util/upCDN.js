@@ -10,8 +10,12 @@ const cos = new COS({
 // 存储同名称
 const bucket = "qing-1258827329";
 const region = "ap-beijing";
-const cosDir = "snake/";
+let cosDir = "snake/";
 upDir = "dist";
+
+if (process.env?.NODE_ENV === 'test') {
+	cosDir = 'testSnake/'
+}
 
 let arr = [];
 traverseFiles(upDir, (filePath) => {

@@ -18,7 +18,7 @@ module.exports = (env) => {
 			},
 		},
 		devtool: "cheap-module-source-map",
-		mode: env.production ? "production" : "development", // development / production
+		mode: process.env.NODE_ENV, // development / production
 		plugins: [
 			new HTMLWebpackPlugin({
 				inject: "body",
