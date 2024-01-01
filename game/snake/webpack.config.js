@@ -1,8 +1,9 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const { DefinePlugin } = require('webpack')
 
-module.exports = (env) => {
+module.exports = () => {
 	return {
 		entry: {
 			app: "./src/app.ts",
@@ -35,6 +36,11 @@ module.exports = (env) => {
 						to: path.resolve(__dirname, "./dist/assets"),
 					}
 				],
+			}),
+			new DefinePlugin({
+				ENV: JSON.stringify(process.env.NODE_ENV),
+				process: JSON.stringify(process.env),
+
 			}),
 		],
 		devServer: {

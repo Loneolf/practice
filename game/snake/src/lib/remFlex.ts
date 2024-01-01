@@ -26,7 +26,9 @@ document.getElementsByTagName("head")[0].insertAdjacentHTML("beforeend", metaHTM
 		if (clientWidth < 260) {
 			clientWidth = 260
 		}
-		docEl.style.fontSize = Math.ceil(100 * (clientWidth / 375)) + "px";
+		const fs = Math.ceil(100 * (clientWidth / 375))
+		docEl.style.fontSize = fs + "px";
+		window.gfontSize = fs
 	};
 	if (!doc.addEventListener) {
 		return;
@@ -35,3 +37,5 @@ document.getElementsByTagName("head")[0].insertAdjacentHTML("beforeend", metaHTM
 	win.addEventListener(resizeEvt, recalc, false);
 	doc.addEventListener("DOMContentLoaded", recalc, false);
 })(document, window);
+
+exports = {}
