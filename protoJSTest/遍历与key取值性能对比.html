@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遍历与key取值性能对比</title>
+</head>
+<body>
+    <script type="">
+        const arr1 = []
+        const arr2 = []
+        for (let i = 0; i < 3000; i++) {
+            var item = {
+                name: 'name' + i,
+                index: i,
+            }
+            if (i === 300) {
+                arr2.push(item)            
+                continue
+            }
+            if (i === 5000) {
+                arr1.push(item)
+                continue
+            }
+            arr2.push(item)            
+            arr1.push(item)
+        }
+        console.log()
+        let time1 = Date.now()
+        var diff = []
+        arr1.forEach((item)=>{
+            let tem = arr2.find((si)=> {
+                return si.index === item.index
+            })
+            if (!tem) diff.push(item) 
+        })
+        var time2 = Date.now()
+        console.log('aaaaresult', time2 - time1, diff)
+    </script>
+    <script type="111">
+        const obj1 = {}
+        const obj2 = {}
+        for (let i = 0; i < 10000; i++) {
+            var item = {
+                name: 'name' + i,
+                index: i,
+            }
+            if (i === 300) {
+                obj2[item.name] = item            
+                continue
+            }
+            if (i === 5000) {
+                obj1[item.name] = item   
+                continue
+            }
+            obj1[item.name] = item              
+            obj2[item.name] = item   
+        }
+        let time1 = Date.now()
+        var diff = []
+        for (const key in obj1) {
+            if(!obj2[key]) {
+                diff.push(obj1[key])
+            }
+        }
+        var time2 = Date.now()
+        console.log('aaaaresult', time2 - time1, diff)
+    </script>
+</body>
+</html>

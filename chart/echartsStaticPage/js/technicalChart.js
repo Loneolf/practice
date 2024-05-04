@@ -1,4 +1,4 @@
-import {technicalData} from './data.js'
+import { technicalData } from './data.js'
 
 let technicalChart = echarts.init(document.querySelector(".bar1 .chart"));
 

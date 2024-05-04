@@ -27,10 +27,13 @@
   <body>
     <div class="ball"></div>
     <div class="board"></div>
+    <div class="info">碰撞记录：</div>
 
     <script>
       let ball = document.querySelector(".ball");
       let board = document.querySelector(".board");
+      let infoBox = document.querySelector(".info");
+      let time = 0
       ball.addEventListener("mousedown", moveMouseHandler, true);
       board.addEventListener("mousedown", moveMouseHandler, true);
 
@@ -44,7 +47,11 @@
           this.addEventListener("mouseup", moveMouseHandler);
         }
         if (e.type === "mousemove") {
-          if (answerToPosition(ball, board)) console.log('aaa', '碰撞了')
+          if (answerToPosition(ball, board)) {
+            time++
+            infoBox.innerHTML = '碰撞记录：' + time
+            console.log('aaa', '碰撞了')
+          }
           this.elem.style.left = e.x - this.position.x + "px";
           this.elem.style.top = e.y - this.position.y + "px";
         }

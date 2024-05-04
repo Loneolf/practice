@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>到指定位置的答案</title>
     <style>
         *{margin:0;padding:0;}
         html,body{
             height:100%;
+            overflow: hidden;
         }
         .answer{
             width:100%;
@@ -15,14 +18,14 @@
             position:relative;
         }
         .answerchidren{
-            width:150px;
-            height:150px;
+            width:50px;
+            height:50px;
             background:deepskyblue;
             position:absolute;
             top:30%;
             text-align: center;
-            line-height: 150px;
-            font-size: 50px;
+            line-height: 50px;
+            font-size: 20px;
             z-index: 1;
         }
         .a{
@@ -57,11 +60,11 @@
             align-items: center;
         }
         .positionchidren{
-            width:150px;
-            height:150px;
+            width:50px;
+            height:50px;
             text-align: center;
-            line-height: 150px;
-            font-size: 50px;
+            line-height: 50px;
+            font-size: 20px;
             border:1px dotted #ccc;
             position:relative;
         }
