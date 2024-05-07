@@ -17,10 +17,10 @@ const option = {
             let allNum = params[1].axisValue
             return `总题数${allNum}, 已刷${(params[0].data * allNum).toFixed(0)}`
         },
-		position: function (p) {
-			//其中p为当前鼠标的位置
-			return [p[0] + 10, p[1] - 15];
-		},
+		// position: function (p) {
+		// 	//其中p为当前鼠标的位置，固定在鼠标的位置
+		// 	return [p[0] + 10, p[1] - 15];
+		// },
 		trigger: "axis",  // item
 		axisPointer: {
 			// 坐标轴指示器，坐标轴触发有效

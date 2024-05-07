@@ -7,12 +7,13 @@ const option = {
 		trigger: "item",
 		formatter: "{a} <br/>{b}: {c} ({d}%)",
 		position: function (p) {
+			// console.log('aaap', p)
 			//其中p为当前鼠标的位置
 			return [p[0] + 10, p[1] - 15];
 		},
 	},
 	legend: {
-		top: "90%",
+		top: "75%",
 		itemWidth: 10,
 		itemHeight: 10,
 		data: ageData.ageRound,
@@ -25,7 +26,7 @@ const option = {
 		{
 			name: "年龄分布",
 			type: "pie",
-			center: ["50%", "44%"],
+			center: ["50%", "38%"],
 			radius: ["40%", "60%"],
 			color: [
 				"#065aab",

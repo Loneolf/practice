@@ -39,7 +39,7 @@ export const personData = {
 
 // 饼形图-年龄分布
 export const ageData = {
-	ageRound: ["0岁以下", "20-29岁", "30-39岁", "40-49岁", "50岁以上"],
+	ageRound: ["20岁以下", "20-29岁", "30-39岁", "40-49岁", "50岁以上"],
 	ageNum: [
 		{ value: 2, name: "20岁以下" },
 		{ value: 4, name: "20-29岁" },
