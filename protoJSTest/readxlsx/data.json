@@ -1,48 +1,140 @@
 {
-  "jjph_zx": {
-    "desc": "基金排行页面展现",
-    "name": "基金排行-展现",
-    "resStr": "maidian.reportEvent('jjph_zx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'pageview', 'title': '基金排行页', 'function_module': '理财', 'function': '基金排行' })"
+  "kjlct_nxt_wkt_zx": {
+    "desc": "未开通南向通页面展现时触发",
+    "name": "跨境理财通-南向通-未开通-展现",
+    "resStr": "maidian.reportEvent('kjlct_nxt_wkt_zx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'pageview', 'title': '跨境理财通', 'function_module': '综合', 'function': '南向通投资账户登录' })"
   },
-  "jjph_tab": {
-    "desc": "基金排行下的一级tab点击",
-    "name": "基金排行-tab",
-    "resStr": "maidian.reportEvent('jjph_tab', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'tab_click', 'title': '基金排行页', 'btn_name': '【股票型、混合型、债券型等】', 'function_module': '理财', 'function': '基金排行' })"
+  "kjlct_wktnxt_ljkh": {
+    "desc": "点击“立即开户”时触发",
+    "name": "跨境理财通-未开通南向通-立即开户",
+    "resStr": "maidian.reportEvent('kjlct_wktnxt_ljkh', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'register_login', 'title': '跨境理财通', 'account_type': '南向通投资账户开户', 'type': '开户', 'function_module': '跨境理财通', 'function': '跨境理财通首页' })"
   },
-  "jjph_ejfl": {
-    "desc": "新加的二级分类",
-    "name": "基金排行-二级分类",
-    "resStr": "maidian.reportEvent('jjph_ejfl', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '基金排行页', 'btn_name': '【全部、普通股票型、被动指数型等】', 'btn_module': '【股票型、混合型、债券型等】', 'function_module': '理财', 'function': '基金排行' })"
+  "kjlct_wktnxt_djdl": {
+    "desc": "点击“点击登录”时触发",
+    "name": "跨境理财通-未开通南向通-点击登录",
+    "resStr": "maidian.reportEvent('kjlct_wktnxt_djdl', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'register_login', 'title': '跨境理财通', 'account_type': '南向通投资账户登录', 'type': '登录', 'function_module': '跨境理财通', 'function': '跨境理财通首页' })"
   },
-  "jjph_sjxz": {
-    "desc": "今年以来等下拉选择时间项，下拉框中点击时触发",
-    "name": "基金排行-时间选择",
-    "resStr": "maidian.reportEvent('jjph_sjxz', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '基金排行页', 'btn_name': '【日涨幅、近一周、近一月等】', 'btn_module': '【股票型、混合型、债券型等】', 'function_module': '理财', 'function': '基金排行' })"
+  "kjlct_wbdtzh_zx": {
+    "desc": "未绑定投资户页面展现时触发",
+    "name": "跨境理财通-未绑定投资户-展现",
+    "resStr": "maidian.reportEvent('kjlct_wbdtzh_zx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'pageview', 'title': '跨境理财通', 'function_module': '跨境理财通', 'function': '跨境理财通首页' })"
   },
-  "jjph_djcp": {
-    "change___resource_module": "【股票型、混合型、债券型等】--->[nameF]",
-    "desc": "点击排行榜中的产品",
-    "name": "基金排行-点击产品",
-    "resStr": "maidian.reportEvent('jjph_djcp', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'resource_click', 'title': '基金排行页', 'resource_name': '点击产品', 'resource_module': '[nameF]', 'product_code': '【基金代码】', 'product_name': '【基金名称】', 'function_module': '理财', 'function': '基金排行' })"
+  "kjlct_wbdtzh_ljkh": {
+    "desc": "点击“立即开户”时触发",
+    "name": "跨境理财通-未绑定投资户-立即开户",
+    "resStr": "maidian.reportEvent('kjlct_wbdtzh_ljkh', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '跨境理财通', 'btn_name': '立即开户', 'function_module': '跨境理财通', 'function': '跨境理财通首页' })"
   },
-  "jjph_sx": {
-    "desc": "点击筛选按钮",
-    "name": "基金排行-筛选",
-    "resStr": "maidian.reportEvent('jjph_sx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '基金排行页', 'btn_name': '筛选', 'btn_module': '【股票型、混合型、债券型等】', 'function_module': '理财', 'function': '基金排行' })"
+  "kjlct_wbdtzh_kjzjhz": {
+    "desc": "点击“跨境资金划转”时触发",
+    "name": "跨境理财通-未绑定投资户-跨境资金划转",
+    "resStr": "maidian.reportEvent('kjlct_wbdtzh_kjzjhz', { 'appkey': 'aa347fba81312f24', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '跨境理财通', 'btn_name': '跨境资金划转', 'function_module': '跨境理财通', 'function': '跨境理财通首页' })"
   },
-  "jjph_sx_cz": {
-    "desc": "筛选中点击重置",
-    "name": "基金排行-筛选-重置",
-    "resStr": "maidian.reportEvent('jjph_sx_cz', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '基金排行页', 'btn_name': '筛选重置', 'btn_module': '【股票型、混合型、债券型等】', 'function_module': '理财', 'function': '基金排行' })"
+  "kjlct_wbdtzh_wdzh": {
+    "desc": "点击“我的账户”时触发",
+    "name": "跨境理财通-未绑定投资户-我的账户",
+    "resStr": "maidian.reportEvent('kjlct_wbdtzh_wdzh', { 'appkey': 'aa347fba81312f25', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '跨境理财通', 'btn_name': '我的账户', 'function_module': '跨境理财通', 'function': '跨境理财通首页' })"
   },
-  "jjph_sx_ckjj": {
-    "desc": "筛选中点击查看基金",
-    "name": "基金排行-筛选-查看基金",
-    "resStr": "maidian.reportEvent('jjph_sx_ckjj', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '基金排行页', 'btn_name': '查看基金', 'btn_module': '【股票型、混合型、债券型等】', 'function_module': '理财', 'function': '基金排行' })"
+  "kjlct_nxt_tzcsbkh_zx": {
+    "desc": "跳转CSB开户页面展现时触发",
+    "name": "跨境理财通-南向通-跳转CSB开户-展现",
+    "resStr": "maidian.reportEvent('kjlct_nxt_tzcsbkh_zx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'pageview', 'title': '跨境理财通', 'function_module': '跨境理财通', 'function': '跨境理财通首页' })"
   },
-  "jjph_ss": {
-    "desc": "基金排行右上角点击搜索放大镜",
-    "name": "基金排行-搜索",
-    "resStr": "maidian.reportEvent('jjph_ss', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '基金排行页', 'btn_name': '搜索', 'function_module': '理财', 'function': '基金排行' })"
+  "kjlct_nxt_tzcsbkh_qrtz": {
+    "desc": "点击“确认跳转”时触发",
+    "name": "跨境理财通-南向通-跳转CSB开户-确认跳转",
+    "resStr": "maidian.reportEvent('kjlct_nxt_tzcsbkh_qrtz', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '跨境理财通', 'btn_name': '确认跳转', 'function_module': '跨境理财通', 'function': '跨境理财通首页' })"
+  },
+  "kjlct_nxt_zx": {
+    "desc": "跨境理财通-南向通页面展现时触发",
+    "name": "跨境理财通-南向通-展现",
+    "resStr": "maidian.reportEvent('kjlct_nxt_zx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'pageview', 'title': '跨境理财通', 'function_module': '跨境理财通', 'function': '跨境理财通首页' })"
+  },
+  "kjlct_nxt_jgw": {
+    "change___resource_name": "【跨境资金划转、我的账户、投资交易】--->[name]",
+    "desc": "点击顶部金刚位时触发",
+    "name": "跨境理财通-南向通-金刚位",
+    "resStr": "maidian.reportEvent('kjlct_nxt_jgw', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'resource_click', 'title': '跨境理财通', 'resource_name': '[name]', 'resource_type': '金刚位', 'resource_location': '顶部', 'function_module': '跨境理财通', 'function': '跨境理财通首页金刚位' })"
+  },
+  "kjlct_nxtcp_wldj": {
+    "change___resource_name": "【对应产品名称，如：景顺鼎益LOF等】--->[name]",
+    "desc": "点击南向通产品模块中的物料时触发",
+    "name": "跨境理财通-南向通产品-物料点击",
+    "resStr": "maidian.reportEvent('kjlct_nxtcp_wldj', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'resource_click', 'title': '跨境理财通', 'resource_name': '[name]', 'resource_module': '南向通产品', 'product_code': '【对应产品code】', 'resource_rank': '【1、2、3 等】', 'function_module': '跨境理财通', 'function': '跨境理财通首页南向通产品' })"
+  },
+  "kjlct_nxtcp_tabdj": {
+    "desc": "点击tab时触发",
+    "name": "跨境理财通-南向通-tab点击",
+    "resStr": "maidian.reportEvent('kjlct_nxtcp_tabdj', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'tab_click', 'title': '跨境理财通', 'btn_name': '【对应按钮名称，如：货币基金、股票基金、存款证、海外基金 等】', 'resource_module': '南向通产品', 'function_module': '跨境理财通', 'function': '跨境理财通首页南向通产品' })"
+  },
+  "kjlct_nxtcp_tab_wldj": {
+    "change___resource_name": "【对应产品名称，如：易方达（香港）美元货币市场基金 等】--->[name]",
+    "desc": "点击tab物料时触发",
+    "name": "跨境理财通-南向通-tab-物料点击",
+    "resStr": "maidian.reportEvent('kjlct_nxtcp_tab_wldj', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'resource_click', 'title': '跨境理财通', 'resource_name': '[name]', 'resource_module': '南向通产品', 'resource_module_sub': '【对应二级目录，如：货币基金、股票基金 等】', 'product_code': '【对应产品code】', 'function_module': '跨境理财通', 'function': '跨境理财通首页南向通产品' })"
+  },
+  "kjlct_nxtcp_tab_ckqbbxtcp": {
+    "desc": "点击“查看全部南向通产品”时触发",
+    "name": "跨境理财通-南向通-tab-查看全部南向通产品",
+    "resStr": "maidian.reportEvent('kjlct_nxtcp_tab_ckqbbxtcp', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '跨境理财通', 'btn_name': '查看全部南向通产品', 'btn_module': '南向通产品', 'function_module': '跨境理财通', 'function': '跨境理财通首页南向通产品' })"
+  },
+  "kjlct_nxtcp_ckgd": {
+    "desc": "点击“查看更多”时触发",
+    "name": "跨境理财通-南向通-查看更多",
+    "resStr": "maidian.reportEvent('kjlct_nxtcp_ckgd', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '跨境理财通', 'btn_name': '查看更多', 'btn_module': '南向通产品', 'function_module': '跨境理财通', 'function': '跨境理财通首页南向通产品' })"
+  },
+  "kjlct_fxjss_qr": {
+    "desc": "跨境理财通页面风险揭示书弹窗点击确认时触发",
+    "name": "跨境理财通-风险揭示书-确认",
+    "resStr": "maidian.reportEvent('kjlct_fxjss_qr', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'confirm', 'title': '跨境理财通', 'product_name': '跨境理财通风险揭示书确认', 'function_module': '跨境理财通', 'function': '跨境理财通首页' })"
+  },
+  "nxttzhkh_zx": {
+    "desc": "南向通投资户开户页面展现时触发",
+    "name": "南向通投资户开户-展现",
+    "resStr": "maidian.reportEvent('nxttzhkh_zx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'pageview', 'title': '权限管理', 'function_module': '综合', 'function': '南向通投资账户开户' })"
+  },
+  "kjlct_kh": {
+    "desc": "点击“我要办理”时触发",
+    "name": "南向通投资户开户-我要办理",
+    "resStr": "maidian.reportEvent('kjlct_kh', { 'appkey': 'aa347fba81312f24', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '权限管理', 'btn_name': '我要办理', 'function_module': '综合', 'function': '南向通投资账户开户' })"
+  },
+  "kjlct_nxt_zz_zx": {
+    "desc": "“跨境资金划转”页面展现时触发",
+    "name": "跨境理财通-南向通-转账-展现",
+    "resStr": "maidian.reportEvent('kjlct_nxt_zz_zx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'pageview', 'title': '跨境资金划转页', 'function_module': '跨境理财通', 'function': '跨境资金划转' })"
+  },
+  "kjlct_nxt_zz_zzcx": {
+    "desc": "点击转账查询时触发",
+    "name": "跨境理财通-南向通-转账-转账查询",
+    "resStr": "maidian.reportEvent('kjlct_nxt_zz_zzcx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '跨境资金划转页', 'btn_name': '转账查询', 'function_module': '跨境理财通', 'function': '跨境资金划转' })"
+  },
+  "kjlct_nxt_zz_lkzz": {
+    "desc": "点击立刻转账时触发",
+    "name": "跨境理财通-南向通-转账-立刻转账",
+    "resStr": "maidian.reportEvent('kjlct_nxt_zz_lkzz', { 'appkey': 'aa347fba81312f24', 'record_cluster': 'xet_HMA', 'xwhat': 'btn_click', 'title': '跨境资金划转页', 'btn_name': '立刻转账', 'function_module': '跨境理财通', 'function': '跨境资金划转' })"
+  },
+  "kjlct_nxt_zz_ecqr-qr": {
+    "desc": "转账二次确认弹窗点击确认时触发",
+    "name": "跨境理财通-南向通-转账-二次确认-确认",
+    "resStr": "maidian.reportEvent('kjlct_nxt_zz_ecqr-qr', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'confirm', 'title': '跨境资金划转页', 'product_name': '跨境资金划转确认', 'function_module': '跨境理财通', 'function': '跨境资金划转' })"
+  },
+  "kjlct_nxt_zz_tc-qr": {
+    "desc": "转账弹窗点击确认时触发",
+    "name": "跨境理财通-南向通-转账-弹窗-确认",
+    "resStr": "maidian.reportEvent('kjlct_nxt_zz_tc-qr', { 'appkey': 'aa347fba81312f24', 'record_cluster': 'xet_HMA', 'xwhat': 'confirm', 'title': '跨境资金划转页', 'product_name': '跨境资金划转确认', 'function_module': '跨境理财通', 'function': '跨境资金划转' })"
+  },
+  "kjlct_nxt_zz_zzcx_zx": {
+    "desc": "“转账查询”页面展现时触发",
+    "name": "跨境理财通-南向通-转账-转账查询-展现",
+    "resStr": "maidian.reportEvent('kjlct_nxt_zz_zzcx_zx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'pageview', 'title': '转账查询', 'function_module': '跨境理财通', 'function': '转账查询' })"
+  },
+  "kjlct_nxt_zz_zzcx_tab": {
+    "desc": "点击tab时触发",
+    "name": "跨境理财通-南向通-转账-转账查询-tab",
+    "resStr": "maidian.reportEvent('kjlct_nxt_zz_zzcx_tab', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'tab_click', 'title': '转账查询', 'btn_name': '【对应按钮名称，如：当日、一月、自定义】', 'function_module': '跨境理财通', 'function': '转账查询' })"
+  },
+  "kjlct_nxt_wdzh_zhxx_zx": {
+    "desc": "“账户信息”页面展现时触发",
+    "name": "跨境理财通-南向通-我的账户-账户信息-展现",
+    "resStr": "maidian.reportEvent('kjlct_nxt_wdzh_zhxx_zx', { 'appkey': 'aa347fba81312f23', 'record_cluster': 'xet_HMA', 'xwhat': 'pageview', 'title': '账户信息', 'function_module': '跨境理财通', 'function': '账户信息' })"
   }
 }

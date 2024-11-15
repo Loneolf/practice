@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // px/em/rem/vh/vw这些单位的区别
+
+        /* px：绝对单位，页面按精确像素展示
+        em：相对单位，基准点为父节点字体的大小，如果自身定义了font-size按自身来计算，整个页面内1em不是一个固定的值
+        rem：相对单位，可理解为root em, 相对根节点html的字体大小来计算
+        vh、vw：主要用于页面视口大小布局，在页面布局上更加方便简单 */
+
+
+
+
+
+
+
+
+
+        // vue 中的v-show和v-if怎么理解
+        /*  共同点，true值占据页面位置，false不占据页面位置
+         区别：
+         控制手段：v-show隐藏则是为该元素添加css--display:none，dom元素依旧还在。v-if显示隐藏是将dom元素整个添加或删除
+         编译过程：v-if切换有一个局部编译/卸载的过程，切换过程中合适地销毁和重建内部的事件监听和子组件；v-show只是简单的基于css切换
+         编译条件：v-if是真正的条件渲染，它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。渲染条件为假时，并不做操作，直到为真才渲染
+         v-show 由false变为true的时候不会触发组件的生命周期
+         v-if由false变为true的时候，触发组件的beforeCreate、create、beforeMount、mounted钩子，由true变为false的时候触发组件的beforeDestory、destoryed方法
+         性能消耗：v-if有更高的切换消耗；v-show有更高的初始渲染消耗；
+         应用场景：频繁切换，建议使用v-show，运行条件很少改变，使用v-if */
+
+
+
+
+
+
+
+        // vue中常用的修饰符有哪些
+        // 表单修饰符
+        /* lazy:光标离开标签的时候，才会将值赋予给value、
+        trim:自动过滤用户输入的首空格字符，而中间的空格不会过滤
+        number:自动将用户的输入值转为数值类型，但如果这个值无法被parseFloat解析，则会返回原来的值 */
+        // 常用
+        /* .stop：阻止事件冒泡
+        .native：绑定原生事件
+        .once：事件只执行一次
+        .self ：将事件绑定在自身身上，相当于阻止事件冒泡
+        .prevent：阻止默认事件
+        .caption：用于事件捕获
+        .once：只触发一次
+        .keyCode：监听特定键盘按下
+        .right：右键 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // 说一下函数的防抖和节流
+       /*  节流: n 秒内只运行一次，若在 n 秒内重复触发，只有一次生效
+        防抖: n 秒后在执行该事件，若在 n 秒内被重复触发，则重新计时
+
+        防抖在连续的事件，只需触发一次回调的场景有：
+        搜索框搜索输入。只需用户最后一次输入完，再发送请求
+        手机号、邮箱验证输入检测
+        窗口大小resize。只需窗口调整完成后，计算窗口大小。防止重复渲染。
+
+        节流在间隔一段时间执行一次回调的场景有：
+        滚动加载，加载更多或滚到底部监听
+        搜索框，搜索联想功能 */
+
+
+
+
+
+
+
+
+
+
+        // 页面的回流与重绘
+        /* 回流：布局引擎会根据各种样式计算每个盒子在页面上的大小与位置
+        重绘：当计算好盒模型的位置、大小及其他属性后，浏览器根据每个盒子特性进行绘制
+
+        解析HTML，生成DOM树，解析CSS，生成CSSOM树
+        将DOM树和CSSOM树结合，生成渲染树(Render Tree)
+        Layout(回流):根据生成的渲染树，进行回流(Layout)，得到节点的几何信息（位置，大小）
+        Painting(重绘):根据渲染树以及回流得到的几何信息，得到节点的绝对像素
+        Display:将像素发送给GPU，展示在页面上
+
+        回流这一阶段主要是计算节点的位置和几何信息，那么当页面布局和几何信息发生变化的时候，就需要回流，如下面情况：
+            添加或删除可见的DOM元素
+            元素的位置发生变化
+            元素的尺寸发生变化（包括外边距、内边框、边框大小、高度和宽度等）
+            内容发生变化，比如文本变化或图片被另一个不同尺寸的图片所替代
+            页面一开始渲染的时候（这避免不了）
+            浏览器的窗口尺寸变化（因为回流是根据视口的大小来计算元素的位置和大小的）
+            还有通过计算获取某些元素的属性值offsetTop、offsetLeft、 offsetWidth、offsetHeight、scrollTop、scrollLeft、scrollWidth、scrollHeight、clientTop、clientLeft、clientWidth、clientHeight等
+        
+        触发回流一定会触发重绘
+            除此之外还有一些其他引起重绘行为：
+            颜色的修改
+            文本方向的修改
+            阴影的修改
+
+        如何减少回流与重绘
+            合并样式修改
+            避免内联样式
+            使用 CSS3 过渡和动画：这些属性可以让浏览器在 GPU 层面进行处理，通常不会引起回流，而且性能较好
+            减少 DOM 节点的添加和删除
+            批量处理 DOM 操作
+            使用绝对定位或固定定位：脱离文档流，不会影响别的元素
+            避免使用表格布局
+            防抖（debounce）和节流（throttle） */
+
+
+
+
+
+
+            
+
+
+
+        
+        // 12、35、99、18、76，写一个函数，使上面的五个数字从小到大进行排列
+        function sort(arr) {
+            var len = arr.length;
+            for (var i = 0; i < len - 1; i++) {
+                for (var j = 0; j < len - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        // 交换元素位置
+                        // [arr[j], arr[i]] = [arr[i], arr[j]]
+                        var temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+        console.log(sort([12, 35, 99, 18, 76]));
+
+
+        // 写一个函数进行数字格式转换，将数字转为含分隔符，并保留两位小数的字符串
+        // 1234567 -> 1,234,567.00
+        // 100 -> 100.00
+        // 12.21 -> 12.21
+        function parse(num) {
+            // 判断是否为数字，如果不是则返回空字符串
+            if (typeof num!== 'number') return '';
+            // 先将数字转换为绝对值并保留两位小数
+            let absNum = Math.abs(num).toFixed(2); 
+             // 拆分整数部分和小数部分
+            let [integerPart, decimalPart] = absNum.split('.'); 
+
+            // 对整数部分添加分隔符
+            let separator = ',';
+            let formattedIntegerPart = '';
+            for (let i = integerPart.length - 1, j = 0; i >= 0; i--, j++) {
+                if (j > 0 && j % 3 === 0) {
+                    formattedIntegerPart = separator + formattedIntegerPart;
+                }
+                formattedIntegerPart = integerPart[i] + formattedIntegerPart;
+            }
+
+            // 如果原数字是负数，添加负号
+            if (num < 0) {
+                formattedIntegerPart = '-' + formattedIntegerPart;
+            }
+            // 组合整数部分和小数部分并返回
+            return formattedIntegerPart + '.' + decimalPart;
+        }
+        console.log(parse(1234567.889))
+    </script>
+</body>
+
+</html>

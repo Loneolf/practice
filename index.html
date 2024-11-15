@@ -8,5 +8,16 @@
 </head>
 <body>
     这是一个测试页面
+    <script>
+        var arr = [{title: 12, body: 13}, {title: 14, body: 13},{title: 16, body: 13},{title: 15, body: 13}]
+        var res = arr.reduce(function (sum, item) {
+            console.log(sum, item)
+            if (item.title % 2 === 0) {
+                sum.push(item.title)
+                return sum
+            }
+        }, [])
+        console.log(res)
+    </script>
 </body>
 </html>

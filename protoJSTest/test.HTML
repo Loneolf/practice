@@ -2,81 +2,172 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.5/base64.min.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.5/base64.min.js"></script> -->
+	<style>
+		html{
+			font-size: 50px;
+		}
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.itemBox{
+			font-size: .24rem;
+			background-color: #fff;
+			margin-top: .08rem;
+			padding: 0 .3rem;
+			color: #222222;
+		}
+		.itemBox .header{
+			height: 1rem;
+			display: flex;
+			align-items: center;
+			font-size: .32rem;
+			border-bottom: .01rem solid #f3f3f3;
+		}
+		.itemBox .header .code{
+			color: #777777;
+			margin-left: .16rem;
+		}
+		.itemBox .header .type{
+			display: inline-block;
+			height: .36rem;
+			line-height: .36rem;
+			padding: 0 .08rem;
+			font-size: .24rem;
+			border-radius: .04rem;
+			margin-left: .24rem;
+		}
+		.itemBox .header .status{
+			flex: 1;
+			text-align: right;
+			font-size: .28rem;
+			color: #777777;
+		}
+		.itemBox .title,.itemBox .content{
+			display: flex;
+			align-items: center;
+			/* justify-content: space-between; */
+			height: .8rem;
+			font-size: .22rem;
+			color: #999999;
+			border-bottom: .01rem solid #f3f3f3;
+		}
+		.itemBox .title .titleItem, .itemBox .content .detailItem{
+			display: inline-flex;
+			flex-direction: column;
+			text-align: center;
+			text-align: right;
+			flex: 1;
+		}
+		.itemBox .title .titleItem:first-child, .itemBox .content .detailItem:first-child{
+			text-align: left;
+			padding-right: .2rem;
+		}
+		.itemBox .title .titleItem .titleSi:nth-child(2){
+			margin-top: .06rem;
+		}
+		.itemBox .content{
+			height: 1.12rem;
+			font-size: .28rem;
+			color: #222222;
+			border-bottom: none;
+		}
+	</style>
 </head>
+<div>
+	测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字
+	<select type="number" name="city">
+		<option value="beijing">北京</option>
+		<option value="shanghai">上海</option>
+		<option value="guangzhou">广州</option>
+	</select>
+</div>
+<li class='itemBox' data-num=37>
+	<div class='header border-bottom-ee'>
+		<span class=text>贝特瑞</span>
+		<span class=code>835185</span>
+		<span class=type style='background:#FFECDD;color:#A2601F'>融券</span>
+		<span class=status>部分归还</span></div>
+	<div class='title border-bottom-ee'>
+		<div class='titleItem'><span class='titleSi'>开仓日期</span><span class='titleSi'>归还截止日</span></div>
+		<div class='titleItem'><span class='titleSi'>开仓金额</span><span class='titleSi'>未还金额</span></div>
+		<div class='titleItem'><span class='titleSi'>未还利息</span><span class='titleSi'>未还费用</span></div>
+		<div class='titleItem'><span class='titleSi'>总负债</span></div>
+	</div>
+	<div class='content border-bottom-ee'>
+		<div class='detailItem'><span class='detailSi'>2022-11-14</span><span class='detailSi'>2024-11-30</span></div>
+		<div class='detailItem'><span class='detailSi'>55550.00</span><span class='detailSi'>55550.00</span></div>
+		<div class='detailItem'><span class='detailSi'>0.00</span><span class='detailSi'>8.23</span></div>
+		<div class='detailItem'><span class='detailSi'>55558.23</span></div>
+	</div>
+</li>
 
 <body>
-  <script>
-    let data = [
-      {
-        title: "两网及退市转让",
-        type: "normal",
-        list: [
-          {
-            name: "限价买入",
-            url: "http://action:13010/?title=限价买入",
-            urlType: "linkAction",
-          },
-          {
-            name: "限价卖出",
-            url: "http://action:13011/?title=限价卖出",
-            urlType: "linkAction",
-          },
-        ],
-      },
-      {
-        title: "新三板摘牌转让",
-        type: "normal",
-        list: [
-          {
-            name: "摘牌买入",
-            url: "/newjy/gz/gz_zpmr.html",
-          },
-          {
-            name: "摘牌卖出",
-            url: "/newjy/gz/gz_zpmc.html",
-          },
-          {
-            name: "摘牌委托撤单",
-            url: "/newjy/gz/gz_zpcd.html",
-            exClass: "marginTop2",
-          },
-          {
-            name: "摘牌当日委托",
-            // url: "/newjy/jy_qmore.html?oldmanP=120?qtype=drwt",
-            url: '12303',
-            urlType: 'tradeaction',
-            exClass: "marginTop2",
-            title: "drwt",
-          },
-          {
-            name: "摘牌当日成交",
-            url: '12303',
-            urlType: 'tradeaction',
-            title: "drcj",
-            // url: "/newjy/jy_qmore.html?oldmanP=120?qtype=drcj",
-          },
-          {
-            name: "摘牌历史委托",
-            url: "/newjy/ptjy/qhiswt.html",
-          },
-          {
-            name: "摘牌历史成交",
-            url: "/newjy/ptjy/qhiscj.html",
-            action: '12383',
-            datetype: '1',
-            title: '历史成交',
-            urlType: 'tradeactionUrl'
-          },
-        ],
-      },
-    ];
+	<script>
+		let str = "{name:meituan,tel:123,info:{type:1,price:100}}";
+		// console.log(parseStringToObject(str));
 
-    console.log(data[0].list)
-  </script>
+		// function parseStringToObject1(str) {
+		// 	str = str.slice(1, str.length - 1);
+		// 	console.log(str);
+		// 	const map = { '}': '{', ']': '[' };
+		// 	let stack = [];
+		// 	let couter = '';
+		// 	let res = {};
+		// 	let norPoint = 'res';
+		// 	for (let i = 0; i < str.length; i++) {
+		// 		let tem = str[i];
+		// 		if (tem === ':') {
+		// 			res[];
+		// 		}
+		// 		couter += tem;
+		// 		if (tem === '{' && str[i - 1] === ':') {
+
+		// 		}
+
+		// 	}
+		// }
+
+
+
+		// function isvalid(s) {
+		// 	let length = s.length;
+		// 	if (length % 2 != 0) return false;
+		// 	let stack = [];
+		// 	const map = { ')': '(', '}': '{', ']': '[' };
+		// 	for (let i = 0; i < length; i++) {
+		// 		if (s[i] === '(' || s[i] === '[' || s[i] === '{') {
+		// 			stack.push(s[i]);
+		// 		} else {
+		// 			if (stack.length === 0 || stack.pop() !== map[s[i]]) {
+		// 				return false;
+		// 			}
+		// 		}
+		// 	}
+		// 	return stack.length === 0;
+		// }
+
+		//方案一 拼凑成JSON形式的字符串，只处理对象，数组需要额外的兼容
+		//  '{"name":"meituan","tel":"123","info":{"type":"1","price":"100"}}'
+		// console.log(JSON.parse(parseStr1(str)))
+		function parseStr1(str) {
+			let res = '';
+			for (let i = 0; i < str.length; i++) {
+				if (str[i] === ':' || str[i] === ',' || str[i] === '}' && str[i + 1] === '}') res += '"';
+				res += str[i];
+				if (str[i] === '{') res += '"';
+				if (str[i] === ':' && str[i + 1] !== '{' || str[i] === ',') res += '"';
+			}
+			return res;
+		}
+
+
+	</script>
 </body>
 
 

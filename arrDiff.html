@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr1 = ['委托编号', '股票代码', '证券', '买卖方向', '委托价格', '委托数量', '时间', '成交数量', '成交价格', '合约编号', '市场类型', '股东账号', '是否可撤', '委托状态', '委托日期', '委托类别', '业务名称', '可撤', '证券全称', '废单原因']
+        let arr2 = ["委托日期", "委托时间", "委托编号", "证券代码", "证券名称", "买卖方向", "订单名称", "委托数量", "市场类型", "股东账号", "委托状态", "成交数量", "委托价格", "废单原因", "是否可撤", "成交价格", "委托类别",]
+        let arr1Has = []
+        let arr2has = []
+        let common = []
+        arr1.forEach((item) => {
+            arr2.forEach((sitem) => {
+                if (item === sitem) {
+                    common.push(item)
+                }
+            })
+        })
+        console.log(common)
+        arr1.forEach((item) => {
+            let nocomm = common.some((si)=> si === item)
+            if (!nocomm) arr1Has.push(item)
+        })
+        arr2.forEach((item) => {
+            let nocomm = common.some((si)=> si === item)
+            if (!nocomm) arr2has.push(item)
+        })
+        console.log(arr1Has, arr2has)
+    </script>
+</body>
+</html>

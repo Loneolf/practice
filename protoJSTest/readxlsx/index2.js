@@ -1,11 +1,13 @@
 //两层对象模式，第一层对象Key值为埋点名称
 const XLSX = require("xlsx");
 const fs = require("fs");
-const workbook = XLSX.readFile("./fundRank.xlsx");
-const sheetName = workbook.SheetNames[0];
+const workbook = XLSX.readFile("./crossBorder.xlsx");
+// const workbook = XLSX.readFile("./fundRank.xlsx");
+const sheetName = workbook.SheetNames[1];
+console.log('aaaasheetName', sheetName)
 const sheet = workbook.Sheets[sheetName];
 const data = XLSX.utils.sheet_to_json(sheet);
-
+console.log('aaaadata', data)
 // writeFile(data, 'originData.json')
 // return
 
