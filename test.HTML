@@ -13,12 +13,112 @@
 
 <body>
   <div class="box">
-    
   </div>
 
   <script>
+    function convertAndCompressTemplateLiteralsToES5(str) {
+    // 查找所有的模板字符串（用反引号括起来的部分）
+    const templateLiterals = str.match(/`([^`]*)`/g);
 
+    if (templateLiterals) {
+        // 遍历每个找到的模板字符串
+        templateLiterals.forEach((templateLiteral) => {
+            // 获取模板字符串中的表达式部分（去掉反引号）
+            const expression = templateLiteral.slice(1, -1);
+            // 将表达式部分中的美元符号和花括号替换为普通的字符串拼接形式
+            const convertedExpression = expression.replace(/\$\{([^}]*)\}/g, " + ($1) + ");
+            // 将原始的模板字符串替换为转换后的拼接字符串形式
+            str = str.replace(templateLiteral, "'" + convertedExpression + "'");
+        });
+    }
+
+    // 进行简单的字符串压缩
+    // 去除字符串开头和结尾的空格
+    str = str.trim();
+    // 替换连续的多个空格为一个空格
+    str = str.replace(/\s+/g, " ");
+
+    return str;
+}
+
+
+// 示例用法
+const es6String = `
+<div class="searchcomBox">
+    <div class="searchInput">
+        <img class="seachIcon" src="./img/seachIcon.png"/>
+        <input 
+            v-model="searchValue" 
+            @click.prevent="inputClick($event)"
+            :placeholder="placeholder"
+        />
+        <img v-if="searchValue" class="clear" src="./img/clear.png" @click.stop="clearSeach">
+    </div>
+    <van-popup
+        v-model="isShowSeachPop"
+        position="bottom"
+        :close-on-click-overlay="false"
+        @click-overlay="onCancel"
+    >
+        <div class="search-box" ref="searchbox">
+            <div class="width-center vantSearchBox">
+                <van-search
+                    v-model="searchValue"
+                    :placeholder="placeholder"
+                    @input="onInput"
+                    shape="round"
+                    clearable
+                    ref="searchRef"
+                ></van-search>
+                <div class="close" @click="onCancel">关闭</div>
+            </div>
+        </div>
+        <div class="search-list width-center">
+            <div class="empty" v-show="isEmpty && searchValue != ''">
+                <img src="./img/noData.png" alt="" />
+                <div class="empty-text">未找到搜索结果</div>
+                <div
+                    class="empty-button"
+                    v-show="searchValue.length === 6 && !isNaN(searchValue)"
+                    @click="useCode"
+                >
+                    直接使用此代码
+                </div>
+            </div>
+            <div v-show="!isEmpty && searchValue">
+                <div
+                    class="search-list-item"
+                    v-for="(item, i) in searchList"
+                    :key="i"
+                    @click.stop="itemClick(item)"
+                >
+                    <div class="badge" :style="{ color: item.label.color,background: item.label.bgColor}">
+                        {{ item.label.value }}
+                    </div>
+                    <span v-html="item.stockCode" class="stock-code"></span>
+                    <span v-html="item.stockName" class="stock-name"></span>
+                </div>
+            </div>
+        </div>
+        <van-popup v-model="confrimPopUp">
+            <div class='confirmContent'>
+                <div 
+                    class='confirmItem'
+                    v-for='item in searchList' 
+                    @click='itemClick(item, true)'
+                    :key='item.rawName'
+                >
+                    <span class='code'>{{item.rawCode}}</span>
+                    <span class='name'>{{item.rawName}}</span>
+                </div>
+            </div>
+        </van-popup>
+    </van-popup>
+    
+</div>
+`;
+const es5String = convertAndCompressTemplateLiteralsToES5(es6String);
+console.log(es5String);
   </script>
 </body>
-
 </html>

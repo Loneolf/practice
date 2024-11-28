@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,viewport-fit=cover,minimal-ui">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-touch-fullscreen" content="YES">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/z_modules/common/css/base.min.css">
+    <link href="./index.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="dzjy_detail" id="dzjy_detail" v-cloak>
+        <div v-if="showData.tipText || recordTip" class="titleTips">
+            <p class="text">{{showData.tipText || recordTip}}</p>
+        </div>
+        <ul class="itemWrap">
+            <li v-for="item in showData" class="item">
+                <span class="lable">{{item.lable}}</span>
+                <span class="value" :class="item.isNumFont ? 'num' : ''">{{item.value}}</span>
+            </li>
+        </ul>
+        <div class="footer">
+            <span class="preBtn btn" @click="changeIndex(-1)">上一条</span>
+            <span class="line"></span>
+            <span class="nextBtn btn" @click="changeIndex(1)">下一条</span>
+        </div>
+    </div>
+    <script type="text/javascript" src="/z_modules/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/c_modules/sea.js"></script>
+    <script type="text/javascript" src="/z_modules/vue/vue.min.js"></script>
+    <script src="/c/TZT.js"></script>
+    <script src="/z_modules/rem/rem.js"></script>
+
+    <script type="text/javascript">
+        seajs.use('./detail_index.js', function(exports) {
+            exports.init();
+        });
+    </script>
+</body>
+
+</html>
