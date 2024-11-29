@@ -3,10 +3,11 @@
 //该模块应用jquery，因所有页面均引用，在此不单独引用jquery
 
 define(function (require, exports, module) {
+    var timePicker = require('./TimeSelect/index');
     require('./assets/index.css#');
-    var utils = require('/vue/utils/common');
     //初始化
     function init(componentsName, Vue) {
+        timePicker.init('time-picker');
         Vue = Vue ? Vue : window.Vue;
         if (!componentsName) {
             console.error('缺少组件名称');
@@ -17,115 +18,105 @@ define(function (require, exports, module) {
             return false;
         }
         Vue.component(componentsName, {
-            props: ['minDate', 'maxDate', 'formatter', 'beginDate', 'endDate', 'isShow', 'maxDiff'],
+            props: {
+                'minDate': {
+                    type: Date,
+                },
+                'maxDate': {
+                    type: Date,
+                },
+                'beginDate': {
+                    type: String,
+                },
+                'endDate': {
+                    type: String,
+                },
+                'maxDiff': {
+                    type: Number,
+                    default: '31'
+                },
+                'istoday': {
+                    type: Boolean,
+                    default: true,
+                },
+                'activeTab': {
+                    type: String,
+                    default: 'weekly',
+                },
+            },
             
-            template:  "",
+            template:  `
+                <div class="timeBarBox">
+                    <div class="timeBar">
+                        <div class="tabBox">
+                            <div 
+                                class="tabItem" 
+                                v-for="item in timeArr"
+                                :class="item.value == selfActiveTab ? 'nevbar' : ''" 
+                                :key="item.value"
+                                @click="tabClick(item)"
+                            >{{item.text}}</div>
+                        </div>
+                    </div>
+                    <time-picker
+                        :is-show="selfActiveTab == 'userDefined'"
+                        :formatter="formatter" 
+                        :min-date="minDate" 
+                        :max-date="maxDate" 
+                        :begin-date="beginDate" 
+                        :end-date="endDate" 
+                        :max-diff="31"
+                        @confirm="onConfirm" 
+                        @datechange="onDateChange"
+                    ></time-picker>
+                </div>
+            `,
 
             data: function data() {
+                var activeTab = this.activeTab;
                 return {
-                    componentName: componentsName,
-                    beginDateTemp: this.beginDate,
-                    endDateTemp: this.endDate,
-                    isDatePickerOpen: false,
-                    datePickerType: 'date',
-                    dateType: 'begin',
-                    monthBegin: '',
-                    monthEnd: '',
-                    firstMonthChange: true
+                    timeArr: [
+                        { text: "当日", value: "today"},
+                        { text: "近一周", value: "weekly"},
+                        { text: "近一月", value: "month"},
+                        { text: "自定义", value: "userDefined"},
+                    ],
+                    selfActiveTab: activeTab,
                 };
             },
-            mounted: function mounted() {},
-            methods: {
-                chooseDatePickerType: function(type) {
-                    this.datePickerType = type;
-                    if (type === 'year-month' && this.firstMonthChange) {
-                        var res = utils.getMonthBeginEndDate(this.maxDate)
-                        this.monthBegin = res.beginDate.timeText
-                        this.monthEnd = this.formateDateToString(res.endDate.time > this.maxDate ? this.maxDate : res.endDate.time)
-                    }
-                },
-                chooseDateType: function(type) {
-                    this.dateType = type;
-                },       
-                getDateTime: function (time) {
-					return new Date(time)
-				},  
-                formateDateToString: function (dateObject, split) {
-                    if (typeof split == 'undefined') {
-                        split = '-';
-                    }
-                    var fullYear = dateObject.getFullYear();
-                    var m = dateObject.getMonth() + 1;
-                    var month = m >= 10 ? m : '0' + m;
-                    var d = dateObject.getDate();
-                    var day = d >= 10 ? d : '0' + d;
-                    return '' + fullYear + split + month + split + day;
-                },
-                setPopDate: function (type, position) {
-                    if (position === 'wrap') {
-                        this.isDatePickerOpen = true
-                        this.beginDateTemp = this.beginDate
-                        this.endDateTemp = this.endDate
-                    }
-                    this.dateType = type
-                },
-                onConfirm: function onConfirm() {
-                    if (this.datePickerType == 'date') {
-                        var difftime = this.maxDiff || 31
-                        if (this.getDateTime(this.beginDateTemp) > this.getDateTime(this.endDateTemp)) {
-                            vant.Toast({
-                                message: '开始日期不能大于截止日期',
-                                position: 'bottom'
-                            });
-                            return
-                        }
-                        if ((this.getDateTime(this.endDateTemp) - this.getDateTime(this.beginDateTemp)) >= difftime * 24 * 60 * 60 * 1000) {
-                            vant.Toast({
-                                message: '查询区间不得超过' + difftime + '天',
-                                position: 'bottom'
-                            });
-                            return
-                        }
-                        this.$emit('datechange', this.beginDateTemp, this.endDateTemp);
-                    } else {
-                        this.$emit('datechange', this.monthBegin, this.monthEnd);
-                    }
-                    this.isDatePickerOpen = false
-                    this.datePickerType = 'date'
-                    this.$emit('confirm');
-                },
-                onCancel: function onCancel() {
-                    this.isDatePickerOpen = false
-                    this.datePickerType = 'date'
-                    console.log('aaaaconcel')
-                },
-                onChange: function onChange(picker) {
-                    var values = picker.getValues();
-                    console.log('aaa233change')
-                    if (values.length === 2) {
-                        this.monthBegin = values.join('').replace(/\D/g, '-') + '01'
-                        var days = new Date(parseInt(values[0]), parseInt(values[1]), 0).getDate()
-                        var endTem = new Date(parseInt(values[0]), parseInt(values[1]) - 1, days)
-                        this.monthEnd = this.formateDateToString(endTem > this.maxDate ? this.maxDate : endTem)
-                    } else if (values.length === 3) {
-                        var time = values.join('').replace(/\D/g, '-').replace(/-$/, '');
-                        if (this.dateType === 'begin') {
-                            this.beginDateTemp = time
-                        } else {
-                            this.endDateTemp = time
-                        }
-                    }
-                },
-            },
-            computed: {
-                selectedDate: function selectedDate() {
-                    if (this.datePickerType == 'date') {
-                        return this.dateType == 'begin' ? this.getDateTime(this.beginDateTemp) : this.getDateTime(this.endDateTemp);
-                    } else {
-                        return this.maxDate
-                    }
+            mounted: function mounted() {
+                if (!this.istoday) {
+                    this.timeArr.shift()
                 }
             },
+            methods: {
+
+                tabClick: function tabClick(item) {
+                    this.activeTab = item.value;
+                    this.$emit('confirm');
+                },
+
+                onDateChange: function onDateChange(beginDate, endDate) {
+                    this.$emit('datechange', beginDate, endDate);
+                },
+
+                formatter: function(type, val) {
+                    if (type === 'year') {
+                        return val + '\u5E74';
+                    } else if (type === 'month') {
+                        return val + '\u6708';
+                    } else if (type === 'day') {
+                        return val + '\u65E5';
+                    }
+                    return val;
+                },
+
+                onConfirm: function onConfirm() {
+                    this.$emit('confirm');
+                },
+                
+            },
+            
         });
     }
 

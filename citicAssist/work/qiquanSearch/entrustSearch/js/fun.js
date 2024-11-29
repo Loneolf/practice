@@ -2,7 +2,7 @@
 define(function(require, exports) {
     var config = require('./config')
     var util = require('../../common/util')
-    var isMock = false
+    var isMock = true
 
 
     // 获取服务器时间
@@ -10,7 +10,7 @@ define(function(require, exports) {
         var oSendData = {
             action: 5,
         };
-        if(isMock) return fnSuc('2024/07/19 16:18:32')
+        if(isMock) return fnSuc(config.mockAction5)
         $.getData({
             oSendData: oSendData,
             fnSuccess: function(oData) {

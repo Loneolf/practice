@@ -2198,7 +2198,7 @@
             }
 
             function showLoadingTip() {
-                $('head').append('<link href="/c_modules/css/loading.css" rel="stylesheet" media="all" />');
+                // $('head').append('<link href="/c_modules/css/loading.css" rel="stylesheet" media="all" />');
                 T.tipln++;
                 if (!_loadingCLock) {
                     _loadingCLock = document.createElement("div");
