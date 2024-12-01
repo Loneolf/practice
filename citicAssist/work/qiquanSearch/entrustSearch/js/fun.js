@@ -23,34 +23,6 @@ define(function(require, exports) {
         });
     };
 
-    // 获取股东卡号
-	exports.ms122 = function (oSend, callBack, fnFail) {
-		var oSend =$.extend({
-			action:122,
-			Account: '($account)'
-		}, oSend);
-        // 账号类型值 上海A=SHACCOUNT、深圳A=SZACCOUNT、上海B=SHBACCOUNT、深圳B=SZBACCOUNT、三板A=SBACCOUNT、沪HK=HKACCOUNT、三板B=SBBACCOUNT、深HK=HKSZACCOUNT
-		if (isMock) {
-			return callBack(config.mockAccontData)
-		}
-		util.getData(oSend, callBack, fnFail);
-	};
-
-    // 投票记录
-    exports.loadRecord = function (oSend, callBack, titleArr, type) {
-        if (isMock) {
-            return callBack(dealRecordData(config.mockList, titleArr, type))
-        }
-        function dealCallback(data) {
-            console.log('aaaaadealdealCallback', data)
-            callBack(dealRecordData(data, titleArr, type))
-        } 
-        var oSend =$.extend({
-			Account: '($account)'
-		}, oSend);
-        util.getData(oSend, dealCallback, dealCallback);
-    };
-
     // 投票结果
     exports.loadhistory = function (oSend, callBack, titleArr, type) {
         if (isMock) {
@@ -114,51 +86,6 @@ define(function(require, exports) {
                 data.positionstr = arr.pop()[data.POSITIONSTRINDEX]
             }
 
-        }
-        return data
-    }
-
-    function dealRecordData(data, titleArr, type) {
-        console.log('aaa23333dealRecordData', type)
-        if(data.GRID0){
-            var arr = []
-            data['GRID0'].forEach(function (item){
-                arr.push(item.split('|'))
-            })
-            var title
-            if (isTitle(data.GRID0)) {
-                data.titleArr = arr.shift()
-                title = data.titleArr
-            } else {
-                title = titleArr
-            }
-            var showData = []
-            console.log(title)
-            console.log(arr)
-            arr.forEach( function (item) {
-                var showItem = {}
-                var billType = item[data.VOTETYPEINDEX]
-                showItem.name = item[data.STOCKNAMEINDEX] //证券名字 
-                showItem.code = item[data.STOCKCODEINDEX] // 证券代码
-                showItem.status = item[data.ENTRUSTTYPENAMEINDEX]
-                if (showItem.status === '已确认') showItem.status = '已接收'
-                showItem.mainArr = [
-                    {lable: '议案编号', value: Number(item[data.VOTECODEINDEX]).toFixed(3)},
-                    {lable: '议案类型', value: billType === '0' ? '非累积议案' : '累积议案'},
-                    {lable: '投票情况', value:  util.getVoteDetail(item[data.MATCHQTYINDEX], billType)},
-                    {lable: '委托时间', value: util.timeFormat(item[data.ORDERTIMEINDEX])},
-                ]
-                if (type.indexOf('历史') > -1) {
-                    showItem.mainArr[3] = {lable: '委托时间', value: util.dateFormat(item[data.ORDERDATEINDEX]) + ' ' +util.timeFormat(item[data.ORDERTIMEINDEX]), isOneLine: true}
-                }
-
-                showData.push(showItem)
-            } )
-            // console.log('aaaaarrr', title)
-            data.showData = showData
-            if (arr.length) {
-                data.positionstr = arr.pop()[data.POSITIONSTRINDEX]
-            }
         }
         return data
     }

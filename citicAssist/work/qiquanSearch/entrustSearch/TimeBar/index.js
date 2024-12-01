@@ -4,6 +4,7 @@
 
 define(function (require, exports, module) {
     var timePicker = require('./TimeSelect/index');
+
     require('./assets/index.css#');
     //初始化
     function init(componentsName, Vue) {
@@ -47,16 +48,14 @@ define(function (require, exports, module) {
             
             template:  `
                 <div class="timeBarBox">
-                    <div class="timeBar">
-                        <div class="tabBox">
-                            <div 
-                                class="tabItem" 
-                                v-for="item in timeArr"
-                                :class="item.value == selfActiveTab ? 'nevbar' : ''" 
-                                :key="item.value"
-                                @click="tabClick(item)"
-                            >{{item.text}}</div>
-                        </div>
+                    <div class="tabBox">
+                        <div 
+                            class="tabItem" 
+                            v-for="item in timeArr"
+                            :class="item.value == selfActiveTab ? 'activeBar' : ''" 
+                            :key="item.value"
+                            @click="tabClick(item)"
+                        >{{item.text}}</div>
                     </div>
                     <time-picker
                         :is-show="selfActiveTab == 'userDefined'"
@@ -85,6 +84,7 @@ define(function (require, exports, module) {
                 };
             },
             mounted: function mounted() {
+                console.log('timebar mounted')
                 if (!this.istoday) {
                     this.timeArr.shift()
                 }
@@ -92,8 +92,8 @@ define(function (require, exports, module) {
             methods: {
 
                 tabClick: function tabClick(item) {
-                    this.activeTab = item.value;
-                    this.$emit('confirm');
+                    this.selfActiveTab = item.value;
+                    this.$emit('tabchange', item.value);
                 },
 
                 onDateChange: function onDateChange(beginDate, endDate) {

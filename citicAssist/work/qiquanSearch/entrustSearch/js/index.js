@@ -32,12 +32,6 @@ define(function (require, exports, module) {
 				isHistoryList: pageData.title.indexOf('历史') > -1,
 				isResult: pageData.title.indexOf('结果') > -1,
 				activeTab: 'today',
-				// 默认选择查询七天内的
-				accontInfo: { // 账号相关信息
-					active: {text: '股东账号: --'},
-					list: []
-				}, 
-				isShowAccontOption: false,
 
 				// 查询的开始时间和结束时间
 				beginDate: pageData.title.indexOf('当日') > -1 ?  pageData.nearTime.today :  pageData.nearTime.weekly.beginDate,
@@ -64,18 +58,7 @@ define(function (require, exports, module) {
 
 			mounted: function () {
 				return
-				var that = this
-				if (this.isShowAccont) {
-					this.getAccont()
-				} else {
-					this.loadData()
-				}
-				var that = this
-				document.addEventListener('click', function (e) {
-					if (that.isShowAccontOption) {
-						that.isShowAccontOption = false
-					}
-				})
+				this.loadData()
 			},
 
 			methods: {
@@ -84,9 +67,6 @@ define(function (require, exports, module) {
 					if (!this.isHistoryList) {
 						this.loadData(true)
 					}
-				},
-				getDateTime: function (time) {
-					return new Date(time)
 				},
 				
 				// // 时间选择：一周，一月，自定义（默认近一个月）
@@ -97,6 +77,9 @@ define(function (require, exports, module) {
 				// 	this.loadData(true)
 				// },
 
+				onTabChange: function (tab) { 
+
+				},
 
                 onConfirm: function() {
                     this.loadData(true);
