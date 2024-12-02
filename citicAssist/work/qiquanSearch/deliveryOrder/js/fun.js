@@ -26,9 +26,9 @@ define(function(require, exports) {
     };
 
     // 获取当日数据
-    exports.loadTodayData = function (oSend, callBack, titleArr) {
+    exports.loadData = function (oSend, callBack, titleArr) {
         if (isMock) {
-            return callBack(dealLoadData(config.mocktoday, titleArr))
+            return callBack(dealLoadData(config.mockList, titleArr))
         }
         function dealCallback(data) {
             console.log('aaaaaloadTodayData', data)
@@ -36,30 +36,12 @@ define(function(require, exports) {
         } 
         var oSend =$.extend({
 			Account: '($account)',
-            action: 5412,
+            action: 5458,
 		}, oSend);
         util.getData(oSend, dealCallback, dealCallback);
     };
 
-
-    // 获取历史数据
-    exports.loadHistoryData = function (oSend, callBack, titleArr) {
-        if (isMock) {
-            return callBack(dealLoadData(config.mockHistory, titleArr, 'history'))
-        }
-        function dealCallback(data) {
-            console.log('aaaaaloadHistoryData', data)
-            callBack(dealLoadData(data, titleArr, 'history'))
-        } 
-        var oSend =$.extend({
-			Account: '($account)',
-            action: 5423,
-
-		}, oSend);
-        util.getData(oSend, dealCallback, dealCallback);
-    };
-
-    function dealLoadData(data, titleArr, type) {
+    function dealLoadData(data, titleArr) {
         console.log('aaa23333dealResultData')
         if(data.GRID0){
             var arr = []
@@ -78,25 +60,24 @@ define(function(require, exports) {
             console.log(arr)
             arr.forEach( function (item) {
                 var showItem = {}
-                showItem.name = item[data.OPTIONNAMEINDEX] // 合约名称
-                showItem.code = item[data.OPTIONCODEINDEX] // 期权合约编码
-                showItem.businessName = item[data.BUYDIRECTIONINDEX] + item[data.BUSINESSNAMEINDEX]  // 开平仓方向
-                showItem.status = item[data.ENTRUSTTYPENAMEINDEX] // 委托状态
-                showItem.isBack = item[data.DRAWINDEX] != 0 // 是否可撤单
+                // showItem.name = item[data.BUSINESSNAMEINDEX] // 名称
+                showItem.name = item[data.REMARKINDEX] // 名称
+                showItem.money = item[11]  // 发生金额
+                showItem.time = util.dateFormat(item[data.ORDERDATEINDEX]) + ' ' + util.timeFormat(item[data.REPORTTIMEINDEX])
                 showItem.mainArr = [
-                    {lable: '委托价格', value:  util.numFixed(item[data.ORDERPRICEINDEX], 4)},
-                    {lable: '委托数量', value: item[data.ORDERQTYINDEX]},
-                    {lable: '成交均价', value:  util.numFixed(item[data.MATCHPRICEINDEX], 4)},
-                    {lable: '成交数量', value:  item[data.MATCHQTYINDEX]},
-                    {lable: '委托时间', value: util.timeFormat(item[data.ORDERTIMEINDEX])},
-                    {lable: '委托属性', value:  item[data.ENTRUSTPROPINDEX]},
+                    {lable: '成交金额', value:  util.numFixed(item[data.DEALMONEYINDEX], 4)},
+                    {lable: '佣金', value: item[16]},
+                    {lable: '印花税', value: ''},
+                    {lable: '过户费', value: ''},
+                    {lable: '委托费', value: ''},
+                    {lable: '其他费', value: ''},
                 ]
-                if (item[data.CANCELINFOINDEX] && item[data.CANCELINFOINDEX] != '0') {
-                    showItem.mainArr.unshift({lable: '废单原因', value: item[data.CANCELINFOINDEX], isOneLine: true})
-                }
-                if (type === 'history') {
-                    showItem.mainArr[4] = {lable: '成交时间', value: util.dateFormat(item[data.ORDERDATEINDEX]) + ' ' + util.timeFormat(item[1]), isOneLine: true}
-                }
+                showItem.subArr = [
+                    {lable: '合约名称', value:  item[data.OPTIONNAMEINDEX]},
+                    {lable: '期货合约代码', value: item[data.OPTIONCODEINDEX]},
+                    {lable: '成交价格', value:  item[data.MATCHPRICEINDEX]},
+                    {lable: '成交数量', value:  item[data.MATCHQTYINDEX]},
+                ]
                 showData.push(showItem)
             })
             // console.log('aaaaarrr', title)
@@ -108,6 +89,7 @@ define(function(require, exports) {
         }
         return data
     }
+
 
     function isTitle(arr) {
         if (!arr || arr.length === 0) return false

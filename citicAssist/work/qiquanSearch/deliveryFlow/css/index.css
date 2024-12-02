@@ -66,14 +66,10 @@
 }
 
 .mainList .cont_title {
-   padding-top: .24rem;
-   padding-bottom: .28rem;
+   padding: .26rem 0;
    border-bottom: 0.01rem solid #EBEDEE;
-}
-.mainList .cont_title .nameBox{
    display: flex;
    align-items: center;
-   margin-bottom: .08rem;
 }
 
 .mainList .title_name {
@@ -81,20 +77,15 @@
    color: #222222;
    font-size: 0.32rem;
    font-weight: 500;
-   margin-right: 0.16rem;
+   margin: 0 .16rem;
 }
 
 .mainList .title_code {
    color: #6D7A85;
 }
 
-.mainList .oprateBox {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-}
 
-.mainList .oprateBox .businessName{
+.mainList .businessName{
    background-color: #0677DD;
    color: #ffffff;
    height: .44rem;
@@ -103,7 +94,7 @@
    line-height: .44rem;
    border-radius: .04rem;
 }
-.mainList .oprateBox .buyOpen{
+.mainList .buyOpen{
    background-color: #FD242A;
    color: #ffffff;
    height: .44rem;
@@ -112,21 +103,6 @@
    line-height: .44rem;
    border-radius: .04rem;
 }
-
-.mainList .oprateBox .opratebtn{
-   display: inline-block;
-   background: #CCD1D6;
-   border-radius: 24rem;
-   height: .48rem;
-   line-height: .48rem;
-   width: .96rem;
-   color: #ffffff;
-   text-align: center;
-   font-size: .24rem;
-   margin-left: .08rem;
-}
-
-
 
 .mainList .mainContent {
    padding: .24rem 0 .16rem;

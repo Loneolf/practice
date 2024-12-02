@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>委托查询</title>
+    <title>期权交割单</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport"
         content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi = medium-dpi">
@@ -31,6 +31,7 @@
                 :begin-date="beginDate" 
                 :end-date="endDate"
                 :active-tab="activeTab"
+                :istoday="false"
                 @confirm="onConfirm" 
                 @datechange="onDateChange"
                 @tabchange="onTabChange"
@@ -52,26 +53,25 @@
                     >
                         <div class="mainList" v-for="(item, i) in dataList" @click="goDetail(i)">
                             <div class="cont_title">
-                                <div class="nameBox">
-                                    <span class="title_name">{{item.name}}</span>
-                                    <span class="title_code num">{{item.code}}</span>
+                                <div class="titleText">
+                                    <span class="titleName">{{item.name}}</span>
+                                    <span class="titileAmt num">{{item.money}}</span>
                                 </div>
-                                <div class="oprateBox">
-                                    <span class="businessName" :class="item.businessName.indexOf('开') > -1 ? 'buyOpen' : ''">{{item.businessName}} </span>
-                                    <span class="statusBox">
-                                        <span class="status">{{item.status}}</span>
-                                        <span 
-                                            class="opratebtn" 
-                                            :class="item.isBack ? 'normalBack' : ''" 
-                                            @click.stop="backClick(item)"
-                                        >撤单</span>
-                                    </span>
+                                <div class="timeText">
+                                    <span class="time">{{item.time}}</span>
+                                    <span>发生金额</span>
                                 </div>
                             </div>
                             <div class="mainContent">
-                                <p class="subItem"  v-for="si in item.mainArr" :class="si.isOneLine ? 'oneLineSubItem' : ''">
+                                <p class="subItem"  v-for="si in item.mainArr">
                                     <span class="siLable">{{si.lable}}</span>
                                     <span class="siValue num">{{si.value || '--'}}</span>
+                                </p>
+                            </div>
+                            <div class="subContent">
+                                <p class="subItem"  v-for="sui in item.subArr">
+                                    <span class="siLable">{{sui.lable}}</span>
+                                    <span class="siValue num">{{sui.value || '--'}}</span>
                                 </p>
                             </div>
                         </div>

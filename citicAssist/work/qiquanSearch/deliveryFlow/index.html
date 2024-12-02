@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>委托查询</title>
+    <title>行权交割流水</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport"
         content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi = medium-dpi">
@@ -35,6 +35,11 @@
                 @datechange="onDateChange"
                 @tabchange="onTabChange"
             ></time-bar>
+            <div class="mainTitle">
+                <div class="item"  v-for="sitem in titleConfig">
+                    <span class="sitem" v-for="si in sitem"> {{si}} </span>
+                </div>
+            </div>
         </div>
         
         <div class="maincontent">
@@ -51,28 +56,10 @@
                         @load="loadData"
                     >
                         <div class="mainList" v-for="(item, i) in dataList" @click="goDetail(i)">
-                            <div class="cont_title">
-                                <div class="nameBox">
-                                    <span class="title_name">{{item.name}}</span>
-                                    <span class="title_code num">{{item.code}}</span>
-                                </div>
-                                <div class="oprateBox">
-                                    <span class="businessName" :class="item.businessName.indexOf('开') > -1 ? 'buyOpen' : ''">{{item.businessName}} </span>
-                                    <span class="statusBox">
-                                        <span class="status">{{item.status}}</span>
-                                        <span 
-                                            class="opratebtn" 
-                                            :class="item.isBack ? 'normalBack' : ''" 
-                                            @click.stop="backClick(item)"
-                                        >撤单</span>
-                                    </span>
-                                </div>
-                            </div>
                             <div class="mainContent">
-                                <p class="subItem"  v-for="si in item.mainArr" :class="si.isOneLine ? 'oneLineSubItem' : ''">
-                                    <span class="siLable">{{si.lable}}</span>
-                                    <span class="siValue num">{{si.value || '--'}}</span>
-                                </p>
+                                <div class="item"  v-for="sitem in item">
+                                    <span class="sitem" v-for="si in sitem"> {{si}} </span>
+                                </div>
                             </div>
                         </div>
                     </van-list>

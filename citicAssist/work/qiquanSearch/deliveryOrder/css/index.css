@@ -60,20 +60,32 @@
 
 .mainList {
    padding:  0 0.24rem ;
+   padding-bottom: .24rem;
    font-size: 0.28rem;
    background: #fff;
    margin-bottom: .08rem;
 }
 
 .mainList .cont_title {
-   padding-top: .24rem;
-   padding-bottom: .28rem;
+   padding: .24rem 0;
    border-bottom: 0.01rem solid #EBEDEE;
 }
-.mainList .cont_title .nameBox{
+
+.mainList .cont_title>div {
    display: flex;
-   align-items: center;
-   margin-bottom: .08rem;
+   justify-content: space-between;
+}
+.mainList .cont_title .titleText {
+   font-size: .32rem;
+   color: #222222;
+   font-weight: bold;
+   line-height: .44rem;
+}
+.mainList .cont_title .timeText {
+   font-size: .24rem;
+   color: #6D7A85;
+   margin-top: .08rem;
+   line-height: .32rem;
 }
 
 .mainList .title_name {
@@ -81,96 +93,57 @@
    color: #222222;
    font-size: 0.32rem;
    font-weight: 500;
-   margin-right: 0.16rem;
+   margin: 0 .16rem;
 }
 
 .mainList .title_code {
    color: #6D7A85;
 }
 
-.mainList .oprateBox {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-}
-
-.mainList .oprateBox .businessName{
-   background-color: #0677DD;
-   color: #ffffff;
-   height: .44rem;
-   width: 1.28rem;
-   text-align: center;
-   line-height: .44rem;
-   border-radius: .04rem;
-}
-.mainList .oprateBox .buyOpen{
-   background-color: #FD242A;
-   color: #ffffff;
-   height: .44rem;
-   width: 1.28rem;
-   text-align: center;
-   line-height: .44rem;
-   border-radius: .04rem;
-}
-
-.mainList .oprateBox .opratebtn{
-   display: inline-block;
-   background: #CCD1D6;
-   border-radius: 24rem;
-   height: .48rem;
-   line-height: .48rem;
-   width: .96rem;
-   color: #ffffff;
-   text-align: center;
-   font-size: .24rem;
-   margin-left: .08rem;
-}
-
 
 
 .mainList .mainContent {
-   padding: .24rem 0 .16rem;
+   padding-top: .24rem;
    display: flex;
    flex-wrap: wrap;
    justify-content: space-between;
 }
 
-.mainList .mainContent p {
+.mainList p {
    width: 45%;
    display: flex;
    align-items: center;
+   justify-content: space-between;
    margin-bottom: .16rem;
 }
 
-.mainList .mainContent .oneLineSubItem {
-   width: 90%;
-   justify-content: flex-start;
-   align-items: baseline;
-}
-
-.mainList .mainContent .siLable {
+.mainList .siLable {
    font-family: PingFangSC-Regular;
    font-size: .28rem;
    color:  #6D7A85;
    font-weight: 400;
-   white-space: nowrap;
    margin-right: .24rem;
+   white-space: nowrap;
+   word-break: keep-all;
 }
 
-.mainList .mainContent .siValue {
+.mainList .siValue {
+   white-space: nowrap;
+   word-break: keep-all;
    font-size: .28rem;
    color: #000000;
    text-align: right;
    font-weight: 400;
 }
 
-.mainList .tip {
-   font-size: .28rem;
-   color: #FD242A;
-   padding-bottom: .32rem;
-   margin-top: -.1rem;
+.mainList .subContent{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   padding: .24rem .24rem .08rem;
+   background: #F5F6F9;
+   border-radius: .08rem;
 }
-
 .none {
    background-color: #fff;
    display: -webkit-box;

@@ -36,7 +36,7 @@ define(function(require, exports) {
         } 
         var oSend =$.extend({
 			Account: '($account)',
-            action: 5412,
+            action: 5413,
 		}, oSend);
         util.getData(oSend, dealCallback, dealCallback);
     };
@@ -53,7 +53,7 @@ define(function(require, exports) {
         } 
         var oSend =$.extend({
 			Account: '($account)',
-            action: 5423,
+            action: 5424,
 
 		}, oSend);
         util.getData(oSend, dealCallback, dealCallback);
@@ -80,22 +80,22 @@ define(function(require, exports) {
                 var showItem = {}
                 showItem.name = item[data.OPTIONNAMEINDEX] // 合约名称
                 showItem.code = item[data.OPTIONCODEINDEX] // 期权合约编码
-                showItem.businessName = item[data.BUYDIRECTIONINDEX] + item[data.BUSINESSNAMEINDEX]  // 开平仓方向
-                showItem.status = item[data.ENTRUSTTYPENAMEINDEX] // 委托状态
-                showItem.isBack = item[data.DRAWINDEX] != 0 // 是否可撤单
-                showItem.mainArr = [
-                    {lable: '委托价格', value:  util.numFixed(item[data.ORDERPRICEINDEX], 4)},
-                    {lable: '委托数量', value: item[data.ORDERQTYINDEX]},
-                    {lable: '成交均价', value:  util.numFixed(item[data.MATCHPRICEINDEX], 4)},
-                    {lable: '成交数量', value:  item[data.MATCHQTYINDEX]},
-                    {lable: '委托时间', value: util.timeFormat(item[data.ORDERTIMEINDEX])},
-                    {lable: '委托属性', value:  item[data.ENTRUSTPROPINDEX]},
-                ]
-                if (item[data.CANCELINFOINDEX] && item[data.CANCELINFOINDEX] != '0') {
-                    showItem.mainArr.unshift({lable: '废单原因', value: item[data.CANCELINFOINDEX], isOneLine: true})
-                }
-                if (type === 'history') {
-                    showItem.mainArr[4] = {lable: '成交时间', value: util.dateFormat(item[data.ORDERDATEINDEX]) + ' ' + util.timeFormat(item[1]), isOneLine: true}
+                showItem.businessName = item[8] + item[7]  // 开平仓方向
+                if (type=== 'history') {
+                    showItem.mainArr = [
+                        {lable: '成交价格', value:  util.numFixed(item[data.MATCHPRICEINDEX], 4)},
+                        {lable: '成交数量', value: item[data.MATCHQTYINDEX]},
+                        {lable: '成交金额', value:  util.numFixed(item[data.DEALMONEYINDEX], 4)},
+                        {lable: '成交时间', value: util.dateFormat(item[data.MATCHDATEINDEX]) + ' ' + util.timeFormat(item[1]), isOneLine: true},
+                    ]
+                } else {
+                    showItem.mainArr = [
+                        {lable: '成交价格', value:  util.numFixed(item[data.MATCHPRICEINDEX], 4)},
+                        {lable: '委托数量', value: item[data.MATCHQTYINDEX]},
+                        {lable: '成交金额', value: util.timeFormat(item[data.DEALMONEYINDEX])},
+                        {lable: '成交时间', value: util.timeFormat(item[data.MATCHTIMEINDEX])},
+                        {lable: '委托属性', value:  item[data.BUYDIRECTIONINDEX]},
+                    ]   
                 }
                 showData.push(showItem)
             })
@@ -108,6 +108,7 @@ define(function(require, exports) {
         }
         return data
     }
+
 
     function isTitle(arr) {
         if (!arr || arr.length === 0) return false

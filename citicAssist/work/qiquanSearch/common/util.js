@@ -169,4 +169,11 @@ define(function (require, exports, module) {
         return str
     }
 
+    // 保留小数点后几位
+    exports.numFixed = numFixed
+    function numFixed(num, fixed) {
+        if (!num) return ''
+        return Number(num).toFixed(fixed)
+    }
+
 })

@@ -20,6 +20,7 @@ define(function (require, exports, module) {
 		app = new Vue({
 			el: "#app",
 			data: {
+				
 				activeTab: pageData.type === 'today' ? 'today'	: 'weekly',
 
 				// 查询的开始时间和结束时间

@@ -20,8 +20,14 @@ define(function (require, exports, module) {
 		app = new Vue({
 			el: "#app",
 			data: {
+				
 				activeTab: pageData.type === 'today' ? 'today'	: 'weekly',
-
+				titleConfig: [
+					['交易类别', '日期'],
+					['清算数量', '交收数量'],
+					['现金结算数量'],
+					['清算金额', '现金结算金额'],
+				],
 				// 查询的开始时间和结束时间
 				beginDate: pageData.type === 'today' ?  pageData.nearTime.today :  pageData.nearTime.weekly.beginDate,
 				endDate: pageData.type === 'today' ?  pageData.nearTime.today :  pageData.nearTime.weekly.endDate,

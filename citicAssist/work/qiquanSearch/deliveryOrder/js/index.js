@@ -10,7 +10,6 @@ define(function (require, exports, module) {
 			var timestamp = new Date(res)
 			pageData.nearTime = util.getNearTime(timestamp, false)
 			pageData.time = util.getDiffDate(timestamp, 1).time
-			pageData.type = T.getUrlParameter('type') || 'today' // today、history
 			console.log('aaa2333pageData', pageData)
 			initVue();
 		})
@@ -20,11 +19,12 @@ define(function (require, exports, module) {
 		app = new Vue({
 			el: "#app",
 			data: {
-				activeTab: pageData.type === 'today' ? 'today'	: 'weekly',
+				
+				activeTab: 'weekly',
 
 				// 查询的开始时间和结束时间
-				beginDate: pageData.type === 'today' ?  pageData.nearTime.today :  pageData.nearTime.weekly.beginDate,
-				endDate: pageData.type === 'today' ?  pageData.nearTime.today :  pageData.nearTime.weekly.endDate,
+				beginDate: pageData.nearTime.weekly.beginDate,
+				endDate: pageData.nearTime.weekly.endDate,
                 minDate: new Date(2010, 0, 1),
                 maxDate: pageData.time,
 
@@ -41,7 +41,6 @@ define(function (require, exports, module) {
 				pageStart: 0, // 
 				pageSize: 20, // 每次请求 显示条数
 				MaxCount: 20,
-				// positionstr: '',
 
 				titleArr: [], // 从第二页开始加载的数据将不返回title内容，缓存下来用于处理后续的分页数据
 			},
@@ -64,10 +63,8 @@ define(function (require, exports, module) {
 
 				onTabChange: function (tab) { 
 					this.activeTab = tab
-					if (this.activeTab!== 'today') {
-						this.beginDate = pageData.nearTime[this.activeTab].beginDate;
-						this.endDate = pageData.nearTime[this.activeTab].endDate;
-					}
+					this.beginDate = pageData.nearTime[this.activeTab].beginDate;
+					this.endDate = pageData.nearTime[this.activeTab].endDate;
 					this.loadData(true)
 				},
 
@@ -94,18 +91,13 @@ define(function (require, exports, module) {
 					var params = {
 						StartPos: this.pageStart, 
 						MaxCount: this.MaxCount,
-						// REQUESTNUM: 20,
+						BEGINDATE: pbegindate,
+						ENDDATE: penddate,
 					}
-					if (this.activeTab !== 'today') {
-						params.BEGINDATE = pbegindate
-						params.ENDDATE = penddate
-					}
-					// if (!isInit) params.positionstr = this.positionstr
 					
 					var _that = this
-					var reqType = this.activeTab !== 'today' ? 'loadHistoryData' : 'loadTodayData'
-					console.log('aaa23333reqParams', reqType, params)
-					funs[reqType](params, function (data) {
+					console.log('aaa23333reqParams', params)
+					funs.loadData(params, function (data) {
 						console.log('aa233', data)
 						document.getElementById("__hello").style.display = "none";
 						_that.dealShouldLoadMore(data, isInit)
