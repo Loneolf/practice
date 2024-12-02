@@ -3,8 +3,7 @@
 //该模块应用jquery，因所有页面均引用，在此不单独引用jquery
 
 define(function (require, exports, module) {
-    var timePicker = require('./TimeSelect/index');
-
+    var timePicker = require('../TimeSelect/index');
     require('./assets/index.css#');
     //初始化
     function init(componentsName, Vue) {
@@ -52,13 +51,13 @@ define(function (require, exports, module) {
                         <div 
                             class="tabItem" 
                             v-for="item in timeArr"
-                            :class="item.value == selfActiveTab ? 'activeBar' : ''" 
+                            :class="item.value == activeTab ? 'activeBar' : ''" 
                             :key="item.value"
                             @click="tabClick(item)"
                         >{{item.text}}</div>
                     </div>
                     <time-picker
-                        :is-show="selfActiveTab == 'userDefined'"
+                        :is-show="activeTab == 'userDefined'"
                         :formatter="formatter" 
                         :min-date="minDate" 
                         :max-date="maxDate" 
@@ -72,7 +71,6 @@ define(function (require, exports, module) {
             `,
 
             data: function data() {
-                var activeTab = this.activeTab;
                 return {
                     timeArr: [
                         { text: "当日", value: "today"},
@@ -80,7 +78,6 @@ define(function (require, exports, module) {
                         { text: "近一月", value: "month"},
                         { text: "自定义", value: "userDefined"},
                     ],
-                    selfActiveTab: activeTab,
                 };
             },
             mounted: function mounted() {
@@ -92,7 +89,6 @@ define(function (require, exports, module) {
             methods: {
 
                 tabClick: function tabClick(item) {
-                    this.selfActiveTab = item.value;
                     this.$emit('tabchange', item.value);
                 },
 

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title></title>
+    <title>委托查询</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport"
         content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi = medium-dpi">
@@ -38,7 +38,7 @@
         </div>
         
         <div class="maincontent">
-            <!-- <div ref="list" class="dzjy_list" v-if="dataList.length">
+            <div ref="list" class="main_list" v-if="dataList.length">
                 <van-pull-refresh
                     v-model="isPullLoading"
                     success-text="刷新成功"
@@ -52,33 +52,38 @@
                     >
                         <div class="mainList" v-for="(item, i) in dataList" @click="goDetail(i)">
                             <div class="cont_title">
-                                <span class="cont_left_text">
+                                <div class="nameBox">
                                     <span class="title_name">{{item.name}}</span>
                                     <span class="title_code num">{{item.code}}</span>
-                                </span>
-                                <span class="status">{{item.status}} </span>
+                                </div>
+                                <div class="oprateBox">
+                                    <span class="businessName" :class="item.businessName.indexOf('买') > -1 ? 'buyOpen' : ''">{{item.businessName}} </span>
+                                    <span class="statusBox">
+                                        <span class="status">{{item.status}}</span>
+                                        <span 
+                                            class="opratebtn" 
+                                            :class="item.isBack ? 'normalBack' : ''" 
+                                            @click.stop="backClick(item)"
+                                        >撤单</span>
+                                    </span>
+                                </div>
                             </div>
-                            <p v-if="isResult" class="yianName">
-                                <span class="siLable">议案名称</span>
-                                <span class="siValue">{{item.yianName}}</span>
-                            </p>
                             <div class="mainContent">
                                 <p class="subItem"  v-for="si in item.mainArr" :class="si.isOneLine ? 'oneLineSubItem' : ''">
                                     <span class="siLable">{{si.lable}}</span>
                                     <span class="siValue num">{{si.value}}</span>
                                 </p>
                             </div>
-                            <p class="tip" v-if="item.tip">{{item.tip}}</p>
                         </div>
                     </van-list>
                 </van-pull-refresh>
-            </div> -->
-            <!-- <div class="none" v-if="!dataList.length && !isLoadmore && !isLoading">
-                <img src="../main/img/noData.png" alt="">
+            </div>
+            <div class="none" v-if="!dataList.length && !isLoadmore && !isLoading">
+                <img src="../common/noData.png" alt="">
                 <p>暂无数据</p>
-            </div> -->
+            </div>
         </div>
-        <div class="refreshBtn" :class="isHistoryList ? 'historyBack' : ''" @click="handleRefresh"></div>
+        <!-- <div class="refreshBtn" :class="isHistoryList ? 'historyBack' : ''" @click="handleRefresh"></div> -->
     </div>
     <script type="text/javascript" src="../../../lib/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="../../../lib/sea.js"></script>

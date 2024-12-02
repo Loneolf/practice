@@ -2,13 +2,11 @@ define(function (require, exports, module) {
 
     exports.getData = getData
     function getData(oSend, fn, errorFn) {
-        var type = T.getUrlParameter("type");
-        var itype = type === 'credit' ? '1' : '0'
 		var obj = {};
 		obj.logintype = 1;
 		oSend.ReqlinkType = 1;
 		//token类型Token类型，交易相关功能开发此参数要放在前面。默认为0，0普通交易；1融资融券；2期货；3港股；8个股期权 9融资融券担保品划转登录普通账号后的token类型
-		oSend.tokentype = oSend.tokentype || itype;
+		oSend.tokentype = '8';
 		obj["oSendData"] = oSend;
 		obj["fnSuccess"] = fn;
 		obj["oConfig"] = errorFn;
@@ -112,7 +110,7 @@ define(function (require, exports, module) {
         if (!arr || arr.length === 0) return false
         var titleStr = arr[0]
         // 投票记录和投票结果的title中都含有'证券名称'字段
-        if (titleStr.indexOf('证券代码') > -1 || titleStr.indexOf('委托编号') > -1) {
+        if (titleStr.indexOf('期权合约编码') > -1 || titleStr.indexOf('合约名称') > -1) {
             return true
         }
         return false
@@ -171,10 +169,4 @@ define(function (require, exports, module) {
         return str
     }
 
-    // 获取投票情况
-    exports.getVoteDetail = getVoteDetail
-    function getVoteDetail(vote, type) {
-        if (type != '0') return vote
-        return {'1.00': '同意', '2.00': '反对','3.00': '反对'}[vote]
-    }
 })

@@ -1,5 +1,5 @@
 define(function (require, exports, module) {
-	var TimeBar = require('../TimeBar/index');
+	var TimeBar = require('../../common/TimeBar/index');
 	var util = require('../../common/util')
 	var funs = require('./fun')
 	var pageData = {}
@@ -7,12 +7,12 @@ define(function (require, exports, module) {
 	exports.init =  function () {
 		funs.action5(function(res) {
 			TimeBar.init('time-bar');
-			var timestamp = new Date()
+			var timestamp = new Date(res)
 			pageData.nearTime = util.getNearTime(timestamp, false)
 			pageData.time = util.getDiffDate(timestamp, 1).time
-			pageData.type = T.getUrlParameter('type')
+			pageData.type = T.getUrlParameter('type') || 'today' // today、history
 			pageData.title = decodeURIComponent(T.getUrlParameter('title'))
-			console.log('aaa2333title', pageData.title)
+			console.log('aaa2333pageData', pageData)
 			initVue();
 		})
 	}
@@ -27,15 +27,11 @@ define(function (require, exports, module) {
 					{ text: "近一月", value: "month"},
 					{ text: "自定义", value: "userDefined"},
 				],
-				isShowTip: pageData.title.indexOf('记录') > -1 && pageData.type === 'normal',
-				isShowAccont: pageData.title.indexOf('记录') > -1, 
-				isHistoryList: pageData.title.indexOf('历史') > -1,
-				isResult: pageData.title.indexOf('结果') > -1,
-				activeTab: 'today',
+				activeTab: pageData.type === 'today' ? 'today'	: 'weekly',
 
 				// 查询的开始时间和结束时间
-				beginDate: pageData.title.indexOf('当日') > -1 ?  pageData.nearTime.today :  pageData.nearTime.weekly.beginDate,
-				endDate: pageData.title.indexOf('当日') > -1 ?  pageData.nearTime.today :  pageData.nearTime.weekly.endDate,
+				beginDate: pageData.type === 'today' ?  pageData.nearTime.today :  pageData.nearTime.weekly.beginDate,
+				endDate: pageData.type === 'today' > -1 ?  pageData.nearTime.today :  pageData.nearTime.weekly.endDate,
                 minDate: new Date(2010, 0, 1),
                 maxDate: pageData.time,
 
@@ -51,13 +47,12 @@ define(function (require, exports, module) {
 
 				pageCount: 0, // 
 				pageSize: 20, // 每次请求 显示条数
-				positionstr: '',
+				// positionstr: '',
 
 				titleArr: [], // 从第二页开始加载的数据将不返回title内容，缓存下来用于处理后续的分页数据
 			},
 
 			mounted: function () {
-				return
 				this.loadData()
 			},
 
@@ -78,7 +73,8 @@ define(function (require, exports, module) {
 				// },
 
 				onTabChange: function (tab) { 
-
+					this.activeTab = tab
+					this.loadData(true)
 				},
 
                 onConfirm: function() {
@@ -92,7 +88,6 @@ define(function (require, exports, module) {
 				// 初始加载数据及上拉加载数据
 				loadData: function (isInit) {
 					console.log('aaa23333loadData', isInit)
-					return
 					if (this.isLoading) return
 					this.isLoading = true
 					if (isInit) {
@@ -100,48 +95,27 @@ define(function (require, exports, module) {
 						this.finished = false
 						try { this.$refs.list.scrollTo({top: 0, behavior: 'smooth'})} catch (error) {}
 					}
-					var accountType = this.accontInfo.active.value
-					var text = pageData.title
 					var pbegindate = this.beginDate.replace(/-/g, '')
 					var penddate =  this.endDate.replace(/-/g, '')
 					var params = {
 						StartPos: 0, 
 						MaxCount: 20,
-						REQUESTNUM: 20,
+						// REQUESTNUM: 20,
 					}
-					if (!isInit) params.positionstr = this.positionstr
-					var recordParmas =  $.extend({
-						// WTACCOUNTTYPE : accountType,
-						wtaccounttype :  accountType,
-						WTACCOUNT : this.accontInfo.active.wtNumb,
-					}, params)
+					if (this.activeTab !== 'today') {
+						params.BEGINDATE = pbegindate
+						params.ENDDATE = penddate
+					}
+					// if (!isInit) params.positionstr = this.positionstr
 					
-					var funMap = { 
-						"普通上海当日投票记录": {
-							fun: 'loadRecord',
-							params: $.extend({
-								action: '5723',
-							}, recordParmas)
-						},
-					}
-					if (text.indexOf('记录') > -1) {
-						if (accountType === 'SZACCOUNT'|| accountType === 'SZBACCOUNT') text = '深圳' + text
-						if (accountType === 'SHACCOUNT' || accountType === 'SHBACCOUNT') text = '上海' + text
-						if (pageData.type === 'credit') text = '信用' + text
-						if (pageData.type === 'normal') text = '普通' + text
-					}
-					var reqItem = funMap[text]
-					console.log('aaaareqItem', text, reqItem)
 					var _that = this
-					if (!reqItem) {
-						_that.dealShouldLoadMore({})
-						return
-					}
-					funs[reqItem.fun](reqItem.params, function (data) {
+					var reqType = this.activeTab !== 'today' ? 'loadHistoryData' : 'loadTodayData'
+					console.log('aaa23333reqType', reqType)
+					funs[reqType](params, function (data) {
 						console.log('aa233', data)
 						document.getElementById("__hello").style.display = "none";
 						_that.dealShouldLoadMore(data, isInit)
-					}, _that.titleArr, text)	
+					}, _that.titleArr)	
 				},
 				// 处理接口返回的数据，是否加载更多
 				dealShouldLoadMore: function (data, isInit) {
@@ -157,7 +131,7 @@ define(function (require, exports, module) {
 						}
 						var ot = util.isTitle(this.originData)
 						this.originData = this.originData.concat(data.GRID0.slice(ot ? 1 : 0, data.GRID0.length))
-						this.positionstr = data.positionstr
+						// this.positionstr = data.positionstr
 						this.hideField = data.HIDESEGMENTINDEX
 
 						this.isLoadmore = false
@@ -184,27 +158,18 @@ define(function (require, exports, module) {
 				
 				// 去详情页面
 				goDetail: function (i) {
-					// console.log('aaaagoDetail', v, i)	
-					var titleMap = {
-						"当日投票记录": "投票记录详情",
-						"历史投票记录": "投票记录详情",
-						"当日投票结果": "投票结果详情",
-						"历史投票结果": "投票结果详情",
-						"default": '详情'
-					};
-					var title = titleMap[pageData.title] || titleMap.default 
+					console.log('aaaagoDetail', v, i)	
 					var oSave = {
 						Arr: this.originData.slice(1, this.originData.length),
 						hideField: this.hideField,
 						field: this.originData[0],
-						isShowTip: this.isShowTip && (this.accontInfo.active.value === 'SHACCOUNT' || this.accontInfo.active.value === 'SHBACCOUNT')
 					};
 					// console.log('aaa2333',i, oSave)
 					// return
 					T.saveMapMesg({ C_DETAIL: JSON.stringify(oSave) }, function () {
 						T.fn.action10061({
 							tzttitletype: pageData.type=== 'credit' ? 1 : 0,
-							url:'/vue/networkVoting/detail/index.html?title=' + title + '&num=' + i
+							url:'/vue/networkVoting/detail/index.html?title=委托详情&num=' + i
 						});
 					});
 				},

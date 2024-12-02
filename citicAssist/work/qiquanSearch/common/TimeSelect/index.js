@@ -4,7 +4,7 @@
 
 define(function (require, exports, module) {
     require('./assets/index.css#');
-    var utils = require('../../../common/util');
+    var utils = require('/vue/utils/common');
     //初始化
     function init(componentsName, Vue) {
         Vue = Vue ? Vue : window.Vue;
