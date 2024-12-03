@@ -74,7 +74,7 @@ define(function(require, exports) {
                 ]
                 showItem.subArr = [
                     {lable: '合约名称', value:  item[data.OPTIONNAMEINDEX]},
-                    {lable: '期货合约代码', value: item[data.OPTIONCODEINDEX]},
+                    {lable: '合约代码', value: item[data.OPTIONCODEINDEX]},
                     {lable: '成交价格', value:  item[data.MATCHPRICEINDEX]},
                     {lable: '成交数量', value:  item[data.MATCHQTYINDEX]},
                 ]

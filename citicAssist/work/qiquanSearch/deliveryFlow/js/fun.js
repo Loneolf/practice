@@ -36,7 +36,7 @@ define(function(require, exports) {
         } 
         var oSend =$.extend({
 			Account: '($account)',
-            action: 5413,
+            action: 5457,
 		}, oSend);
         util.getData(oSend, dealCallback, dealCallback);
     };
@@ -77,8 +77,9 @@ define(function(require, exports) {
             console.log(title)
             console.log(arr)
             arr.forEach( function (item) {
+                var dealType = item[type === 'history' ? data.WTACCOUNTTYPENAMEINDEX : data.STOCKCODETYPEINDEX] 
                 var showItem = [
-                    [item[data.WTACCOUNTTYPENAMEINDEX], util.dateFormat(item[data.REPORTDATEINDEX])],
+                    [dealType, util.dateFormat(item[data.REPORTDATEINDEX])],
                     [item[data.CLEARAMOUNTINDEX], util.dateFormat(item[data.SETTLEAMOUNTINDEX])],
                     [item[data.CLEARBALANCEINDEX]],
                     [item[data.CLEARBALANCEINDEX], item[data.SETTLEBALANCEINDEX]],

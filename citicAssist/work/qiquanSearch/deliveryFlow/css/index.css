@@ -2,41 +2,52 @@
    display: none !important;
 }
 
-@font-face {
-   font-family: CITIC-Numbers-Medium;
-   src: url(/z_modules/font/CITIC-Numbers-Medium.ttf) format("trueType");
-}
-
-@font-face {
-   font-family: CITIC-Numbers-Regular;
-   src: url(/z_modules/font/CITIC-Numbers-Regular.ttf) format("trueType");
-}
-
-.numMediun {
-   font-family: CITIC-Numbers-Medium;
-}
-
-.num {
-   font-family: CITIC-Numbers-Regular;
-}
-
-.titleTips{
-   padding: .16rem 0;
-   margin-bottom: .08rem;
-   background-color: #ffffff;
-}
-.titleTips p{
-   padding: .12rem .3rem;
-   background: #FDEFEF;
-   font-size: .26rem;
-   color: #E83333;
-   line-height: .4rem;
-}
-
 .listBox {
    height: 100%;
    display: flex;
    flex-direction: column;
+}
+
+.mainTitle{
+   display: flex;
+   align-items: center;
+   padding: .24rem .24rem 0;
+   height: .84rem;
+   background: #ffffff;
+}
+
+.mainTitle>div{
+   display: flex;
+   flex-direction: column;
+   font-size: .24rem;
+   line-height: .32rem;
+   color: #6D7A85;
+   white-space: nowrap;
+}
+
+.mainTitle>div:nth-child(1){
+   width: 1.7rem;
+   text-align: left;
+}
+.mainTitle>div:nth-child(2) {
+   width: .96rem;
+   text-align: right;
+   margin-right: .74rem;
+}
+.mainTitle>div:nth-child(4){
+   width: 2.14rem;
+   text-align: right;
+}
+.mainTitle>div:nth-child(3){
+   text-align: right;
+   width: 1.44rem;
+}
+
+.definedFix .mainTitle {
+   padding-top: 0;
+}
+.definedFix .timeBarBox{
+   border-bottom: none;
 }
 
 .maincontent {
@@ -59,92 +70,20 @@
 }
 
 .mainList {
-   padding:  0 0.24rem ;
-   font-size: 0.28rem;
    background: #fff;
-   margin-bottom: .08rem;
+   height: 1.12rem;
+   line-height: .44rem;
 }
-
-.mainList .cont_title {
-   padding: .26rem 0;
-   border-bottom: 0.01rem solid #EBEDEE;
-   display: flex;
-   align-items: center;
+.mainList>div {
+   font-size: 0.28rem;
+   line-height: .44rem;
 }
-
-.mainList .title_name {
-   font-family: PingFangSC-Medium;
+.mainList>div span:nth-child(1) {
+   line-height: .44rem;
    color: #222222;
-   font-size: 0.32rem;
-   font-weight: 500;
-   margin: 0 .16rem;
 }
-
-.mainList .title_code {
-   color: #6D7A85;
-}
-
-
-.mainList .businessName{
-   background-color: #0677DD;
-   color: #ffffff;
-   height: .44rem;
-   width: 1.28rem;
-   text-align: center;
-   line-height: .44rem;
-   border-radius: .04rem;
-}
-.mainList .buyOpen{
-   background-color: #FD242A;
-   color: #ffffff;
-   height: .44rem;
-   width: 1.28rem;
-   text-align: center;
-   line-height: .44rem;
-   border-radius: .04rem;
-}
-
-.mainList .mainContent {
-   padding: .24rem 0 .16rem;
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-between;
-}
-
-.mainList .mainContent p {
-   width: 45%;
-   display: flex;
-   align-items: center;
-   margin-bottom: .16rem;
-}
-
-.mainList .mainContent .oneLineSubItem {
-   width: 90%;
-   justify-content: flex-start;
-   align-items: baseline;
-}
-
-.mainList .mainContent .siLable {
-   font-family: PingFangSC-Regular;
-   font-size: .28rem;
-   color:  #6D7A85;
-   font-weight: 400;
-   white-space: nowrap;
-   margin-right: .24rem;
-}
-
-.mainList .mainContent .siValue {
-   font-size: .28rem;
-   color: #000000;
-   text-align: right;
-   font-weight: 400;
-}
-
-.mainList .tip {
-   font-size: .28rem;
-   color: #FD242A;
-   padding-bottom: .32rem;
-   margin-top: -.1rem;
+.mainList>div:nth-child(1) span:nth-child(2){
+   font-size: .24rem;
 }
 
 .none {

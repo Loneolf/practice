@@ -94,8 +94,7 @@
     <script type="text/javascript" src="../../../lib/remFlex.js"></script>
     <script type="text/javascript" src="../../../lib/vconsole.min.js"></script>
     <script type="text/javascript">
-        new VConsole();
-        document.title = decodeURIComponent(T.getUrlParameter('title'))
+        // var vConsole = new VConsole();
         document.getElementById("__hello").style.display = "none";
         seajs.use('./js/index.js', function(exports) {
             exports.init();

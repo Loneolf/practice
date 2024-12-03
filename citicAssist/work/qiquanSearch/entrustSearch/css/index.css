@@ -2,24 +2,6 @@
    display: none !important;
 }
 
-@font-face {
-   font-family: CITIC-Numbers-Medium;
-   src: url(/z_modules/font/CITIC-Numbers-Medium.ttf) format("trueType");
-}
-
-@font-face {
-   font-family: CITIC-Numbers-Regular;
-   src: url(/z_modules/font/CITIC-Numbers-Regular.ttf) format("trueType");
-}
-
-.numMediun {
-   font-family: CITIC-Numbers-Medium;
-}
-
-.num {
-   font-family: CITIC-Numbers-Regular;
-}
-
 .titleTips{
    padding: .16rem 0;
    margin-bottom: .08rem;

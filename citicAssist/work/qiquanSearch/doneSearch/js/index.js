@@ -88,6 +88,8 @@ define(function (require, exports, module) {
 					if (isInit) {
 						this.originData = []
 						this.finished = false
+						this.pageStart = 0
+						this.MaxCount = 20
 						try { this.$refs.list.scrollTo({top: 0, behavior: 'smooth'})} catch (error) {}
 					}
 					var pbegindate = this.beginDate.replace(/-/g, '')

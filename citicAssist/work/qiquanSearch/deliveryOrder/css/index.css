@@ -2,24 +2,6 @@
    display: none !important;
 }
 
-@font-face {
-   font-family: CITIC-Numbers-Medium;
-   src: url(/z_modules/font/CITIC-Numbers-Medium.ttf) format("trueType");
-}
-
-@font-face {
-   font-family: CITIC-Numbers-Regular;
-   src: url(/z_modules/font/CITIC-Numbers-Regular.ttf) format("trueType");
-}
-
-.numMediun {
-   font-family: CITIC-Numbers-Medium;
-}
-
-.num {
-   font-family: CITIC-Numbers-Regular;
-}
-
 .titleTips{
    padding: .16rem 0;
    margin-bottom: .08rem;
@@ -110,7 +92,7 @@
 }
 
 .mainList p {
-   width: 45%;
+   width: 47%;
    display: flex;
    align-items: center;
    justify-content: space-between;
@@ -128,12 +110,14 @@
 }
 
 .mainList .siValue {
-   white-space: nowrap;
-   word-break: keep-all;
    font-size: .28rem;
    color: #000000;
    text-align: right;
    font-weight: 400;
+   white-space: nowrap;
+   overflow: hidden; 
+   text-overflow: ellipsis; 
+   width: 2.1rem
 }
 
 .mainList .subContent{

@@ -24,7 +24,7 @@
 		</div>
 	</div>
     <div class="listBox" id="app" v-cloak>
-        <div class="fixed fixedHead">
+        <div class="fixed fixedHead" :class="activeTab === 'userDefined' ? 'definedFix' : ''">
             <time-bar
                 :min-date="minDate" 
                 :max-date="maxDate" 
@@ -55,11 +55,9 @@
                         finished-text="没有更多了"
                         @load="loadData"
                     >
-                        <div class="mainList" v-for="(item, i) in dataList" @click="goDetail(i)">
-                            <div class="mainContent">
-                                <div class="item"  v-for="sitem in item">
-                                    <span class="sitem" v-for="si in sitem"> {{si}} </span>
-                                </div>
+                        <div class="mainList mainTitle" v-for="(item, i) in dataList" @click="goDetail(i)">
+                            <div class="item"  v-for="sitem in item">
+                                <span class="sitem" v-for="si in sitem"> {{si}} </span>
                             </div>
                         </div>
                     </van-list>
@@ -82,7 +80,6 @@
     <script type="text/javascript" src="../../../lib/vconsole.min.js"></script>
     <script type="text/javascript">
         new VConsole();
-        document.title = decodeURIComponent(T.getUrlParameter('title'))
         document.getElementById("__hello").style.display = "none";
         seajs.use('./js/index.js', function(exports) {
             exports.init();
