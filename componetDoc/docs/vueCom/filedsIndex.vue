@@ -18,6 +18,7 @@
   
 <script setup>
   import { ref } from "vue";
+  import { ElMessage } from 'element-plus'
   const taValue = ref('')
   const showData = ref([])
   const tipText = ref('请粘贴正确的请求数据')
@@ -69,9 +70,18 @@
   
   function copy(params) {
       navigator.clipboard.writeText(params).then(() => {
-          alert(`已复制内容:${params}`)
+        ElMessage({
+            message:`已复制内容:${params}`,
+            type:'success'
+        })
+        //   alert(`已复制内容:${params}`)
       }).catch(() => {
-          alert('复制失败，请检查剪切板权限及浏览器版本')
+        ElMessage({
+            message:`已复制内容:${params}`,
+            type:'error'
+        })
+        // ElMessage.error('复制失败，请检查剪切板权限及浏览器版本')
+        //   alert('复制失败，请检查剪切板权限及浏览器版本')
       })
   }
   
@@ -80,17 +90,17 @@
   
 <style lang="less">
   .getFieldIndexBox{
-      height: 100%;
       display: flex;
+
       .leftBox {
-          width: 36%;
-          min-width: 36%;
+          width: 40%;
+          min-width: 40%;
           overflow: auto;
           padding: 20px;
-          height: 100%;
           border-right: 2px solid #cccccc;
           textarea {
-              height: 80%;
+              min-height: 600px;
+              height: 100%;
               width: calc(100% - 20px);
               border: none;
               resize: none;
@@ -101,7 +111,6 @@
       }
       .rightBox{
           flex: 1;
-          height: 100%;
           overflow: auto;
           padding: 20px;
           .item{

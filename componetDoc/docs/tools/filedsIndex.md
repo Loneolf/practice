@@ -1,3 +1,8 @@
+---
+pageClass: toolsPage
+aside: false
+---
+
 # 字符串下标获取
 
 
@@ -11,10 +16,3 @@
 <script setup>
   import Fileds from '../vueCom/filedsIndex.vue';
 </script>
-
-<style>
-    .getFieldIndexBox{
-        width: 60vw!important;
-        height: 80vh!important;
-    }
-</style>

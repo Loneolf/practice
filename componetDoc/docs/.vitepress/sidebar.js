@@ -13,17 +13,19 @@ export default {
 			],
 		},
 	],
-	"/tool/": [
+	"/tools/": [
 		{
 			// text: "Examples",
 			items: [
 				{
 					text: "字段下标获取",
-					link: "/tool/filedsIndex",
+					link: "/tools/filedsIndex",
+                    hasAside: false,
 				},
 				{
-					text: "字符串转换",
-					link: "/tool/stringTurn",
+                    text: "字符串转换",
+					link: "/tools/stringTurn",
+                    hasAside: false,
 				},
 			],
 		},

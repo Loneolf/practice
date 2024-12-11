@@ -5,6 +5,10 @@ import {
 } from "vitepress-theme-demoblock";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import path from "path";
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
 
 import sidebar from "./sidebar";
 
@@ -25,25 +29,38 @@ export default defineConfig({
 				});
 			},
 		},
+		
+		returnToTopLabel:'返回顶部', // 自定义返回顶部文字
 
 		vite: {
-			plugins: [demoblockVitePlugin(), vueJsx()],
+			plugins: [
+				demoblockVitePlugin(), 
+				vueJsx(),
+				AutoImport({
+					resolvers: [ElementPlusResolver()],
+				}),
+				Components({
+					resolvers: [ElementPlusResolver()],
+				}),
+			],
 			resolve: {
 				alias: {
 					"@c": path.resolve(__dirname, "../com"),
 					"@vc": path.resolve(__dirname, "../vueCom"),
+					"@t": path.resolve(__dirname, "../../tool"),
 				},
 			},
 		},
 
 		nav: [
 			{ text: "组件", link: "/componet/timeSelect", activeMatch: "/componet/" },
-			{ text: "工具", link: "/tool/filedsIndex", activeMatch: "/tool/" },
+			{ text: "工具", link: "/tools/filedsIndex", activeMatch: "/tools/" },
 			{ text: "文档", link: "/tooldoc/time", activeMatch: "/tooldoc/" },
 		],
 
 		sidebar,
-
+		outline: [2,4],
+		outlineTitle: '大纲~~~',
 		//  开启搜索功能
 		search: {
 			provider: "local",
