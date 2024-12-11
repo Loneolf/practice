@@ -175,5 +175,15 @@ define(function (require, exports, module) {
         if (!num) return ''
         return Number(num).toFixed(fixed)
     }
-
+    
+    // date: 传入的日期数据
+    // 返回该日期数据对应的月份起始与结束日期字符串
+    exports.getMonthBeginEndDate = getMonthBeginEndDate
+    function getMonthBeginEndDate(date) {
+        var monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0)
+        return {
+            beginDate: getDiffDate(monthEnd, monthEnd.getDate() - 1),
+            endDate: getDiffDate(monthEnd, 0)
+        }
+    }
 })

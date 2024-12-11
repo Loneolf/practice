@@ -146,7 +146,7 @@
                 for (var j = 0; j < len - i - 1; j++) {
                     if (arr[j] > arr[j + 1]) {
                         // 交换元素位置
-                        // [arr[j], arr[i]] = [arr[i], arr[j]]
+                        // [arr[j], arr[j+1]] = [arr[j+1], arr[j]]
                         var temp = arr[j];
                         arr[j] = arr[j + 1];
                         arr[j + 1] = temp;
@@ -186,6 +186,23 @@
             }
             // 组合整数部分和小数部分并返回
             return formattedIntegerPart + '.' + decimalPart;
+        }
+        // while循环
+        function parse(num) {
+            if(!num)return ''
+            var num2 = num.toFixed(2);
+            var arr = num2.split('.');
+            let numRes = '';
+            num = arr[0];
+            while(num.length > 3){
+                numRes = ',' + num.slice(-3) + numRes;
+                num = num.slice(0,num.length-3);
+                console.log(numRes,num)
+            }
+            if( num ){
+                return num + numRes + '.' + arr[1]
+            }
+            return numRes + '.' + arr[1]
         }
         console.log(parse(1234567.889))
     </script>

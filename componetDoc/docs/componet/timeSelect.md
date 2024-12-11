@@ -1,7 +1,6 @@
 # 时间选择控件
 
 <iframe class="iframeBox" src="http://127.0.0.1:5500/docs/com/TimeBar/index.html" width="375px" height="700px"></iframe>
-<!-- <iframe src="https://qing-1258827329.cos.ap-beijing.myqcloud.com/note/index.html#/tools" width="375px" height="700px"></iframe> -->
 
 
 ## 基础用法

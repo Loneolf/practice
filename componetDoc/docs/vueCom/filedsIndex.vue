@@ -1,22 +1,22 @@
 <template>
     <div class="getFieldIndexBox">
-          <div class="leftBox">
-              <textarea v-module="taValue" class="textarea" @input="changeHandle($event)" />
-          </div>
-          <div class="rightBox">
-              <template v-if="showData.length > 0">
-                  <p v-for="(item, index) in showData" :key="index" class="item">
-                      {{item[0]}} ---- <span :class="item[1].includes('需补充下标') ? 'needIndex' : ''">{{item[1]}}</span>
-                      <span @click="copy(item[1])" class="iconfont">复制</span>
-                  </p>
-              </template>
-              <p v-else :class="tipText === '请粘贴正确的请求数据' ? 'tip errorTip' : 'tip'">{{tipText}}</p>
-          </div>
-      </div>
-  </template>
+        <div class="leftBox">
+            <textarea v-module="taValue" class="textarea" @input="changeHandle($event)" />
+        </div>
+        <div class="rightBox">
+            <template v-if="showData.length > 0">
+                <p v-for="(item, index) in showData" :key="index" class="item">
+                    {{item[0]}} ---- <span :class="item[1].includes('需补充下标') ? 'needIndex' : ''">{{item[1]}}</span>
+                    <span @click="copy(item[1])" class="iconfont">复制</span>
+                </p>
+            </template>
+            <p v-else :class="tipText === '请粘贴正确的请求数据' ? 'tip errorTip' : 'tip'">{{tipText}}</p>
+        </div>
+    </div>
+</template>
   
   
-  <script setup>
+<script setup>
   import { ref } from "vue";
   const taValue = ref('')
   const showData = ref([])
@@ -75,10 +75,10 @@
       })
   }
   
-  </script>
+</script>
   
   
-  <style lang="less">
+<style lang="less">
   .getFieldIndexBox{
       height: 100%;
       display: flex;
@@ -127,4 +127,4 @@
           }
       }
   }
-  </style>
+</style>

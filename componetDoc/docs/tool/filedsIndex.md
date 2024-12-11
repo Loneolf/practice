@@ -1,16 +1,20 @@
-### 字符串下标获取
+# 字符串下标获取
 
 
-<Fileds />
+<ClientOnly>
+  <Fileds />
+</ClientOnly>
+
+
 
 
 <script setup>
-  import Fileds from './filedsIndex.vue';
+  import Fileds from '../vueCom/filedsIndex.vue';
 </script>
 
 <style>
     .getFieldIndexBox{
-        width: 80vw!important;
+        width: 60vw!important;
         height: 80vh!important;
     }
 </style>

@@ -1,3 +1,11 @@
+# 时间处理方法
+
+## 引入
+```
+var timeUtil = require('/vue/components/timeUtil');
+```
+
+
 ## 格式化日期，添加年月日文字
 ```js
 exports.dataFormat = function (value, operate) {

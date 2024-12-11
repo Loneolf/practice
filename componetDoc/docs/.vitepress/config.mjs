@@ -31,6 +31,7 @@ export default defineConfig({
 			resolve: {
 				alias: {
 					"@c": path.resolve(__dirname, "../com"),
+					"@vc": path.resolve(__dirname, "../vueCom"),
 				},
 			},
 		},
