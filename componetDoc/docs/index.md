@@ -11,7 +11,7 @@ hero:
       link: /componet/timeSelect
     - theme: alt
       text: 工具
-      link: /tool/filedsIndex
+      link: /tools/filedsIndex
     - theme: alt
       text: 文档
       link: /tooldoc/time
