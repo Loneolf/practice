@@ -8,13 +8,13 @@ hero:
   actions:
     - theme: brand
       text: 组件库
-      link: /componet/timeSelect
+      link: /componetmd/timeSelect
     - theme: alt
       text: 工具
       link: /tools/filedsIndex
     - theme: alt
       text: 文档
-      link: /tooldoc/time
+      link: /toolmd/time
 
 features:
   - title: 组件

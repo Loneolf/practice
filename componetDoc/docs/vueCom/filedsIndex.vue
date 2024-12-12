@@ -1,7 +1,7 @@
 <template>
     <div class="getFieldIndexBox">
         <div class="leftBox">
-            <textarea v-module="taValue" class="textarea" @input="changeHandle($event)" />
+            <textarea v-model="taValue" class="textarea" @input="changeHandle($event)" />
         </div>
         <div class="rightBox">
             <template v-if="showData.length > 0">
@@ -14,7 +14,6 @@
         </div>
     </div>
 </template>
-  
   
 <script setup>
   import { ref } from "vue";
@@ -29,10 +28,10 @@
       grid0.forEach((item, index) => {
           if (!item) return
           // console.log(item, index)
-          let tem = [9999]
+          let tem = []
           for (const key in data) {
-              if (tem[0] === 9999) {
-                  tem[0] = index
+              if (!tem.length) {
+                  tem.push(index)
               }
               if (Number(data[key]) === index) {
                   tem.push(`${item}:${key}`)
@@ -41,15 +40,10 @@
           if (tem.length === 1) tem.push(`${item}:需补充下标`)
           res.push(tem)
       });
-      console.log(res.sort((a, b) => {
-          return a[0] - b[0]
-      }))
       return res.sort((a, b) => {
-          // console.log(a[0], b[0])
           return a[0] - b[0]
       });
   }
-  // getFieldIndex(JSON.parse(taValue))
   function changeHandle(e) {
 	console.log(e.target.value)
       try {
@@ -74,14 +68,11 @@
             message:`已复制内容:${params}`,
             type:'success'
         })
-        //   alert(`已复制内容:${params}`)
       }).catch(() => {
         ElMessage({
             message:`已复制内容:${params}`,
             type:'error'
         })
-        // ElMessage.error('复制失败，请检查剪切板权限及浏览器版本')
-        //   alert('复制失败，请检查剪切板权限及浏览器版本')
       })
   }
   
@@ -91,11 +82,9 @@
 <style lang="less">
   .getFieldIndexBox{
       display: flex;
-
       .leftBox {
           width: 40%;
           min-width: 40%;
-          overflow: auto;
           padding: 20px;
           border-right: 2px solid #cccccc;
           textarea {

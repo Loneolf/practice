@@ -5,6 +5,8 @@ import DefaultTheme from "vitepress/theme";
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
+import { copyString } from '../../common/util'
+
 import "./style.css";
 import "./toolsPage.less"
 
@@ -18,5 +20,7 @@ export default {
 	},
 	enhanceApp({ app, router, siteData }) {
 		app.use(ElementPlus)
+		app.config.globalProperties.$copyString = copyString; // 挂载全局自定义弹窗
+
 	},
 };

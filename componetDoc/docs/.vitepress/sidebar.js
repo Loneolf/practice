@@ -1,14 +1,14 @@
 export default {
-	"/componet/": [
+	"/componetmd/": [
 		{
 			items: [
 				{
 					text: "时间选择器",
-					link: "/componet/timeSelect",
+					link: "/componetmd/timeSelect",
 				},
 				{
 					text: "搜索组件",
-					link: "/componet/search",
+					link: "/componetmd/search",
 				},
 			],
 		},
@@ -30,13 +30,21 @@ export default {
 			],
 		},
 	],
-	"/tooldoc/": [
+	"/toolmd/": [
 		{
 			// text: "方法文档",
 			items: [
 				{
 					text: "时间处理相关",
-					link: "/tooldoc/time",
+					link: "/toolmd/time",
+				},
+				{
+					text: "金额数字处理",
+					link: "/toolmd/number",
+				},
+				{
+					text: "其它",
+					link: "/toolmd/util",
 				},
 			],
 		},

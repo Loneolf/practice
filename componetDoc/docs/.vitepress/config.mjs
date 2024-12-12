@@ -45,17 +45,18 @@ export default defineConfig({
 			],
 			resolve: {
 				alias: {
-					"@c": path.resolve(__dirname, "../com"),
+					"@c": path.resolve(__dirname, "../componet"),
 					"@vc": path.resolve(__dirname, "../vueCom"),
-					"@t": path.resolve(__dirname, "../../tool"),
+					"@t": path.resolve(__dirname, "../tools"),
+					"@com": path.resolve(__dirname, "../common"),
 				},
 			},
 		},
 
 		nav: [
-			{ text: "组件", link: "/componet/timeSelect", activeMatch: "/componet/" },
+			{ text: "组件", link: "/componetmd/timeSelect", activeMatch: "/componetmd/" },
 			{ text: "工具", link: "/tools/filedsIndex", activeMatch: "/tools/" },
-			{ text: "文档", link: "/tooldoc/time", activeMatch: "/tooldoc/" },
+			{ text: "文档", link: "/toolmd/time", activeMatch: "/toolmd/" },
 		],
 
 		sidebar,
