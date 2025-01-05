@@ -1,5 +1,5 @@
 // import { Stack } from "../dataStructure/js/stack.js";
-import { Stack } from "../dataStructure/js/stack-map.js";
+import { Stack } from "../dataStructure/stack/stack-map.js";
 
 let stack = new Stack()
 

@@ -1,5 +1,5 @@
 // import { Stack } from "../dataStructure/ts/stack.ts";
-import { Stack } from "../dataStructure/ts/stack-map.ts";
+import { Stack } from "../dataStructure/stack/stack-map.ts";
 
 let stack: Stack = new Stack()
 

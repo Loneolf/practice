@@ -10,9 +10,9 @@ const config = {
 
   coverageDirectory: "coverage",
 
-  roots: [
-    "./test"
-  ],
+  // roots: [
+  //   "./test"
+  // ],
   testEnvironment: "jsdom",
 
   testPathIgnorePatterns: [

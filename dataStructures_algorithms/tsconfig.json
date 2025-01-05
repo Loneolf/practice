@@ -13,8 +13,11 @@
 
     "noUnusedLocals": true,                /* Report errors on unused locals. */
     "noUnusedParameters": true,            /* Report errors on unused parameters. */
-    "noImplicitReturns": true             /* Report error when not all code paths in function return a value. */
+    "noImplicitReturns": true,          /* Report error when not all code paths in function return a value. */
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   },
   "exclude": ["node_modules", "dist"],
-  "include": ["dataStructure/ts/**/*"]
+  // "include": ["dataStructure/ts/**/*"]
 }
+
