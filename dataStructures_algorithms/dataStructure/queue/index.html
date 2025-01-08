@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>队列</title>
+</head>
+<body>
+    <script type="module">
+        import Queue from "./queue-map.js";
+        const queue = new Queue();
+        console.log(queue.isEmpty()); // true
+        queue.enqueue("1");
+        queue.enqueue("2");
+        queue.enqueue("3");
+        console.log(queue.dequeue()); // 1
+        console.log(queue.size()); // 2
+        console.log(queue.toString()); // 2, 3
+        queue.enqueue("4");
+        queue.enqueue("5");
+        queue.enqueue("6");
+        console.log(queue.dequeue()); // 2
+        console.log(queue.toString()); // 3, 4, 5, 6
+    </script>
+</body>
+</html>

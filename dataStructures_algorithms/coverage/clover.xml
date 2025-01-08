@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1735652466932" clover="3.2.0">
-  <project timestamp="1735652466932" name="All files">
+<coverage generated="1736355844534" clover="3.2.0">
+  <project timestamp="1736355844534" name="All files">
     <metrics statements="30" coveredstatements="30" conditionals="8" coveredconditionals="8" methods="13" coveredmethods="13" elements="51" coveredelements="51" complexity="0" loc="30" ncloc="30" packages="1" files="2" classes="2"/>
     <file name="stack-map.js" path="/Users/loneolf/Desktop/mydoc/practice/dataStructures_algorithms/dataStructure/stack/stack-map.js">
       <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="7" coveredmethods="7"/>
