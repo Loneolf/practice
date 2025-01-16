@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链表</title>
+</head>
+<body>
+    <script type="module">
+        import LinkedList from './linkedList.js'
+        const list = new LinkedList();
+        list.push(1);
+        list.push(2);
+        list.push(3);
+        list.push(6);
+        list.push(4);
+        list.insert(7, 3);
+        list.removeAt(4);
+        list.remove(3);
+        console.log(list.getElementAt(2));
+        console.log(list.indexOf(2));
+        console.log(list.size());
+        console.log(list, list.toString());
+    </script>
+</body>
+</html>

@@ -6,21 +6,65 @@
     <title>队列</title>
 </head>
 <body>
+    <script type="module1">
+        // import Queue from "./queue-map.js";
+        import Queue from "./queue.js";
+        // import Deque from './deque-map.js'
+        import Deque from './deque.js'
+        // const queue = new Queue();
+        // console.log(queue.isEmpty()); // true
+        // queue.enqueue("1");
+        // queue.enqueue("2");
+        // queue.enqueue("3");
+        // console.log(queue.dequeue()); // 1
+        // console.log(queue.size()); // 2
+        // console.log(queue.toString()); // 2, 3
+        // queue.enqueue("4");
+        // queue.enqueue("5");
+        // queue.enqueue("6");
+        // console.log(queue.dequeue()); // 2
+        // console.log(queue.toString()); // 3, 4, 5, 6
+
+        const deque = new Deque();
+        console.log(deque.isEmpty()); // true
+        deque.enqueue("1");
+        deque.enqueue("2");
+        deque.enqueue("3");
+        deque.addFront("0");
+        deque.addFront("00");
+        console.log(deque.peek()); // 查看队列头部元素 00
+        console.log(deque.peekBack()); // 查看队列尾部元素 3
+        console.log(deque.dequeue()); // 队头元素出队 00
+        console.log(deque.removeBack()); // 队尾元素出队 3
+        console.log(deque.size());  // 还剩余三个元素
+        console.log(deque.toString()); // 0, 1, 2
+        deque.enqueue("4");
+        deque.enqueue("5");
+        deque.enqueue("6");
+        console.log(deque.dequeue()); // 出队队头元素 0
+        console.log(deque.toString()); // 1, 2, 4, 5, 6 
+    </script>
+
+    <script type="module2">
+        import PrioriteQueue from './priorityQueue.js'
+        const pq = new PrioriteQueue();
+        pq.enqueue("John", 2);
+        pq.enqueue("Jack", 3);
+        pq.enqueue("Camila", 1);
+        pq.enqueue("Tom", 2);
+        pq.enqueue("Peter", 1);
+        console.log(pq.toString()); // Camila-1 Peter-1 John-2 Tom-2 Jack-3 
+        console.log(pq.dequeue()); // Camila
+        console.log(pq.dequeue()); // Peter
+        pq.enqueue("Sue", 1);
+        console.log(pq.toString()); // Sue-1 John-2 Tom-2 Jack-3 
+    </script>
+
     <script type="module">
-        import Queue from "./queue-map.js";
-        const queue = new Queue();
-        console.log(queue.isEmpty()); // true
-        queue.enqueue("1");
-        queue.enqueue("2");
-        queue.enqueue("3");
-        console.log(queue.dequeue()); // 1
-        console.log(queue.size()); // 2
-        console.log(queue.toString()); // 2, 3
-        queue.enqueue("4");
-        queue.enqueue("5");
-        queue.enqueue("6");
-        console.log(queue.dequeue()); // 2
-        console.log(queue.toString()); // 3, 4, 5, 6
+        import { hotPotato } from './hotPotato.js'
+        const names = ["John", "Jack", "Camila", "Ingrid", "Carl"];
+        const result = hotPotato(names, 7);
+        console.log(result); // {"winer": "John", "moved": "Camila Jack Carl Ingrid "}
     </script>
 </body>
 </html>
