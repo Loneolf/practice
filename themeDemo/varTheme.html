@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>主题切换示例</title>
+  <style>
+    /* 基础样式 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* 主题变量 */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --button-bg: #e0e0e0;
+      --button-text: #333333;
+      --accent-color: #3B82F6;
+    }
+    
+    /* 红色主题 */
+    .theme-red {
+      --bg-color: #ffebee;
+      --text-color: #b71c1c;
+      --button-bg: #ef5350;
+      --button-text: #ffffff;
+      --accent-color: #b71c1c;
+    }
+    
+    /* 白色主题 */
+    .theme-white {
+      --bg-color: #ffffff;
+      --text-color: #212121;
+      --button-bg: #f5f5f5;
+      --button-text: #212121;
+      --accent-color: #03a9f4;
+    }
+    
+    /* 黑色主题 */
+    .theme-black {
+      --bg-color: #212121;
+      --text-color: #ffffff;
+      --button-bg: #424242;
+      --button-text: #ffffff;
+      --accent-color: #ff9800;
+    }
+    
+    /* 应用主题变量 */
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+    
+    .theme-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    
+    .theme-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .theme-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .content {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      color: var(--accent-color);
+    }
+    
+    .feature {
+      margin: 20px 0;
+      padding: 15px;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body class="theme-white">
+  <div class="container">
+    <!-- 主题切换按钮 -->
+    <div class="theme-buttons">
+      <button id="theme-red">红色主题</button>
+      <button id="theme-white">白色主题</button>
+      <button id="theme-black">黑色主题</button>
+    </div>
+    
+    <!-- 页面内容 -->
+    <div class="content">
+      <h1>主题切换示例</h1>
+      
+      <p>点击上方按钮可以切换不同的主题。每种主题都有不同的背景颜色、文字颜色和强调色。</p>
+      
+      <div class="features">
+        <div class="feature">
+          <h2>特性 1</h2>
+          <p>使用CSS变量管理所有主题相关样式，代码简洁易维护。</p>
+        </div>
+        
+        <div class="feature">
+          <h2>特性 2</h2>
+          <p>所有主题切换都有平滑的过渡动画，提升用户体验。</p>
+        </div>
+        
+        <div class="feature">
+          <h2>特性 3</h2>
+          <p>主题样式直接应用于body元素的class，便于全局控制。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 获取主题切换按钮
+    const themeButtons = {
+      red: document.getElementById('theme-red'),
+      white: document.getElementById('theme-white'),
+      black: document.getElementById('theme-black')
+    };
+    
+    // 主题切换函数
+    function switchTheme(theme) {
+      // 移除所有主题类
+      document.body.classList.remove('theme-red', 'theme-white', 'theme-black');
+      
+      // 添加选中的主题类
+      document.body.classList.add(`theme-${theme}`);
+      
+      // 存储主题偏好到localStorage
+      localStorage.setItem('selectedTheme', theme);
+    }
+    
+    // 初始化：检查本地存储的主题偏好
+    const savedTheme = localStorage.getItem('selectedTheme');
+    if (savedTheme) {
+      switchTheme(savedTheme);
+    }
+    
+    // 添加按钮点击事件
+    themeButtons.red.addEventListener('click', () => switchTheme('red'));
+    themeButtons.white.addEventListener('click', () => switchTheme('white'));
+    themeButtons.black.addEventListener('click', () => switchTheme('black'));
+  </script>
+</body>
+</html>

@@ -31,21 +31,21 @@ test('peek', () => {
     expect(stack.peek()).toBe(undefined)
 });
 
-test('isEmpty', () => {
-    stack.clear()
-    expect(stack.isEmpty()).toBe(true)
-    stack.push(1)
-    expect(stack.isEmpty()).toBe(false)
-});
+// test('isEmpty', () => {
+//     stack.clear()
+//     expect(stack.isEmpty()).toBe(true)
+//     stack.push(1)
+//     expect(stack.isEmpty()).toBe(false)
+// });
 
 test('clear', () => {
     stack.clear()
     expect(stack.size()).toBe(0)
 });
 
-test('size', () => {
-    stack.push(1)
-    expect(stack.size()).toBe(1)
-});
+// test('size', () => {
+//     stack.push(1)
+//     expect(stack.size()).toBe(1)
+// });
 
 

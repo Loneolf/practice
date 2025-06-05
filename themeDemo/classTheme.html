@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原子化CSS主题切换示例</title>
+  <style>
+    /* 基础样式 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    /* 原子化颜色类 */
+    .bg-red { background-color: #ffebee; }
+    .bg-white { background-color: #ffffff; }
+    .bg-black { background-color: #212121; }
+    
+    .text-red { color: #b71c1c; }
+    .text-white { color: #ffffff; }
+    .text-black { color: #212121; }
+    
+    .border-red { border-color: #ef9a9a; }
+    .border-white { border-color: #eeeeee; }
+    .border-black { border-color: #424242; }
+    
+    .btn-red { background-color: #ef5350; color: white; }
+    .btn-white { background-color: #f5f5f5; color: #212121; border: 1px solid #e0e0e0; }
+    .btn-black { background-color: #424242; color: white; }
+    
+    .card-red { background-color: rgba(255, 255, 255, 0.8); }
+    .card-white { background-color: #fafafa; }
+    .card-black { background-color: rgba(255, 255, 255, 0.1); }
+    
+    /* 主题组合类 */
+    .theme-red { background-color: #ffebee; }
+    .theme-red .text-primary { color: #b71c1c; }
+    .theme-red .btn-primary { background-color: #ef5350; color: white; }
+    .theme-red .card { 
+      background-color: rgba(255, 255, 255, 0.8); 
+      border: 1px solid #ef9a9a; 
+    }
+    
+    .theme-white { background-color: #ffffff; }
+    .theme-white .text-primary { color: #212121; }
+    .theme-white .btn-primary { 
+      background-color: #f5f5f5; 
+      color: #212121; 
+      border: 1px solid #e0e0e0; 
+    }
+    .theme-white .card { 
+      background-color: #fafafa; 
+      border: 1px solid #eeeeee; 
+    }
+    
+    .theme-black { background-color: #212121; }
+    .theme-black .text-primary { color: #ffffff; }
+    .theme-black .btn-primary { background-color: #424242; color: white; }
+    .theme-black .card { 
+      background-color: rgba(255, 255, 255, 0.1); 
+      border: 1px solid #424242; 
+    }
+    
+    /* 按钮样式 */
+    button {
+      padding: 10px 15px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    /* 卡片样式 */
+    .card {
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="theme-white">
+  <div class="container">
+    <!-- 主题切换按钮 -->
+    <div class="mb-6 text-center">
+      <button id="theme-red" class="btn-primary px-4 py-2 rounded mr-2" onclick="setTheme('red')">红色主题</button>
+      <button id="theme-white" class="btn-primary px-4 py-2 rounded mr-2" onclick="setTheme('white')">白色主题</button>
+      <button id="theme-black" class="btn-primary px-4 py-2 rounded" onclick="setTheme('black')">黑色主题</button>
+    </div>
+    
+    <!-- 页面内容 -->
+    <div class="card">
+      <h1 class="text-primary text-2xl mb-4">原子化CSS主题切换示例</h1>
+      
+      <p class="mb-6">本页面展示了如何使用原子化CSS类实现主题切换功能，通过组合基础样式类而非依赖CSS变量，完全兼容Chrome 36等低版本浏览器。</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="card">
+          <h3 class="text-primary font-bold mb-2">红色主题</h3>
+          <p class="text-sm">热情活力的红色调主题，适合需要突出视觉冲击力的场景。</p>
+        </div>
+        
+        <div class="card">
+          <h3 class="text-primary font-bold mb-2">白色主题</h3>
+          <p class="text-sm">简洁明亮的白色调主题，提供清晰的内容阅读体验。</p>
+        </div>
+        
+        <div class="card">
+          <h3 class="text-primary font-bold mb-2">黑色主题</h3>
+          <p class="text-sm">高端现代的黑色调主题，适合展示精致内容和媒体。</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h3 class="text-primary font-bold mb-2">主要特性</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>完全不依赖CSS变量</li>
+          <li>使用原子化类组合实现样式</li>
+          <li>平滑的主题切换动画</li>
+          <li>兼容Chrome 36+等低版本浏览器</li>
+          <li>通过cookie记住用户主题偏好</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 设置主题函数
+    function setTheme(theme) {
+      // 移除所有主题class
+      document.body.className = document.body.className
+        .replace(/theme-\w+/g, '')
+        .trim();
+      
+      // 添加新的主题class
+      document.body.className += ' theme-' + theme;
+      
+      // 使用cookie存储主题偏好
+      document.cookie = 'theme=' + theme + '; path=/';
+    }
+    
+    // 从cookie读取主题偏好
+    function getThemeFromCookie() {
+      var cookies = document.cookie.split('; ');
+      for (var i = 0; i < cookies.length; i++) {
+        var parts = cookies[i].split('=');
+        if (parts[0] === 'theme') {
+          return parts[1];
+        }
+      }
+      return null;
+    }
+    
+    // 初始化主题
+    function initTheme() {
+      var savedTheme = getThemeFromCookie();
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
+    }
+    
+    // 页面加载时初始化主题
+    initTheme();
+  </script>
+</body>
+</html>  
