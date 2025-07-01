@@ -1,0 +1,28 @@
+/* 主题组合类 */
+.theme-red { background-color: #ffebee; }
+.theme-red .text-primary { color: #b71c1c; }
+.theme-red .btn-primary { background-color: #ef5350; color: white; }
+.theme-red .card { 
+  background-color: rgba(255, 255, 255, 0.8); 
+  border: 1px solid #ef9a9a; 
+}
+
+.theme-white { background-color: #ffffff; }
+.theme-white .text-primary { color: #212121; }
+.theme-white .btn-primary { 
+  background-color: #f5f5f5; 
+  color: #212121; 
+  border: 1px solid #e0e0e0; 
+}
+.theme-white .card { 
+  background-color: #fafafa; 
+  border: 1px solid #eeeeee; 
+}
+
+.theme-black { background-color: #212121; }
+.theme-black .text-primary { color: #ffffff; }
+.theme-black .btn-primary { background-color: #424242; color: white; }
+.theme-black .card { 
+  background-color: rgba(255, 255, 255, 0.1); 
+  border: 1px solid #424242; 
+}
