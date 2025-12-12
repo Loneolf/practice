@@ -21,38 +21,59 @@
     
     /* 主题变量 */
     :root {
-      --bg-color: #ffffff;
-      --text-color: #333333;
-      --button-bg: #e0e0e0;
-      --button-text: #333333;
-      --accent-color: #3B82F6;
+      --bg-color-white: #ffffff;
+      --text-color-white: #333333;
+      --button-bg-white: #e0e0e0;
+      --button-text-white: #333333;
+      --accent-color-white: #3B82F6;
+
+      --bg-color-black: #212121;
+      --text-color-black: #ffffff;
+      --button-bg-black: #424242;
+      --button-text-black: #ffffff;
+      --accent-color-black: #ff9800;
+
+      --bg-color-red: #ffebee;
+      --text-color-red: #b71c1c;
+      --button-bg-red: #ef5350;
+      --button-text-red: #ffffff;
+      --accent-color-red: #b71c1c;
     }
-    
+
+    /* 场景 */
+    :root {
+      --bg-color-scene: var(--bg-color);
+      --text-color-scene: var(--text-color);
+      --button-bg-scene: var(--button-bg);
+      --button-text-scene: var(--button-text);
+      --accent-color-scene: var(--accent-color);
+    }
+
     /* 红色主题 */
     .theme-red {
-      --bg-color: #ffebee;
-      --text-color: #b71c1c;
-      --button-bg: #ef5350;
-      --button-text: #ffffff;
-      --accent-color: #b71c1c;
+      --bg-color: var(--bg-color-red);
+      --text-color: var(--text-color-red);
+      --button-bg: var(--button-bg-red);
+      --button-text: var(--button-text-red);
+      --accent-color: var(--accent-color-red);
     }
     
     /* 白色主题 */
     .theme-white {
-      --bg-color: #ffffff;
-      --text-color: #212121;
-      --button-bg: #f5f5f5;
-      --button-text: #212121;
-      --accent-color: #03a9f4;
+      --bg-color: var(--bg-color-white);
+      --text-color: var(--text-color-white);
+      --button-bg: var(--button-bg-white);
+      --button-text: var(--button-text-white);
+      --accent-color: var(--accent-color-white);
     }
     
     /* 黑色主题 */
     .theme-black {
-      --bg-color: #212121;
-      --text-color: #ffffff;
-      --button-bg: #424242;
-      --button-text: #ffffff;
-      --accent-color: #ff9800;
+      --bg-color: var(--bg-color-black);
+      --text-color: var(--text-color-black);
+      --button-bg: var(--button-bg-black);
+      --button-text: var(--button-text-black);
+      --accent-color: var(--accent-color-black);
     }
     
     /* 应用主题变量 */

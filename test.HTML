@@ -1,30 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>GSAP 移动端滚动（顺滑惯性+无跳动）</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <style>
-    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; }
+    /* 长内容测试 */
+    .section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
+    }
+    .section1 { background: #ff6b6b; }
+    .section2 { background: #4ecdc4; }
+    .section3 { background: #f9c74f; }
+    .section4 { background: #577590; }
+    /* 关键：禁用body弹性滚动，避免跳动 */
+    html, body {
+      height: 100%;
+      overflow: hidden; /* 禁用原生滚动容器 */
+    }
+    /* 自定义滚动容器（核心：用div承载滚动，避免window滚动的兼容性问题） */
+    #scrollContainer {
+      height: 100%;
+      overflow: hidden; /* 禁用原生滚动 */
+      position: relative;
+    }
+    #content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
   </style>
 </head>
-
 <body>
-
-  <button class="play" id="play">播放</button>
-  <audio src="https://qing-1258827329.cos.ap-beijing.myqcloud.com/music/%E4%B8%83%E6%9C%88%E4%B8%8A.mp3"></audio>
+  <!-- 重构：用自定义容器承载滚动，替代window滚动（解决跳动核心） -->
+  <div id="scrollContainer">
+    <div id="content">
+      <div class="section section1">Section 1</div>
+      <div class="section section2">Section 2</div>
+      <div class="section section3">Section 3</div>
+      <div class="section4 section">Section 4</div>
+    </div>
+  </div>
 
   <script>
-    play.addEventListener('click', function () {
-      var audio = document.querySelector('audio');
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
+    // ========== 核心配置（优化惯性+消除跳动） ==========
+    const config = {
+      maxInertiaDistance: window.innerHeight * 0.8, // 最大惯性0.8屏（更易感知）
+      inertiaFactor: 0.3,                          // 增大惯性系数（0.3=明显但不拖沓）
+      stopDuration: 0.4,                           // 延长动画时长（0.4s=感知到惯性）
+      easeType: "power3.out",                      // 缓动：先快后慢，惯性感更强
+      velocityThreshold: 0.01,                     // 降低速度阈值（0.01=更容易触发惯性）
+      velocitySampleTime: 150                      // 延长采样时间（150ms=更稳定的速度）
+    };
+
+    // ========== 元素获取 ==========
+    const scrollContainer = document.getElementById('scrollContainer');
+    const content = document.getElementById('content');
+    let contentHeight = content.offsetHeight; // 内容总高度
+    let viewportHeight = window.innerHeight;  // 视口高度
+
+    // ========== 状态管理（重构：基于自定义容器） ==========
+    let isTouching = false;
+    let startY = 0;          // 触摸起始Y
+    let startTop = 0;        // 内容起始top值（替代window.scrollY）
+    let currentTop = 0;      // 内容当前top值
+    let touchHistory = [];   // 触摸历史
+    let inertiaTween = null; // 惯性动画实例
+
+    // ========== 工具函数 ==========
+    /**
+     * 限制数值范围（边界处理）
+     */
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    /**
+     * 计算滑动速度（优化：取最后150ms的所有采样点）
+     */
+    const calculateVelocity = () => {
+      if (touchHistory.length < 2) return 0;
+      
+      const now = performance.now();
+      // 过滤最近150ms的记录
+      const recent = touchHistory.filter(item => now - item.time < config.velocitySampleTime);
+      if (recent.length < 2) return 0;
+      
+      // 取首尾计算平均速度（优化：不用所有点，减少计算）
+      const first = recent[0];
+      const last = recent[recent.length - 1];
+      const deltaTime = last.time - first.time;
+      const deltaY = last.y - first.y; // 手指向下滑=deltaY正 → 内容向上移
+      
+      return deltaTime > 0 ? deltaY / deltaTime : 0;
+    };
+
+    /**
+     * 停止惯性动画
+     */
+    const killInertia = () => {
+      if (inertiaTween) {
+        inertiaTween.kill();
+        inertiaTween = null;
       }
-    })
+    };
+
+    /**
+     * 更新内容位置（替代window.scrollTo，无跳动）
+     */
+    const setContentTop = (top) => {
+      // 限制top范围：0（顶部） ~ -(内容高度-视口高度)（底部）
+      const maxTop = 0;
+      const minTop = -(contentHeight - viewportHeight);
+      currentTop = clamp(top, minTop, maxTop);
+      content.style.transform = `translateY(${currentTop}px)`; // 用transform避免重排
+    };
+
+    // ========== 触摸事件逻辑（重构：无跳动核心） ==========
+    /**
+     * 触摸开始：初始化
+     */
+    const handleTouchStart = (e) => {
+      isTouching = true;
+      killInertia(); // 停止之前的惯性
+      
+      // 记录初始状态
+      startY = e.touches[0].clientY;
+      startTop = currentTop;
+      touchHistory = []; // 清空历史
+      
+      // 记录首次触摸点
+      touchHistory.push({
+        y: startY,
+        time: performance.now()
+      });
+    };
+
+    /**
+     * 触摸移动：跟手滚动（无跳动核心）
+     */
+    const handleTouchMove = (e) => {
+      if (!isTouching) return;
+      e.preventDefault(); // 禁用原生触摸行为
+      
+      const now = performance.now();
+      const currentY = e.touches[0].clientY;
+      
+      // 记录触摸历史（只保留最近30条，避免内存）
+      touchHistory.push({ y: currentY, time: now });
+      if (touchHistory.length > 30) touchHistory.shift();
+      
+      // 计算偏移：手指移动的距离 = 当前Y - 起始Y → 内容移动的距离 = 起始top + 偏移
+      const deltaY = currentY - startY;
+      const targetTop = startTop + deltaY;
+      
+      // 实时更新位置（用transform，无重排）
+      setContentTop(targetTop);
+    };
+
+    /**
+     * 触摸结束：执行惯性滚动（有感知的惯性）
+     */
+    const handleTouchEnd = () => {
+      if (!isTouching) return;
+      isTouching = false;
+      
+      // 计算速度
+      const velocity = calculateVelocity();
+      // 降低阈值：0.01即可触发惯性
+      if (Math.abs(velocity) < config.velocityThreshold) return;
+      
+      // 计算惯性距离：速度×惯性系数 → 增大系数让惯性更明显
+      const inertiaDistance = velocity * config.inertiaFactor * 1000;
+      // 限制最大惯性距离（0.8屏）
+      const limitedDistance = clamp(
+        inertiaDistance,
+        -config.maxInertiaDistance,
+        config.maxInertiaDistance
+      );
+      
+      // 计算目标位置
+      const targetTop = currentTop + limitedDistance;
+      
+      // 执行惯性动画（有感知的惯性）
+      inertiaTween = gsap.to({}, {
+        duration: config.stopDuration,
+        ease: config.easeType,
+        // 动画过程中实时更新位置
+        onUpdate: () => {
+          const progress = inertiaTween.progress();
+          const currentTarget = currentTop + limitedDistance * progress;
+          setContentTop(currentTarget);
+        },
+        onComplete: () => {
+          inertiaTween = null;
+        }
+      });
+    };
+
+    // ========== 窗口大小适配 ==========
+    const handleResize = () => {
+      viewportHeight = window.innerHeight;
+      contentHeight = content.offsetHeight;
+      // 重新限制位置，避免窗口变化导致越界
+      setContentTop(currentTop);
+    };
+
+    // ========== 事件注册（优化：绑定到容器，而非window） ==========
+    scrollContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+    scrollContainer.addEventListener('touchmove', handleTouchMove, { passive: false }); // 必须false
+    scrollContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
+    scrollContainer.addEventListener('touchcancel', handleTouchEnd, { passive: true });
+    window.addEventListener('resize', handleResize);
+
+    // ========== 初始化 ==========
+    setContentTop(0); // 初始位置置顶
+    handleResize();   // 初始化尺寸
   </script>
 </body>
 </html>

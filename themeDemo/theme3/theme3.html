@@ -1,120 +1,196 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>原子化CSS主题切换示例</title>
-  <link rel="preload" as="script" href="./theme.js" />
-  <script src="./theme.js"></script>
-  <link rel="stylesheet" href="./base.css" />
-  <style>
-    /* 基础样式 */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      transition: all 0.3s ease;
-    }
-    
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    /* 按钮样式 */
-    button {
-      padding: 10px 15px;
-      margin: 0 5px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: all 0.2s ease;
-    }
-    
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    /* 卡片样式 */
-    .card {
-      padding: 15px;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      transition: all 0.3s ease;
-    }
-  </style>
-</head>
-<body class="theme-white">
-  <div class="container">
-    <!-- 主题切换按钮 -->
-    <div class="mb-6 text-center">
-      <button id="theme-red" class="btn-primary px-4 py-2 rounded mr-2" onclick="updateURLParameter('red')">红色主题</button>
-      <button id="theme-white" class="btn-primary px-4 py-2 rounded mr-2" onclick="updateURLParameter('white')">白色主题</button>
-      <button id="theme-black" class="btn-primary px-4 py-2 rounded" onclick="updateURLParameter('black')">黑色主题</button>
-    </div>
-    
-    <!-- 页面内容 -->
-    <div class="card">
-      <h1 class="text-primary text-2xl mb-4">原子化CSS主题切换示例</h1>
-      
-      <p class="mb-6">本页面展示了如何使用原子化CSS类实现主题切换功能，通过组合基础样式类而非依赖CSS变量，完全兼容Chrome 36等低版本浏览器。</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div class="card">
-          <h3 class="text-primary font-bold mb-2">红色主题</h3>
-          <p class="text-sm">热情活力的红色调主题，适合需要突出视觉冲击力的场景。</p>
-        </div>
-        
-        <div class="card">
-          <h3 class="text-primary font-bold mb-2">白色主题</h3>
-          <p class="text-sm">简洁明亮的白色调主题，提供清晰的内容阅读体验。</p>
-        </div>
-        
-        <div class="card">
-          <h3 class="text-primary font-bold mb-2">黑色主题</h3>
-          <p class="text-sm">高端现代的黑色调主题，适合展示精致内容和媒体。</p>
-        </div>
-      </div>
-      
-      <div class="card">
-        <h3 class="text-primary font-bold mb-2">主要特性</h3>
-        <ul class="list-disc pl-5 space-y-1">
-          <li>完全不依赖CSS变量</li>
-          <li>使用原子化类组合实现样式</li>
-          <li>平滑的主题切换动画</li>
-          <li>兼容Chrome 36+等低版本浏览器</li>
-          <li>通过cookie记住用户主题偏好</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <script>
 
-	// 设置主题函数
-	function setTheme(theme) {
-		// 移除所有主题class
-		document.body.className = document.body.className
-		.replace(/theme-\w+/g, '')
-		.trim();
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>原子化CSS主题切换示例</title>
+	<link rel="stylesheet" href="./base.css" />
+
+	<script>
+		function getCSSVariable(variableName, element = document.documentElement) {
+			const styles = getComputedStyle(element);
+			return styles.getPropertyValue(variableName).trim();
+		}
+		const themeGlobal = getCSSVariable('--xet_theme_global');
+		console.log(themeGlobal); // 输出: "1"
+
+
+		function setTheme(theme) {
+			document.body.className = document.body.className.replace(/theme-\w+/g, "").trim();
+			document.body.className += " theme-" + theme;
+		}
+
+		function getUrlParameter(paramName, url = window.location.href) {
+			// 创建URL对象解析URL
+			const urlObj = new URL(url);
+			const params = new URLSearchParams(urlObj.search);
+			const allValues = [...params.getAll(paramName)];
+			
+			// 若没有值，返回null
+			if (allValues.length === 0) return null;
+			return allValues[0];
+		}
+		const observer = new MutationObserver(mutations => {
+			for (const mutation of mutations) {
+				if (mutation.addedNodes.length) {
+					const body = document.querySelector('body');
+					if (body) {
+
+						var savedTheme = getUrlParameter("themeType");		
+						console.log('aaaa333333themeType', savedTheme);
+						if (savedTheme) {
+							setTheme(savedTheme);
+						}
+						observer.disconnect(); // 停止监听
+					}
+				}
+			}
+		});
 		
-		// 添加新的主题class
-		document.body.className += ' theme-' + theme;
-		
-		// 使用cookie存储主题偏好
-		document.cookie = 'theme=' + theme + '; path=/';
-	}
-    // 更新URL参数的函数
-    function updateURLParameter(value) {
-          const url = new URL(window.location.href);
-          url.searchParams.set('themeType', value);
-          // 使用history.pushState或replaceState更新URL
-          if (window.history && window.history.pushState) {
-              window.history.replaceState({}, '', url.toString());
-          }
-		  setTheme(value);
-    }
-  </script>
+		// 监听整个文档的变化
+		observer.observe(document.documentElement, {
+			childList: true,
+			subtree: true
+		});
+	</script>
+	<!-- <link rel="preload" as="script" href="./theme.js" /> -->
+	<!-- <script src="./theme.js"></script> -->
+	<style>
+		/* 基础样式 */
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 20px;
+			transition: all 0.3s ease;
+		}
+
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		/* 按钮样式 */
+		button {
+			padding: 10px 15px;
+			margin: 0 5px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 14px;
+			transition: all 0.2s ease;
+		}
+
+		button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+
+		/* 卡片样式 */
+		.card {
+			padding: 15px;
+			border-radius: 6px;
+			margin-bottom: 15px;
+			transition: all 0.3s ease;
+		}
+	</style>
+</head>
+
+<body class="theme-white">
+	<!-- <script>
+		function setTheme(theme) {
+			document.body.className = document.body.className.replace(/theme-\w+/g, "").trim();
+			document.body.className += " theme-" + theme;
+		}
+
+		function getUrlParameter(paramName, url = window.location.href) {
+			// 创建URL对象解析URL
+			const urlObj = new URL(url);
+			const params = new URLSearchParams(urlObj.search);
+			const allValues = [...params.getAll(paramName)];
+
+			// 若没有值，返回null
+			if (allValues.length === 0) return null;
+			return allValues[0];
+		}
+		var savedTheme = getUrlParameter("themeType");
+		console.log('aaaa333333themeType', savedTheme);
+		if (savedTheme) {
+			setTheme(savedTheme);
+		}
+	</script> -->
+	<div class="container">
+		<!-- 主题切换按钮 -->
+		<div class="mb-6 text-center">
+			<button id="theme-red" class="btn-primary px-4 py-2 rounded mr-2"
+				onclick="updateURLParameter('red')">红色主题</button>
+			<button id="theme-white" class="btn-primary px-4 py-2 rounded mr-2"
+				onclick="updateURLParameter('white')">白色主题</button>
+			<button id="theme-black" class="btn-primary px-4 py-2 rounded"
+				onclick="updateURLParameter('black')">黑色主题</button>
+		</div>
+
+		<!-- 页面内容 -->
+		<div class="card">
+			<h1 class="text-primary text-2xl mb-4">原子化CSS主题切换示例</h1>
+
+			<p class="mb-6">本页面展示了如何使用原子化CSS类实现主题切换功能，通过组合基础样式类而非依赖CSS变量，完全兼容Chrome 36等低版本浏览器。</p>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+				<div class="card">
+					<h3 class="text-primary font-bold mb-2">红色主题</h3>
+					<p class="text-sm">热情活力的红色调主题，适合需要突出视觉冲击力的场景。</p>
+				</div>
+
+				<div class="card">
+					<h3 class="text-primary font-bold mb-2">白色主题</h3>
+					<p class="text-sm">简洁明亮的白色调主题，提供清晰的内容阅读体验。</p>
+				</div>
+
+				<div class="card">
+					<h3 class="text-primary font-bold mb-2">黑色主题</h3>
+					<p class="text-sm">高端现代的黑色调主题，适合展示精致内容和媒体。</p>
+				</div>
+			</div>
+
+			<div class="card">
+				<h3 class="text-primary font-bold mb-2">主要特性</h3>
+				<ul class="list-disc pl-5 space-y-1">
+					<li>完全不依赖CSS变量</li>
+					<li>使用原子化类组合实现样式</li>
+					<li>平滑的主题切换动画</li>
+					<li>兼容Chrome 36+等低版本浏览器</li>
+					<li>通过cookie记住用户主题偏好</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script>
+
+		// 设置主题函数
+		function setTheme(theme) {
+			// 移除所有主题class
+			document.body.className = document.body.className
+				.replace(/theme-\w+/g, '')
+				.trim();
+
+			// 添加新的主题class
+			document.body.className += ' theme-' + theme;
+
+			// 使用cookie存储主题偏好
+			document.cookie = 'theme=' + theme + '; path=/';
+		}
+		// 更新URL参数的函数
+		function updateURLParameter(value) {
+			const url = new URL(window.location.href);
+			url.searchParams.set('themeType', value);
+			// 使用history.pushState或replaceState更新URL
+			if (window.history && window.history.pushState) {
+				window.history.replaceState({}, '', url.toString());
+			}
+			setTheme(value);
+		}
+	</script>
 </body>
-</html>  
+
+</html>
