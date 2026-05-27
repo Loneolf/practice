@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>echarts-test</title>
+	</head>
+	<body>
+		<section class="mainbox">
+			<div class="column">
+				<div class="panel bar">
+					<h2>
+						柱状图-就业行业 <span class="jobbtn" id="job2022">2022</span>
+						<span class="jobbtn" id="job2023"> 2023</span>
+					</h2>
+					<div class="chart" id="chart" style="width: 100%; height: 400px;"></div>
+					<div class="panel-footer"></div>
+				</div>
+			</div>
+		</section>
+		<script src="./lib/flexible.js"></script>
+		<!-- <script src="./lib/echarts.min.js"></script> -->
+		<script src="./lib/echarts.min.5.js"></script>
+		<script>
+			var chartDom = document.getElementById('chart');
+			var myChart = echarts.init(chartDom);
+			var option;
+
+			option = {
+			xAxis: {
+				type: 'category',
+				data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			},
+			yAxis: {
+				type: 'value'
+			},
+			series: [
+				{
+				data: [120, 200, 150, 80, 70, 110, 130],
+				type: 'bar'
+				}
+			]
+			};
+
+			option && myChart.setOption(option);
+		</script>
+	</body>
+</html>
