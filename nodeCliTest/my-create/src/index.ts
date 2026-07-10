@@ -235,11 +235,7 @@ async function init() {
     const cdProjectName = path.relative(process.cwd(), root)
     console.log(`Done. Now run:`)
     if (root !== process.cwd()) {
-        console.log(
-            `  cd ${
-            cdProjectName.includes(' ') ? `"${cdProjectName}"` : cdProjectName
-            }`,
-        )
+        console.log(`  cd ${cdProjectName.includes(' ') ? `"${cdProjectName}"` : cdProjectName }`)
     }
     console.log(`  npm install`)
     console.log(`  npm run dev`)
